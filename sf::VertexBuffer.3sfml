@@ -1,0 +1,451 @@
+.TH "sf::VertexBuffer" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::VertexBuffer \- \fBVertex\fP buffer storage for one or more 2D primitives\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/VertexBuffer\&.hpp>\fP
+.PP
+Inherits \fBsf::Drawable\fP, and \fBsf::GlResource\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBUsage\fP { \fBStream\fP, \fBDynamic\fP, \fBStatic\fP }"
+.br
+.RI "Usage specifiers\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVertexBuffer\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBVertexBuffer\fP (\fBPrimitiveType\fP type)"
+.br
+.RI "Construct a \fBVertexBuffer\fP with a specific PrimitiveType\&. "
+.ti -1c
+.RI "\fBVertexBuffer\fP (\fBUsage\fP usage)"
+.br
+.RI "Construct a \fBVertexBuffer\fP with a specific usage specifier\&. "
+.ti -1c
+.RI "\fBVertexBuffer\fP (\fBPrimitiveType\fP type, \fBUsage\fP usage)"
+.br
+.RI "Construct a \fBVertexBuffer\fP with a specific PrimitiveType and usage specifier\&. "
+.ti -1c
+.RI "\fBVertexBuffer\fP (const \fBVertexBuffer\fP &copy)"
+.br
+.RI "Copy constructor\&. "
+.ti -1c
+.RI "\fB~VertexBuffer\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "bool \fBcreate\fP (std::size_t vertexCount)"
+.br
+.RI "Create the vertex buffer\&. "
+.ti -1c
+.RI "std::size_t \fBgetVertexCount\fP () const"
+.br
+.RI "Return the vertex count\&. "
+.ti -1c
+.RI "bool \fBupdate\fP (const \fBVertex\fP *vertices)"
+.br
+.RI "Update the whole buffer from an array of vertices\&. "
+.ti -1c
+.RI "bool \fBupdate\fP (const \fBVertex\fP *vertices, std::size_t vertexCount, unsigned int offset)"
+.br
+.RI "Update a part of the buffer from an array of vertices\&. "
+.ti -1c
+.RI "bool \fBupdate\fP (const \fBVertexBuffer\fP &vertexBuffer)"
+.br
+.RI "Copy the contents of another buffer into this buffer\&. "
+.ti -1c
+.RI "\fBVertexBuffer\fP & \fBoperator=\fP (const \fBVertexBuffer\fP &right)"
+.br
+.RI "Overload of assignment operator\&. "
+.ti -1c
+.RI "void \fBswap\fP (\fBVertexBuffer\fP &right)"
+.br
+.RI "Swap the contents of this vertex buffer with those of another\&. "
+.ti -1c
+.RI "unsigned int \fBgetNativeHandle\fP () const"
+.br
+.RI "Get the underlying OpenGL handle of the vertex buffer\&. "
+.ti -1c
+.RI "void \fBsetPrimitiveType\fP (\fBPrimitiveType\fP type)"
+.br
+.RI "Set the type of primitives to draw\&. "
+.ti -1c
+.RI "\fBPrimitiveType\fP \fBgetPrimitiveType\fP () const"
+.br
+.RI "Get the type of primitives drawn by the vertex buffer\&. "
+.ti -1c
+.RI "void \fBsetUsage\fP (\fBUsage\fP usage)"
+.br
+.RI "Set the usage specifier of this vertex buffer\&. "
+.ti -1c
+.RI "\fBUsage\fP \fBgetUsage\fP () const"
+.br
+.RI "Get the usage specifier of this vertex buffer\&. "
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBbind\fP (const \fBVertexBuffer\fP *vertexBuffer)"
+.br
+.RI "Bind a vertex buffer for rendering\&. "
+.ti -1c
+.RI "static bool \fBisAvailable\fP ()"
+.br
+.RI "Tell whether or not the system supports vertex buffers\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBVertex\fP buffer storage for one or more 2D primitives\&. 
+
+\fBsf::VertexBuffer\fP is a simple wrapper around a dynamic buffer of vertices and a primitives type\&.
+.PP
+Unlike \fBsf::VertexArray\fP, the vertex data is stored in graphics memory\&.
+.PP
+In situations where a large amount of vertex data would have to be transferred from system memory to graphics memory every frame, using \fBsf::VertexBuffer\fP can help\&. By using a \fBsf::VertexBuffer\fP, data that has not been changed between frames does not have to be re-transferred from system to graphics memory as would be the case with \fBsf::VertexArray\fP\&. If data transfer is a bottleneck, this can lead to performance gains\&.
+.PP
+Using \fBsf::VertexBuffer\fP, the user also has the ability to only modify a portion of the buffer in graphics memory\&. This way, a large buffer can be allocated at the start of the application and only the applicable portions of it need to be updated during the course of the application\&. This allows the user to take full control of data transfers between system and graphics memory if they need to\&.
+.PP
+In special cases, the user can make use of multiple threads to update vertex data in multiple distinct regions of the buffer simultaneously\&. This might make sense when e\&.g\&. the position of multiple objects has to be recalculated very frequently\&. The computation load can be spread across multiple threads as long as there are no other data dependencies\&.
+.PP
+Simultaneous updates to the vertex buffer are not guaranteed to be carried out by the driver in any specific order\&. Updating the same region of the buffer from multiple threads will not cause undefined behaviour, however the final state of the buffer will be unpredictable\&.
+.PP
+Simultaneous updates of distinct non-overlapping regions of the buffer are also not guaranteed to complete in a specific order\&. However, in this case the user can make sure to synchronize the writer threads at well-defined points in their code\&. The driver will make sure that all pending data transfers complete before the vertex buffer is sourced by the rendering pipeline\&.
+.PP
+It inherits \fBsf::Drawable\fP, but unlike other drawables it is not transformable\&.
+.PP
+Example: 
+.PP
+.nf
+sf::Vertex vertices[15];
+\&.\&.\&.
+sf::VertexBuffer triangles(sf::Triangles);
+triangles\&.create(15);
+triangles\&.update(vertices);
+\&.\&.\&.
+window\&.draw(triangles);
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Vertex\fP, \fBsf::VertexArray\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB46\fP of file \fBVertexBuffer\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBsf::VertexBuffer::Usage\fP"
+
+.PP
+Usage specifiers\&. If data is going to be updated once or more every frame, set the usage to Stream\&. If data is going to be set once and used for a long time without being modified, set the usage to Static\&. For everything else Dynamic should be a good compromise\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIStream \fP\fP
+Constantly changing data\&. 
+.TP
+\fB\fIDynamic \fP\fP
+Occasionally changing data\&. 
+.TP
+\fB\fIStatic \fP\fP
+Rarely changing data\&. 
+.PP
+Definition at line \fB60\fP of file \fBVertexBuffer\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::VertexBuffer::VertexBuffer ()"
+
+.PP
+Default constructor\&. Creates an empty vertex buffer\&. 
+.SS "sf::VertexBuffer::VertexBuffer (\fBPrimitiveType\fP type)\fR [explicit]\fP"
+
+.PP
+Construct a \fBVertexBuffer\fP with a specific PrimitiveType\&. Creates an empty vertex buffer and sets its primitive type to \fRtype\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP Type of primitive 
+.RE
+.PP
+
+.SS "sf::VertexBuffer::VertexBuffer (\fBUsage\fP usage)\fR [explicit]\fP"
+
+.PP
+Construct a \fBVertexBuffer\fP with a specific usage specifier\&. Creates an empty vertex buffer and sets its usage to \fRusage\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIusage\fP Usage specifier 
+.RE
+.PP
+
+.SS "sf::VertexBuffer::VertexBuffer (\fBPrimitiveType\fP type, \fBUsage\fP usage)"
+
+.PP
+Construct a \fBVertexBuffer\fP with a specific PrimitiveType and usage specifier\&. Creates an empty vertex buffer and sets its primitive type to \fRtype\fP and usage to \fRusage\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP Type of primitive 
+.br
+\fIusage\fP Usage specifier 
+.RE
+.PP
+
+.SS "sf::VertexBuffer::VertexBuffer (const \fBVertexBuffer\fP & copy)"
+
+.PP
+Copy constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcopy\fP instance to copy 
+.RE
+.PP
+
+.SS "sf::VertexBuffer::~VertexBuffer ()"
+
+.PP
+Destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static void sf::VertexBuffer::bind (const \fBVertexBuffer\fP * vertexBuffer)\fR [static]\fP"
+
+.PP
+Bind a vertex buffer for rendering\&. This function is not part of the graphics API, it mustn't be used when drawing SFML entities\&. It must be used only if you mix \fBsf::VertexBuffer\fP with OpenGL code\&.
+.PP
+.PP
+.nf
+sf::VertexBuffer vb1, vb2;
+\&.\&.\&.
+sf::VertexBuffer::bind(&vb1);
+// draw OpenGL stuff that use vb1\&.\&.\&.
+sf::VertexBuffer::bind(&vb2);
+// draw OpenGL stuff that use vb2\&.\&.\&.
+sf::VertexBuffer::bind(NULL);
+// draw OpenGL stuff that use no vertex buffer\&.\&.\&.
+.fi
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertexBuffer\fP Pointer to the vertex buffer to bind, can be null to use no vertex buffer 
+.RE
+.PP
+
+.SS "bool sf::VertexBuffer::create (std::size_t vertexCount)"
+
+.PP
+Create the vertex buffer\&. Creates the vertex buffer and allocates enough graphics memory to hold \fRvertexCount\fP vertices\&. Any previously allocated memory is freed in the process\&.
+.PP
+In order to deallocate previously allocated memory pass 0 as \fRvertexCount\fP\&. Don't forget to recreate with a non-zero value when graphics memory should be allocated again\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertexCount\fP Number of vertices worth of memory to allocate
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if creation was successful 
+.RE
+.PP
+
+.SS "unsigned int sf::VertexBuffer::getNativeHandle () const"
+
+.PP
+Get the underlying OpenGL handle of the vertex buffer\&. You shouldn't need to use this function, unless you have very specific stuff to implement that SFML doesn't support, or implement a temporary workaround until a bug is fixed\&.
+.PP
+\fBReturns\fP
+.RS 4
+OpenGL handle of the vertex buffer or 0 if not yet created 
+.RE
+.PP
+
+.SS "\fBPrimitiveType\fP sf::VertexBuffer::getPrimitiveType () const"
+
+.PP
+Get the type of primitives drawn by the vertex buffer\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Primitive type 
+.RE
+.PP
+
+.SS "\fBUsage\fP sf::VertexBuffer::getUsage () const"
+
+.PP
+Get the usage specifier of this vertex buffer\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Usage specifier 
+.RE
+.PP
+
+.SS "std::size_t sf::VertexBuffer::getVertexCount () const"
+
+.PP
+Return the vertex count\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Number of vertices in the vertex buffer 
+.RE
+.PP
+
+.SS "static bool sf::VertexBuffer::isAvailable ()\fR [static]\fP"
+
+.PP
+Tell whether or not the system supports vertex buffers\&. This function should always be called before using the vertex buffer features\&. If it returns false, then any attempt to use \fBsf::VertexBuffer\fP will fail\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if vertex buffers are supported, false otherwise 
+.RE
+.PP
+
+.SS "\fBVertexBuffer\fP & sf::VertexBuffer::operator= (const \fBVertexBuffer\fP & right)"
+
+.PP
+Overload of assignment operator\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIright\fP Instance to assign
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to self 
+.RE
+.PP
+
+.SS "void sf::VertexBuffer::setPrimitiveType (\fBPrimitiveType\fP type)"
+
+.PP
+Set the type of primitives to draw\&. This function defines how the vertices must be interpreted when it's time to draw them\&.
+.PP
+The default primitive type is \fBsf::Points\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP Type of primitive 
+.RE
+.PP
+
+.SS "void sf::VertexBuffer::setUsage (\fBUsage\fP usage)"
+
+.PP
+Set the usage specifier of this vertex buffer\&. This function provides a hint about how this vertex buffer is going to be used in terms of data update frequency\&.
+.PP
+After changing the usage specifier, the vertex buffer has to be updated with new data for the usage specifier to take effect\&.
+.PP
+The default primitive type is \fBsf::VertexBuffer::Stream\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIusage\fP Usage specifier 
+.RE
+.PP
+
+.SS "void sf::VertexBuffer::swap (\fBVertexBuffer\fP & right)"
+
+.PP
+Swap the contents of this vertex buffer with those of another\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIright\fP Instance to swap with 
+.RE
+.PP
+
+.SS "bool sf::VertexBuffer::update (const \fBVertex\fP * vertices)"
+
+.PP
+Update the whole buffer from an array of vertices\&. The \fIvertex\fP array is assumed to have the same size as the \fIcreated\fP buffer\&.
+.PP
+No additional check is performed on the size of the vertex array, passing invalid arguments will lead to undefined behavior\&.
+.PP
+This function does nothing if \fIvertices\fP is null or if the buffer was not previously created\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertices\fP Array of vertices to copy to the buffer
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the update was successful 
+.RE
+.PP
+
+.SS "bool sf::VertexBuffer::update (const \fBVertex\fP * vertices, std::size_t vertexCount, unsigned int offset)"
+
+.PP
+Update a part of the buffer from an array of vertices\&. \fRoffset\fP is specified as the number of vertices to skip from the beginning of the buffer\&.
+.PP
+If \fRoffset\fP is 0 and \fRvertexCount\fP is equal to the size of the currently created buffer, its whole contents are replaced\&.
+.PP
+If \fRoffset\fP is 0 and \fRvertexCount\fP is greater than the size of the currently created buffer, a new buffer is created containing the vertex data\&.
+.PP
+If \fRoffset\fP is 0 and \fRvertexCount\fP is less than the size of the currently created buffer, only the corresponding region is updated\&.
+.PP
+If \fRoffset\fP is not 0 and \fRoffset\fP + \fRvertexCount\fP is greater than the size of the currently created buffer, the update fails\&.
+.PP
+No additional check is performed on the size of the vertex array, passing invalid arguments will lead to undefined behavior\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertices\fP Array of vertices to copy to the buffer 
+.br
+\fIvertexCount\fP Number of vertices to copy 
+.br
+\fIoffset\fP Offset in the buffer to copy to
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the update was successful 
+.RE
+.PP
+
+.SS "bool sf::VertexBuffer::update (const \fBVertexBuffer\fP & vertexBuffer)"
+
+.PP
+Copy the contents of another buffer into this buffer\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertexBuffer\fP \fBVertex\fP buffer whose contents to copy into this vertex buffer
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the copy was successful 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

@@ -1,0 +1,46 @@
+.TH "sf::Event::JoystickButtonEvent" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event::JoystickButtonEvent \- \fBJoystick\fP buttons events parameters (JoystickButtonPressed, JoystickButtonReleased)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBjoystickId\fP"
+.br
+.RI "Index of the joystick (in range [0 \&.\&. \fBJoystick::Count\fP - 1]) "
+.ti -1c
+.RI "unsigned int \fBbutton\fP"
+.br
+.RI "Index of the button that has been pressed (in range [0 \&.\&. \fBJoystick::ButtonCount\fP - 1]) "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBJoystick\fP buttons events parameters (JoystickButtonPressed, JoystickButtonReleased) 
+.PP
+Definition at line \fB155\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "unsigned int sf::Event::JoystickButtonEvent::button"
+
+.PP
+Index of the button that has been pressed (in range [0 \&.\&. \fBJoystick::ButtonCount\fP - 1]) 
+.PP
+Definition at line \fB158\fP of file \fBEvent\&.hpp\fP\&.
+.SS "unsigned int sf::Event::JoystickButtonEvent::joystickId"
+
+.PP
+Index of the joystick (in range [0 \&.\&. \fBJoystick::Count\fP - 1]) 
+.PP
+Definition at line \fB157\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

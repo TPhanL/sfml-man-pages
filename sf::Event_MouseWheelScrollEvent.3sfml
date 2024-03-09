@@ -1,0 +1,66 @@
+.TH "sf::Event::MouseWheelScrollEvent" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event::MouseWheelScrollEvent \- \fBMouse\fP wheel events parameters (MouseWheelScrolled)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBMouse::Wheel\fP \fBwheel\fP"
+.br
+.RI "Which wheel (for mice with multiple ones) "
+.ti -1c
+.RI "float \fBdelta\fP"
+.br
+.RI "Wheel offset (positive is up/left, negative is down/right)\&. High-precision mice may use non-integral offsets\&. "
+.ti -1c
+.RI "int \fBx\fP"
+.br
+.RI "X position of the mouse pointer, relative to the left of the owner window\&. "
+.ti -1c
+.RI "int \fBy\fP"
+.br
+.RI "Y position of the mouse pointer, relative to the top of the owner window\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBMouse\fP wheel events parameters (MouseWheelScrolled) 
+.PP
+Definition at line \fB121\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "float sf::Event::MouseWheelScrollEvent::delta"
+
+.PP
+Wheel offset (positive is up/left, negative is down/right)\&. High-precision mice may use non-integral offsets\&. 
+.PP
+Definition at line \fB124\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBMouse::Wheel\fP sf::Event::MouseWheelScrollEvent::wheel"
+
+.PP
+Which wheel (for mice with multiple ones) 
+.PP
+Definition at line \fB123\fP of file \fBEvent\&.hpp\fP\&.
+.SS "int sf::Event::MouseWheelScrollEvent::x"
+
+.PP
+X position of the mouse pointer, relative to the left of the owner window\&. 
+.PP
+Definition at line \fB125\fP of file \fBEvent\&.hpp\fP\&.
+.SS "int sf::Event::MouseWheelScrollEvent::y"
+
+.PP
+Y position of the mouse pointer, relative to the top of the owner window\&. 
+.PP
+Definition at line \fB126\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

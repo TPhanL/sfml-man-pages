@@ -1,0 +1,304 @@
+.TH "sf::InputSoundFile" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::InputSoundFile \- Provide read access to sound files\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Audio/InputSoundFile\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBInputSoundFile\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~InputSoundFile\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "bool \fBopenFromFile\fP (const std::string &filename)"
+.br
+.RI "Open a sound file from the disk for reading\&. "
+.ti -1c
+.RI "bool \fBopenFromMemory\fP (const void *data, std::size_t sizeInBytes)"
+.br
+.RI "Open a sound file in memory for reading\&. "
+.ti -1c
+.RI "bool \fBopenFromStream\fP (\fBInputStream\fP &stream)"
+.br
+.RI "Open a sound file from a custom stream for reading\&. "
+.ti -1c
+.RI "Uint64 \fBgetSampleCount\fP () const"
+.br
+.RI "Get the total number of audio samples in the file\&. "
+.ti -1c
+.RI "unsigned int \fBgetChannelCount\fP () const"
+.br
+.RI "Get the number of channels used by the sound\&. "
+.ti -1c
+.RI "unsigned int \fBgetSampleRate\fP () const"
+.br
+.RI "Get the sample rate of the sound\&. "
+.ti -1c
+.RI "\fBTime\fP \fBgetDuration\fP () const"
+.br
+.RI "Get the total duration of the sound file\&. "
+.ti -1c
+.RI "\fBTime\fP \fBgetTimeOffset\fP () const"
+.br
+.RI "Get the read offset of the file in time\&. "
+.ti -1c
+.RI "Uint64 \fBgetSampleOffset\fP () const"
+.br
+.RI "Get the read offset of the file in samples\&. "
+.ti -1c
+.RI "void \fBseek\fP (Uint64 sampleOffset)"
+.br
+.RI "Change the current read position to the given sample offset\&. "
+.ti -1c
+.RI "void \fBseek\fP (\fBTime\fP timeOffset)"
+.br
+.RI "Change the current read position to the given time offset\&. "
+.ti -1c
+.RI "Uint64 \fBread\fP (Int16 *samples, Uint64 maxCount)"
+.br
+.RI "Read audio samples from the open file\&. "
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.RI "Close the current file\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provide read access to sound files\&. 
+
+This class decodes audio samples from a sound file\&.
+.PP
+It is used internally by higher-level classes such as \fBsf::SoundBuffer\fP and \fBsf::Music\fP, but can also be useful if you want to process or analyze audio files without playing them, or if you want to implement your own version of \fBsf::Music\fP with more specific features\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Open a sound file
+sf::InputSoundFile file;
+if (!file\&.openFromFile("music\&.ogg"))
+    /* error */;
+
+// Print the sound attributes
+std::cout << "duration: " << file\&.getDuration()\&.asSeconds() << std::endl;
+std::cout << "channels: " << file\&.getChannelCount() << std::endl;
+std::cout << "sample rate: " << file\&.getSampleRate() << std::endl;
+std::cout << "sample count: " << file\&.getSampleCount() << std::endl;
+
+// Read and process batches of samples until the end of file is reached
+sf::Int16 samples[1024];
+sf::Uint64 count;
+do
+{
+    count = file\&.read(samples, 1024);
+
+    // process, analyze, play, convert, or whatever
+    // you want to do with the samples\&.\&.\&.
+}
+while (count > 0);
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::SoundFileReader\fP, \fBsf::OutputSoundFile\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB47\fP of file \fBInputSoundFile\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::InputSoundFile::InputSoundFile ()"
+
+.PP
+Default constructor\&. 
+.SS "sf::InputSoundFile::~InputSoundFile ()"
+
+.PP
+Destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void sf::InputSoundFile::close ()"
+
+.PP
+Close the current file\&. 
+.SS "unsigned int sf::InputSoundFile::getChannelCount () const"
+
+.PP
+Get the number of channels used by the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Number of channels (1 = mono, 2 = stereo) 
+.RE
+.PP
+
+.SS "\fBTime\fP sf::InputSoundFile::getDuration () const"
+
+.PP
+Get the total duration of the sound file\&. This function is provided for convenience, the duration is deduced from the other sound file attributes\&.
+.PP
+\fBReturns\fP
+.RS 4
+Duration of the sound file 
+.RE
+.PP
+
+.SS "Uint64 sf::InputSoundFile::getSampleCount () const"
+
+.PP
+Get the total number of audio samples in the file\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Number of samples 
+.RE
+.PP
+
+.SS "Uint64 sf::InputSoundFile::getSampleOffset () const"
+
+.PP
+Get the read offset of the file in samples\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Sample position 
+.RE
+.PP
+
+.SS "unsigned int sf::InputSoundFile::getSampleRate () const"
+
+.PP
+Get the sample rate of the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Sample rate, in samples per second 
+.RE
+.PP
+
+.SS "\fBTime\fP sf::InputSoundFile::getTimeOffset () const"
+
+.PP
+Get the read offset of the file in time\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fBTime\fP position 
+.RE
+.PP
+
+.SS "bool sf::InputSoundFile::openFromFile (const std::string & filename)"
+
+.PP
+Open a sound file from the disk for reading\&. The supported audio formats are: WAV (PCM only), OGG/Vorbis, FLAC, MP3\&. The supported sample sizes for FLAC and WAV are 8, 16, 24 and 32 bit\&.
+.PP
+Because of minimp3_ex limitation, for MP3 files with big (>16kb) APEv2 tag, it may not be properly removed, tag data will be treated as MP3 data and there is a low chance of garbage decoded at the end of file\&. See also: https://github.com/lieff/minimp3
+.PP
+\fBParameters\fP
+.RS 4
+\fIfilename\fP Path of the sound file to load
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the file was successfully opened 
+.RE
+.PP
+
+.SS "bool sf::InputSoundFile::openFromMemory (const void * data, std::size_t sizeInBytes)"
+
+.PP
+Open a sound file in memory for reading\&. The supported audio formats are: WAV (PCM only), OGG/Vorbis, FLAC\&. The supported sample sizes for FLAC and WAV are 8, 16, 24 and 32 bit\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Pointer to the file data in memory 
+.br
+\fIsizeInBytes\fP Size of the data to load, in bytes
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the file was successfully opened 
+.RE
+.PP
+
+.SS "bool sf::InputSoundFile::openFromStream (\fBInputStream\fP & stream)"
+
+.PP
+Open a sound file from a custom stream for reading\&. The supported audio formats are: WAV (PCM only), OGG/Vorbis, FLAC\&. The supported sample sizes for FLAC and WAV are 8, 16, 24 and 32 bit\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstream\fP Source stream to read from
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the file was successfully opened 
+.RE
+.PP
+
+.SS "Uint64 sf::InputSoundFile::read (Int16 * samples, Uint64 maxCount)"
+
+.PP
+Read audio samples from the open file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsamples\fP Pointer to the sample array to fill 
+.br
+\fImaxCount\fP Maximum number of samples to read
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Number of samples actually read (may be less than \fImaxCount\fP) 
+.RE
+.PP
+
+.SS "void sf::InputSoundFile::seek (\fBTime\fP timeOffset)"
+
+.PP
+Change the current read position to the given time offset\&. Using a time offset is handy but imprecise\&. If you need an accurate result, consider using the overload which takes a sample offset\&.
+.PP
+If the given time exceeds to total duration, this function jumps to the end of the sound file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItimeOffset\fP \fBTime\fP to jump to, relative to the beginning 
+.RE
+.PP
+
+.SS "void sf::InputSoundFile::seek (Uint64 sampleOffset)"
+
+.PP
+Change the current read position to the given sample offset\&. This function takes a sample offset to provide maximum precision\&. If you need to jump to a given time, use the other overload\&.
+.PP
+The sample offset takes the channels into account\&. If you have a time offset instead, you can easily find the corresponding sample offset with the following formula: \fRtimeInSeconds * sampleRate * channelCount\fP If the given offset exceeds to total number of samples, this function jumps to the end of the sound file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsampleOffset\fP Index of the sample to jump to, relative to the beginning 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

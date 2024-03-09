@@ -1,0 +1,655 @@
+.TH "sf::Packet" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Packet \- Utility class to build blocks of data to transfer over the network\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Network/Packet\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPacket\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "virtual \fB~Packet\fP ()"
+.br
+.RI "Virtual destructor\&. "
+.ti -1c
+.RI "void \fBappend\fP (const void *data, std::size_t sizeInBytes)"
+.br
+.RI "Append data to the end of the packet\&. "
+.ti -1c
+.RI "std::size_t \fBgetReadPosition\fP () const"
+.br
+.RI "Get the current reading position in the packet\&. "
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.RI "Clear the packet\&. "
+.ti -1c
+.RI "const void * \fBgetData\fP () const"
+.br
+.RI "Get a pointer to the data contained in the packet\&. "
+.ti -1c
+.RI "std::size_t \fBgetDataSize\fP () const"
+.br
+.RI "Get the size of the data contained in the packet\&. "
+.ti -1c
+.RI "bool \fBendOfPacket\fP () const"
+.br
+.RI "Tell if the reading position has reached the end of the packet\&. "
+.ti -1c
+.RI "\fBoperator BoolType\fP () const"
+.br
+.RI "Test the validity of the packet, for reading\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (bool &data)"
+.br
+.RI "Overload of operator >> to read data from the packet\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Int8 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Uint8 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Int16 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Uint16 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Int32 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Uint32 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Int64 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (Uint64 &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (float &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (double &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (char *data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (std::string &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (wchar_t *data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (std::wstring &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator>>\fP (\fBString\fP &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (bool data)"
+.br
+.RI "Overload of operator << to write data into the packet\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Int8 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Uint8 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Int16 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Uint16 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Int32 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Uint32 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Int64 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (Uint64 data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (float data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (double data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (const char *data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (const std::string &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (const wchar_t *data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (const std::wstring &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.ti -1c
+.RI "\fBPacket\fP & \fBoperator<<\fP (const \fBString\fP &data)"
+.br
+.RI "This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual const void * \fBonSend\fP (std::size_t &size)"
+.br
+.RI "Called before the packet is sent over the network\&. "
+.ti -1c
+.RI "virtual void \fBonReceive\fP (const void *data, std::size_t size)"
+.br
+.RI "Called after the packet is received over the network\&. "
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBTcpSocket\fP"
+.br
+.ti -1c
+.RI "class \fBUdpSocket\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Utility class to build blocks of data to transfer over the network\&. 
+
+Packets provide a safe and easy way to serialize data, in order to send it over the network using sockets (\fBsf::TcpSocket\fP, \fBsf::UdpSocket\fP)\&.
+.PP
+Packets solve 2 fundamental problems that arise when transferring data over the network: 
+.PD 0
+.IP "\(bu" 1
+data is interpreted correctly according to the endianness 
+.IP "\(bu" 1
+the bounds of the packet are preserved (one send == one receive)
+.PP
+The \fBsf::Packet\fP class provides both input and output modes\&. It is designed to follow the behavior of standard C++ streams, using operators >> and << to extract and insert data\&.
+.PP
+It is recommended to use only fixed-size types (like sf::Int32, etc\&.), to avoid possible differences between the sender and the receiver\&. Indeed, the native C++ types may have different sizes on two platforms and your data may be corrupted if that happens\&.
+.PP
+Usage example: 
+.PP
+.nf
+sf::Uint32 x = 24;
+std::string s = "hello";
+double d = 5\&.89;
+
+// Group the variables to send into a packet
+sf::Packet packet;
+packet << x << s << d;
+
+// Send it over the network (socket is a valid sf::TcpSocket)
+socket\&.send(packet);
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+
+// Receive the packet at the other end
+sf::Packet packet;
+socket\&.receive(packet);
+
+// Extract the variables contained in the packet
+sf::Uint32 x;
+std::string s;
+double d;
+if (packet >> x >> s >> d)
+{
+    // Data extracted successfully\&.\&.\&.
+}
+
+.fi
+.PP
+.PP
+Packets have built-in operator >> and << overloads for standard types: 
+.PD 0
+.IP "\(bu" 1
+bool 
+.IP "\(bu" 1
+fixed-size integer types (sf::Int8/16/32, sf::Uint8/16/32) 
+.IP "\(bu" 1
+floating point numbers (float, double) 
+.IP "\(bu" 1
+string types (char*, wchar_t*, std::string, std::wstring, \fBsf::String\fP)
+.PP
+Like standard streams, it is also possible to define your own overloads of operators >> and << in order to handle your custom types\&.
+.PP
+.PP
+.nf
+struct MyStruct
+{
+    float       number;
+    sf::Int8    integer;
+    std::string str;
+};
+
+sf::Packet& operator <<(sf::Packet& packet, const MyStruct& m)
+{
+    return packet << m\&.number << m\&.integer << m\&.str;
+}
+
+sf::Packet& operator >>(sf::Packet& packet, MyStruct& m)
+{
+    return packet >> m\&.number >> m\&.integer >> m\&.str;
+}
+.fi
+.PP
+.PP
+Packets also provide an extra feature that allows to apply custom transformations to the data before it is sent, and after it is received\&. This is typically used to handle automatic compression or encryption of the data\&. This is achieved by inheriting from \fBsf::Packet\fP, and overriding the onSend and onReceive functions\&.
+.PP
+Here is an example: 
+.PP
+.nf
+class ZipPacket : public sf::Packet
+{
+    virtual const void* onSend(std::size_t& size)
+    {
+        const void* srcData = getData();
+        std::size_t srcSize = getDataSize();
+
+        return MySuperZipFunction(srcData, srcSize, &size);
+    }
+
+    virtual void onReceive(const void* data, std::size_t size)
+    {
+        std::size_t dstSize;
+        const void* dstData = MySuperUnzipFunction(data, size, &dstSize);
+
+        append(dstData, dstSize);
+    }
+};
+
+// Use like regular packets:
+ZipPacket packet;
+packet << x << s << d;
+\&.\&.\&.
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::TcpSocket\fP, \fBsf::UdpSocket\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB47\fP of file \fBPacket\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Packet::Packet ()"
+
+.PP
+Default constructor\&. Creates an empty packet\&. 
+.SS "virtual sf::Packet::~Packet ()\fR [virtual]\fP"
+
+.PP
+Virtual destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void sf::Packet::append (const void * data, std::size_t sizeInBytes)"
+
+.PP
+Append data to the end of the packet\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Pointer to the sequence of bytes to append 
+.br
+\fIsizeInBytes\fP Number of bytes to append
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBclear\fP 
+.PP
+\fBgetReadPosition\fP 
+.RE
+.PP
+
+.SS "void sf::Packet::clear ()"
+
+.PP
+Clear the packet\&. After calling Clear, the packet is empty\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBappend\fP 
+.RE
+.PP
+
+.SS "bool sf::Packet::endOfPacket () const"
+
+.PP
+Tell if the reading position has reached the end of the packet\&. This function is useful to know if there is some data left to be read, without actually reading it\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if all data was read, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+operator bool 
+.RE
+.PP
+
+.SS "const void * sf::Packet::getData () const"
+
+.PP
+Get a pointer to the data contained in the packet\&. Warning: the returned pointer may become invalid after you append data to the packet, therefore it should never be stored\&. The return pointer is NULL if the packet is empty\&.
+.PP
+\fBReturns\fP
+.RS 4
+Pointer to the data
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetDataSize\fP 
+.RE
+.PP
+
+.SS "std::size_t sf::Packet::getDataSize () const"
+
+.PP
+Get the size of the data contained in the packet\&. This function returns the number of bytes pointed to by what getData returns\&.
+.PP
+\fBReturns\fP
+.RS 4
+Data size, in bytes
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetData\fP 
+.RE
+.PP
+
+.SS "std::size_t sf::Packet::getReadPosition () const"
+
+.PP
+Get the current reading position in the packet\&. The next read operation will read data from this position
+.PP
+\fBReturns\fP
+.RS 4
+The byte offset of the current read position
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBappend\fP 
+.RE
+.PP
+
+.SS "virtual void sf::Packet::onReceive (const void * data, std::size_t size)\fR [protected]\fP, \fR [virtual]\fP"
+
+.PP
+Called after the packet is received over the network\&. This function can be defined by derived classes to transform the data after it is received; this can be used for decompression, decryption, etc\&. The function receives a pointer to the received data, and must fill the packet with the transformed bytes\&. The default implementation fills the packet directly without transforming the data\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Pointer to the received bytes 
+.br
+\fIsize\fP Number of bytes
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBonSend\fP 
+.RE
+.PP
+
+.SS "virtual const void * sf::Packet::onSend (std::size_t & size)\fR [protected]\fP, \fR [virtual]\fP"
+
+.PP
+Called before the packet is sent over the network\&. This function can be defined by derived classes to transform the data before it is sent; this can be used for compression, encryption, etc\&. The function must return a pointer to the modified data, as well as the number of bytes pointed\&. The default implementation provides the packet's data without transforming it\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsize\fP Variable to fill with the size of data to send
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Pointer to the array of bytes to send
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBonReceive\fP 
+.RE
+.PP
+
+.SS "sf::Packet::operator BoolType () const"
+
+.PP
+Test the validity of the packet, for reading\&. This operator allows to test the packet as a boolean variable, to check if a reading operation was successful\&.
+.PP
+A packet will be in an invalid state if it has no more data to read\&.
+.PP
+This behavior is the same as standard C++ streams\&.
+.PP
+Usage example: 
+.PP
+.nf
+float x;
+packet >> x;
+if (packet)
+{
+   // ok, x was extracted successfully
+}
+
+// \-\- or \-\-
+
+float x;
+if (packet >> x)
+{
+   // ok, x was extracted successfully
+}
+
+.fi
+.PP
+.PP
+Don't focus on the return type, it's equivalent to bool but it disallows unwanted implicit conversions to integer or pointer types\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if last data extraction from packet was successful
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBendOfPacket\fP 
+.RE
+.PP
+
+.SS "\fBPacket\fP & sf::Packet::operator<< (bool data)"
+
+.PP
+Overload of operator << to write data into the packet\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (const char * data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (const std::string & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (const std::wstring & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (const \fBString\fP & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (const wchar_t * data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (double data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (float data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Int16 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Int32 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Int64 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Int8 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Uint16 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Uint32 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Uint64 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator<< (Uint8 data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (bool & data)"
+
+.PP
+Overload of operator >> to read data from the packet\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (char * data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (double & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (float & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Int16 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Int32 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Int64 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Int8 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (std::string & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (std::wstring & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (\fBString\fP & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Uint16 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Uint32 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Uint64 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (Uint8 & data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SS "\fBPacket\fP & sf::Packet::operator>> (wchar_t * data)"
+
+.PP
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+.SH "Friends And Related Symbol Documentation"
+.PP 
+.SS "friend class \fBTcpSocket\fP\fR [friend]\fP"
+
+.PP
+Definition at line \fB350\fP of file \fBPacket\&.hpp\fP\&.
+.SS "friend class \fBUdpSocket\fP\fR [friend]\fP"
+
+.PP
+Definition at line \fB351\fP of file \fBPacket\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

@@ -1,0 +1,631 @@
+.TH "sf::Sound" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Sound \- Regular sound that can be played in the audio environment\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Audio/Sound\&.hpp>\fP
+.PP
+Inherits \fBsf::SoundSource\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBStatus\fP { \fBStopped\fP, \fBPaused\fP, \fBPlaying\fP }"
+.br
+.RI "Enumeration of the sound source states\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSound\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBSound\fP (const \fBSoundBuffer\fP &buffer)"
+.br
+.RI "Construct the sound with a buffer\&. "
+.ti -1c
+.RI "\fBSound\fP (const \fBSound\fP &copy)"
+.br
+.RI "Copy constructor\&. "
+.ti -1c
+.RI "\fB~Sound\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "void \fBplay\fP ()"
+.br
+.RI "Start or resume playing the sound\&. "
+.ti -1c
+.RI "void \fBpause\fP ()"
+.br
+.RI "Pause the sound\&. "
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.RI "stop playing the sound "
+.ti -1c
+.RI "void \fBsetBuffer\fP (const \fBSoundBuffer\fP &buffer)"
+.br
+.RI "Set the source buffer containing the audio data to play\&. "
+.ti -1c
+.RI "void \fBsetLoop\fP (bool loop)"
+.br
+.RI "Set whether or not the sound should loop after reaching the end\&. "
+.ti -1c
+.RI "void \fBsetPlayingOffset\fP (\fBTime\fP timeOffset)"
+.br
+.RI "Change the current playing position of the sound\&. "
+.ti -1c
+.RI "const \fBSoundBuffer\fP * \fBgetBuffer\fP () const"
+.br
+.RI "Get the audio buffer attached to the sound\&. "
+.ti -1c
+.RI "bool \fBgetLoop\fP () const"
+.br
+.RI "Tell whether or not the sound is in loop mode\&. "
+.ti -1c
+.RI "\fBTime\fP \fBgetPlayingOffset\fP () const"
+.br
+.RI "Get the current playing position of the sound\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBgetStatus\fP () const"
+.br
+.RI "Get the current status of the sound (stopped, paused, playing) "
+.ti -1c
+.RI "\fBSound\fP & \fBoperator=\fP (const \fBSound\fP &right)"
+.br
+.RI "Overload of assignment operator\&. "
+.ti -1c
+.RI "void \fBresetBuffer\fP ()"
+.br
+.RI "Reset the internal buffer of the sound\&. "
+.ti -1c
+.RI "void \fBsetPitch\fP (float pitch)"
+.br
+.RI "Set the pitch of the sound\&. "
+.ti -1c
+.RI "void \fBsetVolume\fP (float volume)"
+.br
+.RI "Set the volume of the sound\&. "
+.ti -1c
+.RI "void \fBsetPosition\fP (float x, float y, float z)"
+.br
+.RI "Set the 3D position of the sound in the audio scene\&. "
+.ti -1c
+.RI "void \fBsetPosition\fP (const \fBVector3f\fP &position)"
+.br
+.RI "Set the 3D position of the sound in the audio scene\&. "
+.ti -1c
+.RI "void \fBsetRelativeToListener\fP (bool relative)"
+.br
+.RI "Make the sound's position relative to the listener or absolute\&. "
+.ti -1c
+.RI "void \fBsetMinDistance\fP (float distance)"
+.br
+.RI "Set the minimum distance of the sound\&. "
+.ti -1c
+.RI "void \fBsetAttenuation\fP (float attenuation)"
+.br
+.RI "Set the attenuation factor of the sound\&. "
+.ti -1c
+.RI "float \fBgetPitch\fP () const"
+.br
+.RI "Get the pitch of the sound\&. "
+.ti -1c
+.RI "float \fBgetVolume\fP () const"
+.br
+.RI "Get the volume of the sound\&. "
+.ti -1c
+.RI "\fBVector3f\fP \fBgetPosition\fP () const"
+.br
+.RI "Get the 3D position of the sound in the audio scene\&. "
+.ti -1c
+.RI "bool \fBisRelativeToListener\fP () const"
+.br
+.RI "Tell whether the sound's position is relative to the listener or is absolute\&. "
+.ti -1c
+.RI "float \fBgetMinDistance\fP () const"
+.br
+.RI "Get the minimum distance of the sound\&. "
+.ti -1c
+.RI "float \fBgetAttenuation\fP () const"
+.br
+.RI "Get the attenuation factor of the sound\&. "
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBm_source\fP"
+.br
+.RI "OpenAL source identifier\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Regular sound that can be played in the audio environment\&. 
+
+\fBsf::Sound\fP is the class to use to play sounds\&.
+.PP
+It provides: 
+.PD 0
+.IP "\(bu" 1
+Control (play, pause, stop) 
+.IP "\(bu" 1
+Ability to modify output parameters in real-time (pitch, volume, \&.\&.\&.) 
+.IP "\(bu" 1
+3D spatial features (position, attenuation, \&.\&.\&.)\&.
+.PP
+\fBsf::Sound\fP is perfect for playing short sounds that can fit in memory and require no latency, like foot steps or gun shots\&. For longer sounds, like background musics or long speeches, rather see \fBsf::Music\fP (which is based on streaming)\&.
+.PP
+In order to work, a sound must be given a buffer of audio data to play\&. Audio data (samples) is stored in \fBsf::SoundBuffer\fP, and attached to a sound with the \fBsetBuffer()\fP function\&. The buffer object attached to a sound must remain alive as long as the sound uses it\&. Note that multiple sounds can use the same sound buffer at the same time\&.
+.PP
+Usage example: 
+.PP
+.nf
+sf::SoundBuffer buffer;
+buffer\&.loadFromFile("sound\&.wav");
+
+sf::Sound sound;
+sound\&.setBuffer(buffer);
+sound\&.play();
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::SoundBuffer\fP, \fBsf::Music\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB45\fP of file \fBSound\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBsf::SoundSource::Status\fP\fR [inherited]\fP"
+
+.PP
+Enumeration of the sound source states\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIStopped \fP\fP
+\fBSound\fP is not playing\&. 
+.TP
+\fB\fIPaused \fP\fP
+\fBSound\fP is paused\&. 
+.TP
+\fB\fIPlaying \fP\fP
+\fBSound\fP is playing\&. 
+.PP
+Definition at line \fB50\fP of file \fBSoundSource\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Sound::Sound ()"
+
+.PP
+Default constructor\&. 
+.SS "sf::Sound::Sound (const \fBSoundBuffer\fP & buffer)\fR [explicit]\fP"
+
+.PP
+Construct the sound with a buffer\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuffer\fP \fBSound\fP buffer containing the audio data to play with the sound 
+.RE
+.PP
+
+.SS "sf::Sound::Sound (const \fBSound\fP & copy)"
+
+.PP
+Copy constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcopy\fP Instance to copy 
+.RE
+.PP
+
+.SS "sf::Sound::~Sound ()"
+
+.PP
+Destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "float sf::SoundSource::getAttenuation () const\fR [inherited]\fP"
+
+.PP
+Get the attenuation factor of the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Attenuation factor of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetAttenuation\fP, \fBgetMinDistance\fP 
+.RE
+.PP
+
+.SS "const \fBSoundBuffer\fP * sf::Sound::getBuffer () const"
+
+.PP
+Get the audio buffer attached to the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fBSound\fP buffer attached to the sound (can be NULL) 
+.RE
+.PP
+
+.SS "bool sf::Sound::getLoop () const"
+
+.PP
+Tell whether or not the sound is in loop mode\&. 
+.PP
+\fBReturns\fP
+.RS 4
+True if the sound is looping, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetLoop\fP 
+.RE
+.PP
+
+.SS "float sf::SoundSource::getMinDistance () const\fR [inherited]\fP"
+
+.PP
+Get the minimum distance of the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Minimum distance of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetMinDistance\fP, \fBgetAttenuation\fP 
+.RE
+.PP
+
+.SS "float sf::SoundSource::getPitch () const\fR [inherited]\fP"
+
+.PP
+Get the pitch of the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Pitch of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetPitch\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP sf::Sound::getPlayingOffset () const"
+
+.PP
+Get the current playing position of the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Current playing position, from the beginning of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetPlayingOffset\fP 
+.RE
+.PP
+
+.SS "\fBVector3f\fP sf::SoundSource::getPosition () const\fR [inherited]\fP"
+
+.PP
+Get the 3D position of the sound in the audio scene\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Position of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetPosition\fP 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::Sound::getStatus () const\fR [virtual]\fP"
+
+.PP
+Get the current status of the sound (stopped, paused, playing) 
+.PP
+\fBReturns\fP
+.RS 4
+Current status of the sound 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBsf::SoundSource\fP\&.
+.SS "float sf::SoundSource::getVolume () const\fR [inherited]\fP"
+
+.PP
+Get the volume of the sound\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Volume of the sound, in the range [0, 100]
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetVolume\fP 
+.RE
+.PP
+
+.SS "bool sf::SoundSource::isRelativeToListener () const\fR [inherited]\fP"
+
+.PP
+Tell whether the sound's position is relative to the listener or is absolute\&. 
+.PP
+\fBReturns\fP
+.RS 4
+True if the position is relative, false if it's absolute
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetRelativeToListener\fP 
+.RE
+.PP
+
+.SS "\fBSound\fP & sf::Sound::operator= (const \fBSound\fP & right)"
+
+.PP
+Overload of assignment operator\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIright\fP Instance to assign
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to self 
+.RE
+.PP
+
+.SS "void sf::Sound::pause ()\fR [virtual]\fP"
+
+.PP
+Pause the sound\&. This function pauses the sound if it was playing, otherwise (sound already paused or stopped) it has no effect\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBplay\fP, \fBstop\fP 
+.RE
+.PP
+
+.PP
+Implements \fBsf::SoundSource\fP\&.
+.SS "void sf::Sound::play ()\fR [virtual]\fP"
+
+.PP
+Start or resume playing the sound\&. This function starts the stream if it was stopped, resumes it if it was paused, and restarts it from beginning if it was it already playing\&. This function uses its own thread so that it doesn't block the rest of the program while the sound is played\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBpause\fP, \fBstop\fP 
+.RE
+.PP
+
+.PP
+Implements \fBsf::SoundSource\fP\&.
+.SS "void sf::Sound::resetBuffer ()"
+
+.PP
+Reset the internal buffer of the sound\&. This function is for internal use only, you don't have to use it\&. It is called by the \fBsf::SoundBuffer\fP that this sound uses, when it is destroyed in order to prevent the sound from using a dead buffer\&. 
+.SS "void sf::SoundSource::setAttenuation (float attenuation)\fR [inherited]\fP"
+
+.PP
+Set the attenuation factor of the sound\&. The attenuation is a multiplicative factor which makes the sound more or less loud according to its distance from the listener\&. An attenuation of 0 will produce a non-attenuated sound, i\&.e\&. its volume will always be the same whether it is heard from near or from far\&. On the other hand, an attenuation value such as 100 will make the sound fade out very quickly as it gets further from the listener\&. The default value of the attenuation is 1\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIattenuation\fP New attenuation factor of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetAttenuation\fP, \fBsetMinDistance\fP 
+.RE
+.PP
+
+.SS "void sf::Sound::setBuffer (const \fBSoundBuffer\fP & buffer)"
+
+.PP
+Set the source buffer containing the audio data to play\&. It is important to note that the sound buffer is not copied, thus the \fBsf::SoundBuffer\fP instance must remain alive as long as it is attached to the sound\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuffer\fP \fBSound\fP buffer to attach to the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetBuffer\fP 
+.RE
+.PP
+
+.SS "void sf::Sound::setLoop (bool loop)"
+
+.PP
+Set whether or not the sound should loop after reaching the end\&. If set, the sound will restart from beginning after reaching the end and so on, until it is stopped or setLoop(false) is called\&. The default looping state for sound is false\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIloop\fP True to play in loop, false to play once
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetLoop\fP 
+.RE
+.PP
+
+.SS "void sf::SoundSource::setMinDistance (float distance)\fR [inherited]\fP"
+
+.PP
+Set the minimum distance of the sound\&. The 'minimum distance' of a sound is the maximum distance at which it is heard at its maximum volume\&. Further than the minimum distance, it will start to fade out according to its attenuation factor\&. A value of 0 ('inside the head
+of the listener') is an invalid value and is forbidden\&. The default value of the minimum distance is 1\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdistance\fP New minimum distance of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetMinDistance\fP, \fBsetAttenuation\fP 
+.RE
+.PP
+
+.SS "void sf::SoundSource::setPitch (float pitch)\fR [inherited]\fP"
+
+.PP
+Set the pitch of the sound\&. The pitch represents the perceived fundamental frequency of a sound; thus you can make a sound more acute or grave by changing its pitch\&. A side effect of changing the pitch is to modify the playing speed of the sound as well\&. The default value for the pitch is 1\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpitch\fP New pitch to apply to the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetPitch\fP 
+.RE
+.PP
+
+.SS "void sf::Sound::setPlayingOffset (\fBTime\fP timeOffset)"
+
+.PP
+Change the current playing position of the sound\&. The playing position can be changed when the sound is either paused or playing\&. Changing the playing position when the sound is stopped has no effect, since playing the sound will reset its position\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItimeOffset\fP New playing position, from the beginning of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetPlayingOffset\fP 
+.RE
+.PP
+
+.SS "void sf::SoundSource::setPosition (const \fBVector3f\fP & position)\fR [inherited]\fP"
+
+.PP
+Set the 3D position of the sound in the audio scene\&. Only sounds with one channel (mono sounds) can be spatialized\&. The default position of a sound is (0, 0, 0)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP Position of the sound in the scene
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetPosition\fP 
+.RE
+.PP
+
+.SS "void sf::SoundSource::setPosition (float x, float y, float z)\fR [inherited]\fP"
+
+.PP
+Set the 3D position of the sound in the audio scene\&. Only sounds with one channel (mono sounds) can be spatialized\&. The default position of a sound is (0, 0, 0)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP X coordinate of the position of the sound in the scene 
+.br
+\fIy\fP Y coordinate of the position of the sound in the scene 
+.br
+\fIz\fP Z coordinate of the position of the sound in the scene
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetPosition\fP 
+.RE
+.PP
+
+.SS "void sf::SoundSource::setRelativeToListener (bool relative)\fR [inherited]\fP"
+
+.PP
+Make the sound's position relative to the listener or absolute\&. Making a sound relative to the listener will ensure that it will always be played the same way regardless of the position of the listener\&. This can be useful for non-spatialized sounds, sounds that are produced by the listener, or sounds attached to it\&. The default value is false (position is absolute)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIrelative\fP True to set the position relative, false to set it absolute
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBisRelativeToListener\fP 
+.RE
+.PP
+
+.SS "void sf::SoundSource::setVolume (float volume)\fR [inherited]\fP"
+
+.PP
+Set the volume of the sound\&. The volume is a value between 0 (mute) and 100 (full volume)\&. The default value for the volume is 100\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvolume\fP Volume of the sound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetVolume\fP 
+.RE
+.PP
+
+.SS "void sf::Sound::stop ()\fR [virtual]\fP"
+
+.PP
+stop playing the sound This function stops the sound if it was playing or paused, and does nothing if it was already stopped\&. It also resets the playing position (unlike \fBpause()\fP)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBplay\fP, \fBpause\fP 
+.RE
+.PP
+
+.PP
+Implements \fBsf::SoundSource\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "unsigned int sf::SoundSource::m_source\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+OpenAL source identifier\&. 
+.PP
+Definition at line \fB309\fP of file \fBSoundSource\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

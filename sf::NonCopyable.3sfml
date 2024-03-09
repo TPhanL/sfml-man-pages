@@ -1,0 +1,67 @@
+.TH "sf::NonCopyable" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::NonCopyable \- Utility class that makes any derived class non-copyable\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/NonCopyable\&.hpp>\fP
+.PP
+Inherited by \fBsf::Context\fP\fR [private]\fP, \fBsf::Cursor\fP\fR [private]\fP, \fBsf::FileInputStream\fP\fR [private]\fP, \fBsf::Ftp\fP\fR [private]\fP, \fBsf::GlResource::TransientContextLock\fP\fR [private]\fP, \fBsf::Http\fP\fR [private]\fP, \fBsf::InputSoundFile\fP\fR [private]\fP, \fBsf::Lock\fP\fR [private]\fP, \fBsf::Mutex\fP\fR [private]\fP, \fBsf::OutputSoundFile\fP\fR [private]\fP, \fBsf::RenderTarget\fP\fR [private]\fP, \fBsf::Shader\fP\fR [private]\fP, \fBsf::Socket\fP\fR [private]\fP, \fBsf::Thread\fP\fR [private]\fP, \fBsf::ThreadLocal\fP\fR [private]\fP, and \fBsf::WindowBase\fP\fR [private]\fP\&.
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNonCopyable\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~NonCopyable\fP ()"
+.br
+.RI "Default destructor\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Utility class that makes any derived class non-copyable\&. 
+
+This class makes its instances non-copyable, by explicitly disabling its copy constructor and its assignment operator\&.
+.PP
+To create a non-copyable class, simply inherit from \fBsf::NonCopyable\fP\&.
+.PP
+The type of inheritance (public or private) doesn't matter, the copy constructor and assignment operator are declared private in \fBsf::NonCopyable\fP so they will end up being inaccessible in both cases\&. Thus you can use a shorter syntax for inheriting from it (see below)\&.
+.PP
+Usage example: 
+.PP
+.nf
+class MyNonCopyableClass : sf::NonCopyable
+{
+    \&.\&.\&.
+};
+
+.fi
+.PP
+.PP
+Deciding whether the instances of a class can be copied or not is a very important design choice\&. You are strongly encouraged to think about it before writing a class, and to use \fBsf::NonCopyable\fP when necessary to prevent many potential future errors when using it\&. This is also a very important indication to users of your class\&. 
+.PP
+Definition at line \fB41\fP of file \fBNonCopyable\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::NonCopyable::NonCopyable ()\fR [inline]\fP, \fR [protected]\fP"
+
+.PP
+Default constructor\&. Because this class has a copy constructor, the compiler will not automatically generate the default constructor\&. That's why we must define it explicitly\&. 
+.PP
+Definition at line \fB53\fP of file \fBNonCopyable\&.hpp\fP\&.
+.SS "sf::NonCopyable::~NonCopyable ()\fR [inline]\fP, \fR [protected]\fP"
+
+.PP
+Default destructor\&. By declaring a protected destructor it's impossible to call delete on a pointer of \fBsf::NonCopyable\fP, thus preventing possible resource leaks\&. 
+.PP
+Definition at line \fB63\fP of file \fBNonCopyable\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

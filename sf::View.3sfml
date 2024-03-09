@@ -1,0 +1,470 @@
+.TH "sf::View" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::View \- 2D camera that defines what region is shown on screen  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/View\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBView\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBView\fP (const \fBFloatRect\fP &rectangle)"
+.br
+.RI "Construct the view from a rectangle\&. "
+.ti -1c
+.RI "\fBView\fP (const \fBVector2f\fP &center, const \fBVector2f\fP &size)"
+.br
+.RI "Construct the view from its center and size\&. "
+.ti -1c
+.RI "void \fBsetCenter\fP (float x, float y)"
+.br
+.RI "Set the center of the view\&. "
+.ti -1c
+.RI "void \fBsetCenter\fP (const \fBVector2f\fP &center)"
+.br
+.RI "Set the center of the view\&. "
+.ti -1c
+.RI "void \fBsetSize\fP (float width, float height)"
+.br
+.RI "Set the size of the view\&. "
+.ti -1c
+.RI "void \fBsetSize\fP (const \fBVector2f\fP &size)"
+.br
+.RI "Set the size of the view\&. "
+.ti -1c
+.RI "void \fBsetRotation\fP (float angle)"
+.br
+.RI "Set the orientation of the view\&. "
+.ti -1c
+.RI "void \fBsetViewport\fP (const \fBFloatRect\fP &viewport)"
+.br
+.RI "Set the target viewport\&. "
+.ti -1c
+.RI "void \fBreset\fP (const \fBFloatRect\fP &rectangle)"
+.br
+.RI "Reset the view to the given rectangle\&. "
+.ti -1c
+.RI "const \fBVector2f\fP & \fBgetCenter\fP () const"
+.br
+.RI "Get the center of the view\&. "
+.ti -1c
+.RI "const \fBVector2f\fP & \fBgetSize\fP () const"
+.br
+.RI "Get the size of the view\&. "
+.ti -1c
+.RI "float \fBgetRotation\fP () const"
+.br
+.RI "Get the current orientation of the view\&. "
+.ti -1c
+.RI "const \fBFloatRect\fP & \fBgetViewport\fP () const"
+.br
+.RI "Get the target viewport rectangle of the view\&. "
+.ti -1c
+.RI "void \fBmove\fP (float offsetX, float offsetY)"
+.br
+.RI "Move the view relatively to its current position\&. "
+.ti -1c
+.RI "void \fBmove\fP (const \fBVector2f\fP &offset)"
+.br
+.RI "Move the view relatively to its current position\&. "
+.ti -1c
+.RI "void \fBrotate\fP (float angle)"
+.br
+.RI "Rotate the view relatively to its current orientation\&. "
+.ti -1c
+.RI "void \fBzoom\fP (float factor)"
+.br
+.RI "Resize the view rectangle relatively to its current size\&. "
+.ti -1c
+.RI "const \fBTransform\fP & \fBgetTransform\fP () const"
+.br
+.RI "Get the projection transform of the view\&. "
+.ti -1c
+.RI "const \fBTransform\fP & \fBgetInverseTransform\fP () const"
+.br
+.RI "Get the inverse projection transform of the view\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+2D camera that defines what region is shown on screen 
+
+\fBsf::View\fP defines a camera in the 2D scene\&.
+.PP
+This is a very powerful concept: you can scroll, rotate or zoom the entire scene without altering the way that your drawable objects are drawn\&.
+.PP
+A view is composed of a source rectangle, which defines what part of the 2D scene is shown, and a target viewport, which defines where the contents of the source rectangle will be displayed on the render target (window or texture)\&.
+.PP
+The viewport allows to map the scene to a custom part of the render target, and can be used for split-screen or for displaying a minimap, for example\&. If the source rectangle doesn't have the same size as the viewport, its contents will be stretched to fit in\&.
+.PP
+To apply a view, you have to assign it to the render target\&. Then, objects drawn in this render target will be affected by the view until you use another view\&.
+.PP
+Usage example: 
+.PP
+.nf
+sf::RenderWindow window;
+sf::View view;
+
+// Initialize the view to a rectangle located at (100, 100) and with a size of 400x200
+view\&.reset(sf::FloatRect(100, 100, 400, 200));
+
+// Rotate it by 45 degrees
+view\&.rotate(45);
+
+// Set its target viewport to be half of the window
+view\&.setViewport(sf::FloatRect(0\&.f, 0\&.f, 0\&.5f, 1\&.f));
+
+// Apply it
+window\&.setView(view);
+
+// Render stuff
+window\&.draw(someSprite);
+
+// Set the default view back
+window\&.setView(window\&.getDefaultView());
+
+// Render stuff not affected by the view
+window\&.draw(someText);
+
+.fi
+.PP
+.PP
+See also the note on coordinates and undistorted rendering in \fBsf::Transformable\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::RenderWindow\fP, \fBsf::RenderTexture\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB43\fP of file \fBView\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::View::View ()"
+
+.PP
+Default constructor\&. This constructor creates a default view of (0, 0, 1000, 1000) 
+.SS "sf::View::View (const \fBFloatRect\fP & rectangle)\fR [explicit]\fP"
+
+.PP
+Construct the view from a rectangle\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrectangle\fP Rectangle defining the zone to display 
+.RE
+.PP
+
+.SS "sf::View::View (const \fBVector2f\fP & center, const \fBVector2f\fP & size)"
+
+.PP
+Construct the view from its center and size\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcenter\fP Center of the zone to display 
+.br
+\fIsize\fP Size of zone to display 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const \fBVector2f\fP & sf::View::getCenter () const"
+
+.PP
+Get the center of the view\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Center of the view
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetSize\fP, \fBsetCenter\fP 
+.RE
+.PP
+
+.SS "const \fBTransform\fP & sf::View::getInverseTransform () const"
+
+.PP
+Get the inverse projection transform of the view\&. This function is meant for internal use only\&.
+.PP
+\fBReturns\fP
+.RS 4
+Inverse of the projection transform defining the view
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetTransform\fP 
+.RE
+.PP
+
+.SS "float sf::View::getRotation () const"
+
+.PP
+Get the current orientation of the view\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Rotation angle of the view, in degrees
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetRotation\fP 
+.RE
+.PP
+
+.SS "const \fBVector2f\fP & sf::View::getSize () const"
+
+.PP
+Get the size of the view\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Size of the view
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetCenter\fP, \fBsetSize\fP 
+.RE
+.PP
+
+.SS "const \fBTransform\fP & sf::View::getTransform () const"
+
+.PP
+Get the projection transform of the view\&. This function is meant for internal use only\&.
+.PP
+\fBReturns\fP
+.RS 4
+Projection transform defining the view
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetInverseTransform\fP 
+.RE
+.PP
+
+.SS "const \fBFloatRect\fP & sf::View::getViewport () const"
+
+.PP
+Get the target viewport rectangle of the view\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Viewport rectangle, expressed as a factor of the target size
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetViewport\fP 
+.RE
+.PP
+
+.SS "void sf::View::move (const \fBVector2f\fP & offset)"
+
+.PP
+Move the view relatively to its current position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIoffset\fP Move offset
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetCenter\fP, \fBrotate\fP, \fBzoom\fP 
+.RE
+.PP
+
+.SS "void sf::View::move (float offsetX, float offsetY)"
+
+.PP
+Move the view relatively to its current position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIoffsetX\fP X coordinate of the move offset 
+.br
+\fIoffsetY\fP Y coordinate of the move offset
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetCenter\fP, \fBrotate\fP, \fBzoom\fP 
+.RE
+.PP
+
+.SS "void sf::View::reset (const \fBFloatRect\fP & rectangle)"
+
+.PP
+Reset the view to the given rectangle\&. Note that this function resets the rotation angle to 0\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIrectangle\fP Rectangle defining the zone to display
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetCenter\fP, \fBsetSize\fP, \fBsetRotation\fP 
+.RE
+.PP
+
+.SS "void sf::View::rotate (float angle)"
+
+.PP
+Rotate the view relatively to its current orientation\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIangle\fP Angle to rotate, in degrees
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetRotation\fP, \fBmove\fP, \fBzoom\fP 
+.RE
+.PP
+
+.SS "void sf::View::setCenter (const \fBVector2f\fP & center)"
+
+.PP
+Set the center of the view\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcenter\fP New center
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetSize\fP, \fBgetCenter\fP 
+.RE
+.PP
+
+.SS "void sf::View::setCenter (float x, float y)"
+
+.PP
+Set the center of the view\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP X coordinate of the new center 
+.br
+\fIy\fP Y coordinate of the new center
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetSize\fP, \fBgetCenter\fP 
+.RE
+.PP
+
+.SS "void sf::View::setRotation (float angle)"
+
+.PP
+Set the orientation of the view\&. The default rotation of a view is 0 degree\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIangle\fP New angle, in degrees
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetRotation\fP 
+.RE
+.PP
+
+.SS "void sf::View::setSize (const \fBVector2f\fP & size)"
+
+.PP
+Set the size of the view\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsize\fP New size
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetCenter\fP, \fBgetCenter\fP 
+.RE
+.PP
+
+.SS "void sf::View::setSize (float width, float height)"
+
+.PP
+Set the size of the view\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidth\fP New width of the view 
+.br
+\fIheight\fP New height of the view
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetCenter\fP, \fBgetCenter\fP 
+.RE
+.PP
+
+.SS "void sf::View::setViewport (const \fBFloatRect\fP & viewport)"
+
+.PP
+Set the target viewport\&. The viewport is the rectangle into which the contents of the view are displayed, expressed as a factor (between 0 and 1) of the size of the \fBRenderTarget\fP to which the view is applied\&. For example, a view which takes the left side of the target would be defined with \fBView\&.setViewport\fP(sf::FloatRect(0, 0, 0\&.5, 1))\&. By default, a view has a viewport which covers the entire target\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIviewport\fP New viewport rectangle
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetViewport\fP 
+.RE
+.PP
+
+.SS "void sf::View::zoom (float factor)"
+
+.PP
+Resize the view rectangle relatively to its current size\&. Resizing the view simulates a zoom, as the zone displayed on screen grows or shrinks\&. \fIfactor\fP is a multiplier: 
+.PD 0
+.IP "\(bu" 1
+1 keeps the size unchanged 
+.IP "\(bu" 1
+> 1 makes the view bigger (objects appear smaller) 
+.IP "\(bu" 1
+< 1 makes the view smaller (objects appear bigger)
+.PP
+\fBParameters\fP
+.RS 4
+\fIfactor\fP Zoom factor to apply
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetSize\fP, \fBmove\fP, \fBrotate\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

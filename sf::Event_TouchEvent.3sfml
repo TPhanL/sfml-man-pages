@@ -1,0 +1,56 @@
+.TH "sf::Event::TouchEvent" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event::TouchEvent \- \fBTouch\fP events parameters (TouchBegan, TouchMoved, TouchEnded)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBfinger\fP"
+.br
+.RI "Index of the finger in case of multi-touch events\&. "
+.ti -1c
+.RI "int \fBx\fP"
+.br
+.RI "X position of the touch, relative to the left of the owner window\&. "
+.ti -1c
+.RI "int \fBy\fP"
+.br
+.RI "Y position of the touch, relative to the top of the owner window\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBTouch\fP events parameters (TouchBegan, TouchMoved, TouchEnded) 
+.PP
+Definition at line \fB165\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "unsigned int sf::Event::TouchEvent::finger"
+
+.PP
+Index of the finger in case of multi-touch events\&. 
+.PP
+Definition at line \fB167\fP of file \fBEvent\&.hpp\fP\&.
+.SS "int sf::Event::TouchEvent::x"
+
+.PP
+X position of the touch, relative to the left of the owner window\&. 
+.PP
+Definition at line \fB168\fP of file \fBEvent\&.hpp\fP\&.
+.SS "int sf::Event::TouchEvent::y"
+
+.PP
+Y position of the touch, relative to the top of the owner window\&. 
+.PP
+Definition at line \fB169\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

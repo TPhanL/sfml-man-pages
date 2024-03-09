@@ -1,0 +1,119 @@
+.TH "system" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+system \- System module
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBsf::Clock\fP"
+.br
+.RI "Utility class that measures the elapsed time\&. "
+.ti -1c
+.RI "class \fBsf::FileInputStream\fP"
+.br
+.RI "Implementation of input stream based on a file\&. "
+.ti -1c
+.RI "class \fBsf::InputStream\fP"
+.br
+.RI "Abstract class for custom file input streams\&. "
+.ti -1c
+.RI "class \fBsf::Lock\fP"
+.br
+.RI "Automatic wrapper for locking and unlocking mutexes\&. "
+.ti -1c
+.RI "class \fBsf::MemoryInputStream\fP"
+.br
+.RI "Implementation of input stream based on a memory chunk\&. "
+.ti -1c
+.RI "class \fBsf::Mutex\fP"
+.br
+.RI "Blocks concurrent access to shared resources from multiple threads\&. "
+.ti -1c
+.RI "class \fBsf::NonCopyable\fP"
+.br
+.RI "Utility class that makes any derived class non-copyable\&. "
+.ti -1c
+.RI "class \fBsf::String\fP"
+.br
+.RI "Utility string class that automatically handles conversions between types and encodings\&. "
+.ti -1c
+.RI "class \fBsf::Thread\fP"
+.br
+.RI "Utility class to manipulate threads\&. "
+.ti -1c
+.RI "class \fBsf::ThreadLocal\fP"
+.br
+.RI "Defines variables with thread-local storage\&. "
+.ti -1c
+.RI "class \fBsf::ThreadLocalPtr< T >\fP"
+.br
+.RI "Pointer to a thread-local variable\&. "
+.ti -1c
+.RI "class \fBsf::Time\fP"
+.br
+.RI "Represents a time value\&. "
+.ti -1c
+.RI "class \fBsf::Utf< N >\fP"
+.br
+.RI "Utility class providing generic functions for UTF conversions\&. "
+.ti -1c
+.RI "class \fBsf::Vector2< T >\fP"
+.br
+.RI "Utility template class for manipulating 2-dimensional vectors\&. "
+.ti -1c
+.RI "class \fBsf::Vector3< T >\fP"
+.br
+.RI "Utility template class for manipulating 3-dimensional vectors\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "ANativeActivity * \fBsf::getNativeActivity\fP ()"
+.br
+.RI "Return a pointer to the Android native activity\&. "
+.ti -1c
+.RI "void \fBsf::sleep\fP (\fBTime\fP duration)"
+.br
+.RI "Make the current thread sleep for a given duration\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+
+Base module of SFML, defining various utilities\&. It provides vector classes, Unicode strings and conversion functions, threads and mutexes, timing classes\&. 
+.SH "Function Documentation"
+.PP 
+.SS "ANativeActivity * sf::getNativeActivity ()"
+
+.PP
+Return a pointer to the Android native activity\&. You shouldn't have to use this function, unless you want to implement very specific details, that SFML doesn't support, or to use a workaround for a known issue\&.
+.PP
+\fBReturns\fP
+.RS 4
+Pointer to Android native activity structure
+.RE
+.PP
+.IP "\fBPlatform Limitation\fP" 1c
+\fBThis is only available on Android\fP and to use it, you'll have to specifically include \fBSFML/System/NativeActivity\&.hpp\fP in your code\&.
+.PP
+
+.SS "void sf::sleep (\fBTime\fP duration)"
+
+.PP
+Make the current thread sleep for a given duration\&. \fBsf::sleep\fP is the best way to block a program or one of its threads, as it doesn't consume any CPU power\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIduration\fP \fBTime\fP to sleep 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

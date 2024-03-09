@@ -1,0 +1,36 @@
+.TH "sf::Event::TextEvent" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event::TextEvent \- \fBText\fP event parameters (TextEntered)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "Uint32 \fBunicode\fP"
+.br
+.RI "UTF-32 Unicode value of the character\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBText\fP event parameters (TextEntered) 
+.PP
+Definition at line \fB76\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "Uint32 sf::Event::TextEvent::unicode"
+
+.PP
+UTF-32 Unicode value of the character\&. 
+.PP
+Definition at line \fB78\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

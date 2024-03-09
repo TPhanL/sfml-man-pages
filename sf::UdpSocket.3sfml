@@ -1,0 +1,467 @@
+.TH "sf::UdpSocket" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::UdpSocket \- Specialized socket using the UDP protocol\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Network/UdpSocket\&.hpp>\fP
+.PP
+Inherits \fBsf::Socket\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBMaxDatagramSize\fP = 65507 }"
+.br
+.ti -1c
+.RI "enum \fBStatus\fP { \fBDone\fP, \fBNotReady\fP, \fBPartial\fP, \fBDisconnected\fP, \fBError\fP }"
+.br
+.RI "Status codes that may be returned by socket functions\&. "
+.ti -1c
+.RI "enum { \fBAnyPort\fP = 0 }"
+.br
+.RI "Some special values used by sockets\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBUdpSocket\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "unsigned short \fBgetLocalPort\fP () const"
+.br
+.RI "Get the port to which the socket is bound locally\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBbind\fP (unsigned short port, const \fBIpAddress\fP &address=\fBIpAddress::Any\fP)"
+.br
+.RI "Bind the socket to a specific port\&. "
+.ti -1c
+.RI "void \fBunbind\fP ()"
+.br
+.RI "Unbind the socket from the local port to which it is bound\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBsend\fP (const void *data, std::size_t size, const \fBIpAddress\fP &remoteAddress, unsigned short remotePort)"
+.br
+.RI "Send raw data to a remote peer\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBreceive\fP (void *data, std::size_t size, std::size_t &received, \fBIpAddress\fP &remoteAddress, unsigned short &remotePort)"
+.br
+.RI "Receive raw data from a remote peer\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBsend\fP (\fBPacket\fP &packet, const \fBIpAddress\fP &remoteAddress, unsigned short remotePort)"
+.br
+.RI "Send a formatted packet of data to a remote peer\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBreceive\fP (\fBPacket\fP &packet, \fBIpAddress\fP &remoteAddress, unsigned short &remotePort)"
+.br
+.RI "Receive a formatted packet of data from a remote peer\&. "
+.ti -1c
+.RI "void \fBsetBlocking\fP (bool blocking)"
+.br
+.RI "Set the blocking state of the socket\&. "
+.ti -1c
+.RI "bool \fBisBlocking\fP () const"
+.br
+.RI "Tell whether the socket is in blocking or non-blocking mode\&. "
+.in -1c
+.SS "Protected Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBType\fP { \fBTcp\fP, \fBUdp\fP }"
+.br
+.RI "Types of protocols that the socket can use\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "SocketHandle \fBgetHandle\fP () const"
+.br
+.RI "Return the internal handle of the socket\&. "
+.ti -1c
+.RI "void \fBcreate\fP ()"
+.br
+.RI "Create the internal representation of the socket\&. "
+.ti -1c
+.RI "void \fBcreate\fP (SocketHandle handle)"
+.br
+.RI "Create the internal representation of the socket from a socket handle\&. "
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.RI "Close the socket gracefully\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Specialized socket using the UDP protocol\&. 
+
+A UDP socket is a connectionless socket\&.
+.PP
+Instead of connecting once to a remote host, like TCP sockets, it can send to and receive from any host at any time\&.
+.PP
+It is a datagram protocol: bounded blocks of data (datagrams) are transfered over the network rather than a continuous stream of data (TCP)\&. Therefore, one call to send will always match one call to receive (if the datagram is not lost), with the same data that was sent\&.
+.PP
+The UDP protocol is lightweight but unreliable\&. Unreliable means that datagrams may be duplicated, be lost or arrive reordered\&. However, if a datagram arrives, its data is guaranteed to be valid\&.
+.PP
+UDP is generally used for real-time communication (audio or video streaming, real-time games, etc\&.) where speed is crucial and lost data doesn't matter much\&.
+.PP
+Sending and receiving data can use either the low-level or the high-level functions\&. The low-level functions process a raw sequence of bytes, whereas the high-level interface uses packets (see \fBsf::Packet\fP), which are easier to use and provide more safety regarding the data that is exchanged\&. You can look at the \fBsf::Packet\fP class to get more details about how they work\&.
+.PP
+It is important to note that \fBUdpSocket\fP is unable to send datagrams bigger than MaxDatagramSize\&. In this case, it returns an error and doesn't send anything\&. This applies to both raw data and packets\&. Indeed, even packets are unable to split and recompose data, due to the unreliability of the protocol (dropped, mixed or duplicated datagrams may lead to a big mess when trying to recompose a packet)\&.
+.PP
+If the socket is bound to a port, it is automatically unbound from it when the socket is destroyed\&. However, you can unbind the socket explicitly with the Unbind function if necessary, to stop receiving messages or make the port available for other sockets\&.
+.PP
+Usage example: 
+.PP
+.nf
+// \-\-\-\-\- The client \-\-\-\-\-
+
+// Create a socket and bind it to the port 55001
+sf::UdpSocket socket;
+socket\&.bind(55001);
+
+// Send a message to 192\&.168\&.1\&.50 on port 55002
+std::string message = "Hi, I am " + sf::IpAddress::getLocalAddress()\&.toString();
+socket\&.send(message\&.c_str(), message\&.size() + 1, "192\&.168\&.1\&.50", 55002);
+
+// Receive an answer (most likely from 192\&.168\&.1\&.50, but could be anyone else)
+char buffer[1024];
+std::size_t received = 0;
+sf::IpAddress sender;
+unsigned short port;
+socket\&.receive(buffer, sizeof(buffer), received, sender, port);
+std::cout << sender\&.ToString() << " said: " << buffer << std::endl;
+
+// \-\-\-\-\- The server \-\-\-\-\-
+
+// Create a socket and bind it to the port 55002
+sf::UdpSocket socket;
+socket\&.bind(55002);
+
+// Receive a message from anyone
+char buffer[1024];
+std::size_t received = 0;
+sf::IpAddress sender;
+unsigned short port;
+socket\&.receive(buffer, sizeof(buffer), received, sender, port);
+std::cout << sender\&.ToString() << " said: " << buffer << std::endl;
+
+// Send an answer
+std::string message = "Welcome " + sender\&.toString();
+socket\&.send(message\&.c_str(), message\&.size() + 1, sender, port);
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Socket\fP, \fBsf::TcpSocket\fP, \fBsf::Packet\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB45\fP of file \fBUdpSocket\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum\fR [inherited]\fP"
+
+.PP
+Some special values used by sockets\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIAnyPort \fP\fP
+Special value that tells the system to pick any available port\&. 
+.PP
+Definition at line \fB66\fP of file \fBSocket\&.hpp\fP\&.
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIMaxDatagramSize \fP\fP
+The maximum number of bytes that can be sent in a single UDP datagram\&. 
+.PP
+Definition at line \fB52\fP of file \fBUdpSocket\&.hpp\fP\&.
+.SS "enum \fBsf::Socket::Status\fP\fR [inherited]\fP"
+
+.PP
+Status codes that may be returned by socket functions\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIDone \fP\fP
+The socket has sent / received the data\&. 
+.TP
+\fB\fINotReady \fP\fP
+The socket is not ready to send / receive data yet\&. 
+.TP
+\fB\fIPartial \fP\fP
+The socket sent a part of the data\&. 
+.TP
+\fB\fIDisconnected \fP\fP
+The TCP socket has been disconnected\&. 
+.TP
+\fB\fIError \fP\fP
+An unexpected error happened\&. 
+.PP
+Definition at line \fB53\fP of file \fBSocket\&.hpp\fP\&.
+.SS "enum \fBsf::Socket::Type\fP\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Types of protocols that the socket can use\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fITcp \fP\fP
+TCP protocol\&. 
+.TP
+\fB\fIUdp \fP\fP
+UDP protocol\&. 
+.PP
+Definition at line \fB114\fP of file \fBSocket\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::UdpSocket::UdpSocket ()"
+
+.PP
+Default constructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBStatus\fP sf::UdpSocket::bind (unsigned short port, const \fBIpAddress\fP & address = \fR\fBIpAddress::Any\fP\fP)"
+
+.PP
+Bind the socket to a specific port\&. Binding the socket to a port is necessary for being able to receive data on that port\&.
+.PP
+When providing \fBsf::Socket::AnyPort\fP as port, the listener will request an available port from the system\&. The chosen port can be retrieved by calling \fBgetLocalPort()\fP\&.
+.PP
+Since the socket can only be bound to a single port at any given moment, if it is already bound when this function is called, it will be unbound from the previous port before being bound to the new one\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP Port to bind the socket to 
+.br
+\fIaddress\fP Address of the interface to bind to
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Status code
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBunbind\fP, \fBgetLocalPort\fP 
+.RE
+.PP
+
+.SS "void sf::Socket::close ()\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Close the socket gracefully\&. This function can only be accessed by derived classes\&. 
+.SS "void sf::Socket::create ()\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Create the internal representation of the socket\&. This function can only be accessed by derived classes\&. 
+.SS "void sf::Socket::create (SocketHandle handle)\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Create the internal representation of the socket from a socket handle\&. This function can only be accessed by derived classes\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIhandle\fP OS-specific handle of the socket to wrap 
+.RE
+.PP
+
+.SS "SocketHandle sf::Socket::getHandle () const\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Return the internal handle of the socket\&. The returned handle may be invalid if the socket was not created yet (or already destroyed)\&. This function can only be accessed by derived classes\&.
+.PP
+\fBReturns\fP
+.RS 4
+The internal (OS-specific) handle of the socket 
+.RE
+.PP
+
+.SS "unsigned short sf::UdpSocket::getLocalPort () const"
+
+.PP
+Get the port to which the socket is bound locally\&. If the socket is not bound to a port, this function returns 0\&.
+.PP
+\fBReturns\fP
+.RS 4
+Port to which the socket is bound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBbind\fP 
+.RE
+.PP
+
+.SS "bool sf::Socket::isBlocking () const\fR [inherited]\fP"
+
+.PP
+Tell whether the socket is in blocking or non-blocking mode\&. 
+.PP
+\fBReturns\fP
+.RS 4
+True if the socket is blocking, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetBlocking\fP 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::UdpSocket::receive (\fBPacket\fP & packet, \fBIpAddress\fP & remoteAddress, unsigned short & remotePort)"
+
+.PP
+Receive a formatted packet of data from a remote peer\&. In blocking mode, this function will wait until the whole packet has been received\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpacket\fP \fBPacket\fP to fill with the received data 
+.br
+\fIremoteAddress\fP Address of the peer that sent the data 
+.br
+\fIremotePort\fP Port of the peer that sent the data
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Status code
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsend\fP 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::UdpSocket::receive (void * data, std::size_t size, std::size_t & received, \fBIpAddress\fP & remoteAddress, unsigned short & remotePort)"
+
+.PP
+Receive raw data from a remote peer\&. In blocking mode, this function will wait until some bytes are actually received\&. Be careful to use a buffer which is large enough for the data that you intend to receive, if it is too small then an error will be returned and \fIall\fP the data will be lost\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Pointer to the array to fill with the received bytes 
+.br
+\fIsize\fP Maximum number of bytes that can be received 
+.br
+\fIreceived\fP This variable is filled with the actual number of bytes received 
+.br
+\fIremoteAddress\fP Address of the peer that sent the data 
+.br
+\fIremotePort\fP Port of the peer that sent the data
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Status code
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsend\fP 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::UdpSocket::send (const void * data, std::size_t size, const \fBIpAddress\fP & remoteAddress, unsigned short remotePort)"
+
+.PP
+Send raw data to a remote peer\&. Make sure that \fIsize\fP is not greater than \fBUdpSocket::MaxDatagramSize\fP, otherwise this function will fail and no data will be sent\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Pointer to the sequence of bytes to send 
+.br
+\fIsize\fP Number of bytes to send 
+.br
+\fIremoteAddress\fP Address of the receiver 
+.br
+\fIremotePort\fP Port of the receiver to send the data to
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Status code
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBreceive\fP 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::UdpSocket::send (\fBPacket\fP & packet, const \fBIpAddress\fP & remoteAddress, unsigned short remotePort)"
+
+.PP
+Send a formatted packet of data to a remote peer\&. Make sure that the packet size is not greater than \fBUdpSocket::MaxDatagramSize\fP, otherwise this function will fail and no data will be sent\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpacket\fP \fBPacket\fP to send 
+.br
+\fIremoteAddress\fP Address of the receiver 
+.br
+\fIremotePort\fP Port of the receiver to send the data to
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Status code
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBreceive\fP 
+.RE
+.PP
+
+.SS "void sf::Socket::setBlocking (bool blocking)\fR [inherited]\fP"
+
+.PP
+Set the blocking state of the socket\&. In blocking mode, calls will not return until they have completed their task\&. For example, a call to Receive in blocking mode won't return until some data was actually received\&. In non-blocking mode, calls will always return immediately, using the return code to signal whether there was data available or not\&. By default, all sockets are blocking\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIblocking\fP True to set the socket as blocking, false for non-blocking
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBisBlocking\fP 
+.RE
+.PP
+
+.SS "void sf::UdpSocket::unbind ()"
+
+.PP
+Unbind the socket from the local port to which it is bound\&. The port that the socket was previously bound to is immediately made available to the operating system after this function is called\&. This means that a subsequent call to \fBbind()\fP will be able to re-bind the port if no other process has done so in the mean time\&. If the socket is not bound to a port, this function has no effect\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBbind\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

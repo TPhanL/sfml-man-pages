@@ -1,0 +1,29 @@
+.TH "sf::Shader::CurrentTextureType" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Shader::CurrentTextureType \- Special type that can be passed to \fBsetUniform()\fP, and that represents the texture of the object being drawn\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/Shader\&.hpp>\fP
+.SH "Detailed Description"
+.PP 
+Special type that can be passed to \fBsetUniform()\fP, and that represents the texture of the object being drawn\&. 
+
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetUniform(const std::string&, CurrentTextureType)\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB74\fP of file \fBShader\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

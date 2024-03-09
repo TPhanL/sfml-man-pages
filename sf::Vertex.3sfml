@@ -1,0 +1,173 @@
+.TH "sf::Vertex" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Vertex \- Define a point with color and texture coordinates\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/Vertex\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVertex\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBVertex\fP (const \fBVector2f\fP &thePosition)"
+.br
+.RI "Construct the vertex from its position\&. "
+.ti -1c
+.RI "\fBVertex\fP (const \fBVector2f\fP &thePosition, const \fBColor\fP &theColor)"
+.br
+.RI "Construct the vertex from its position and color\&. "
+.ti -1c
+.RI "\fBVertex\fP (const \fBVector2f\fP &thePosition, const \fBVector2f\fP &theTexCoords)"
+.br
+.RI "Construct the vertex from its position and texture coordinates\&. "
+.ti -1c
+.RI "\fBVertex\fP (const \fBVector2f\fP &thePosition, const \fBColor\fP &theColor, const \fBVector2f\fP &theTexCoords)"
+.br
+.RI "Construct the vertex from its position, color and texture coordinates\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBVector2f\fP \fBposition\fP"
+.br
+.RI "2D position of the vertex "
+.ti -1c
+.RI "\fBColor\fP \fBcolor\fP"
+.br
+.RI "\fBColor\fP of the vertex\&. "
+.ti -1c
+.RI "\fBVector2f\fP \fBtexCoords\fP"
+.br
+.RI "Coordinates of the texture's pixel to map to the vertex\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Define a point with color and texture coordinates\&. 
+
+A vertex is an improved point\&.
+.PP
+It has a position and other extra attributes that will be used for drawing: in SFML, vertices also have a color and a pair of texture coordinates\&.
+.PP
+The vertex is the building block of drawing\&. Everything which is visible on screen is made of vertices\&. They are grouped as 2D primitives (triangles, quads, \&.\&.\&.), and these primitives are grouped to create even more complex 2D entities such as sprites, texts, etc\&.
+.PP
+If you use the graphical entities of SFML (sprite, text, shape) you won't have to deal with vertices directly\&. But if you want to define your own 2D entities, such as tiled maps or particle systems, using vertices will allow you to get maximum performances\&.
+.PP
+Example: 
+.PP
+.nf
+// define a 100x100 square, red, with a 10x10 texture mapped on it
+sf::Vertex vertices[] =
+{
+    sf::Vertex(sf::Vector2f(  0,   0), sf::Color::Red, sf::Vector2f( 0,  0)),
+    sf::Vertex(sf::Vector2f(  0, 100), sf::Color::Red, sf::Vector2f( 0, 10)),
+    sf::Vertex(sf::Vector2f(100, 100), sf::Color::Red, sf::Vector2f(10, 10)),
+    sf::Vertex(sf::Vector2f(100,   0), sf::Color::Red, sf::Vector2f(10,  0))
+};
+
+// draw it
+window\&.draw(vertices, 4, sf::Quads);
+
+.fi
+.PP
+.PP
+Note: although texture coordinates are supposed to be an integer amount of pixels, their type is float because of some buggy graphics drivers that are not able to process integer coordinates correctly\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::VertexArray\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB42\fP of file \fBVertex\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Vertex::Vertex ()"
+
+.PP
+Default constructor\&. 
+.SS "sf::Vertex::Vertex (const \fBVector2f\fP & thePosition)"
+
+.PP
+Construct the vertex from its position\&. The vertex color is white and texture coordinates are (0, 0)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIthePosition\fP \fBVertex\fP position 
+.RE
+.PP
+
+.SS "sf::Vertex::Vertex (const \fBVector2f\fP & thePosition, const \fBColor\fP & theColor)"
+
+.PP
+Construct the vertex from its position and color\&. The texture coordinates are (0, 0)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIthePosition\fP \fBVertex\fP position 
+.br
+\fItheColor\fP \fBVertex\fP color 
+.RE
+.PP
+
+.SS "sf::Vertex::Vertex (const \fBVector2f\fP & thePosition, const \fBVector2f\fP & theTexCoords)"
+
+.PP
+Construct the vertex from its position and texture coordinates\&. The vertex color is white\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIthePosition\fP \fBVertex\fP position 
+.br
+\fItheTexCoords\fP \fBVertex\fP texture coordinates 
+.RE
+.PP
+
+.SS "sf::Vertex::Vertex (const \fBVector2f\fP & thePosition, const \fBColor\fP & theColor, const \fBVector2f\fP & theTexCoords)"
+
+.PP
+Construct the vertex from its position, color and texture coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthePosition\fP \fBVertex\fP position 
+.br
+\fItheColor\fP \fBVertex\fP color 
+.br
+\fItheTexCoords\fP \fBVertex\fP texture coordinates 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBColor\fP sf::Vertex::color"
+
+.PP
+\fBColor\fP of the vertex\&. 
+.PP
+Definition at line \fB98\fP of file \fBVertex\&.hpp\fP\&.
+.SS "\fBVector2f\fP sf::Vertex::position"
+
+.PP
+2D position of the vertex 
+.PP
+Definition at line \fB97\fP of file \fBVertex\&.hpp\fP\&.
+.SS "\fBVector2f\fP sf::Vertex::texCoords"
+
+.PP
+Coordinates of the texture's pixel to map to the vertex\&. 
+.PP
+Definition at line \fB99\fP of file \fBVertex\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

@@ -1,0 +1,44 @@
+.TH "sf::GlResource::TransientContextLock" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::GlResource::TransientContextLock \- RAII helper class to temporarily lock an available context for use\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/GlResource\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTransientContextLock\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~TransientContextLock\fP ()"
+.br
+.RI "Destructor\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+RAII helper class to temporarily lock an available context for use\&. 
+.PP
+Definition at line \fB79\fP of file \fBGlResource\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::GlResource::TransientContextLock::TransientContextLock ()"
+
+.PP
+Default constructor\&. 
+.SS "sf::GlResource::TransientContextLock::~TransientContextLock ()"
+
+.PP
+Destructor\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

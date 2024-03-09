@@ -1,0 +1,171 @@
+.TH "sf::Http" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Http \- A HTTP client\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Network/Http\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBRequest\fP"
+.br
+.RI "Define a HTTP request\&. "
+.ti -1c
+.RI "class \fBResponse\fP"
+.br
+.RI "Define a HTTP response\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHttp\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBHttp\fP (const std::string &host, unsigned short port=0)"
+.br
+.RI "Construct the HTTP client with the target host\&. "
+.ti -1c
+.RI "void \fBsetHost\fP (const std::string &host, unsigned short port=0)"
+.br
+.RI "Set the target host\&. "
+.ti -1c
+.RI "\fBResponse\fP \fBsendRequest\fP (const \fBRequest\fP &request, \fBTime\fP timeout=\fBTime::Zero\fP)"
+.br
+.RI "Send a HTTP request and return the server's response\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+A HTTP client\&. 
+
+\fBsf::Http\fP is a very simple HTTP client that allows you to communicate with a web server\&.
+.PP
+You can retrieve web pages, send data to an interactive resource, download a remote file, etc\&. The HTTPS protocol is not supported\&.
+.PP
+The HTTP client is split into 3 classes: 
+.PD 0
+.IP "\(bu" 1
+\fBsf::Http::Request\fP 
+.IP "\(bu" 1
+\fBsf::Http::Response\fP 
+.IP "\(bu" 1
+\fBsf::Http\fP
+.PP
+\fBsf::Http::Request\fP builds the request that will be sent to the server\&. A request is made of: 
+.PD 0
+.IP "\(bu" 1
+a method (what you want to do) 
+.IP "\(bu" 1
+a target URI (usually the name of the web page or file) 
+.IP "\(bu" 1
+one or more header fields (options that you can pass to the server) 
+.IP "\(bu" 1
+an optional body (for POST requests)
+.PP
+\fBsf::Http::Response\fP parse the response from the web server and provides getters to read them\&. The response contains: 
+.PD 0
+.IP "\(bu" 1
+a status code 
+.IP "\(bu" 1
+header fields (that may be answers to the ones that you requested) 
+.IP "\(bu" 1
+a body, which contains the contents of the requested resource
+.PP
+\fBsf::Http\fP provides a simple function, SendRequest, to send a \fBsf::Http::Request\fP and return the corresponding \fBsf::Http::Response\fP from the server\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Create a new HTTP client
+sf::Http http;
+
+// We'll work on http://www\&.sfml\-dev\&.org
+http\&.setHost("http://www\&.sfml\-dev\&.org");
+
+// Prepare a request to get the 'features\&.php' page
+sf::Http::Request request("features\&.php");
+
+// Send the request
+sf::Http::Response response = http\&.sendRequest(request);
+
+// Check the status code and display the result
+sf::Http::Response::Status status = response\&.getStatus();
+if (status == sf::Http::Response::Ok)
+{
+    std::cout << response\&.getBody() << std::endl;
+}
+else
+{
+    std::cout << "Error " << status << std::endl;
+}
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB46\fP of file \fBHttp\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Http::Http ()"
+
+.PP
+Default constructor\&. 
+.SS "sf::Http::Http (const std::string & host, unsigned short port = \fR0\fP)"
+
+.PP
+Construct the HTTP client with the target host\&. This is equivalent to calling setHost(host, port)\&. The port has a default value of 0, which means that the HTTP client will use the right port according to the protocol used (80 for HTTP)\&. You should leave it like this unless you really need a port other than the standard one, or use an unknown protocol\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIhost\fP Web server to connect to 
+.br
+\fIport\fP Port to use for connection 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBResponse\fP sf::Http::sendRequest (const \fBRequest\fP & request, \fBTime\fP timeout = \fR\fBTime::Zero\fP\fP)"
+
+.PP
+Send a HTTP request and return the server's response\&. You must have a valid host before sending a request (see setHost)\&. Any missing mandatory header field in the request will be added with an appropriate value\&. Warning: this function waits for the server's response and may not return instantly; use a thread if you don't want to block your application, or use a timeout to limit the time to wait\&. A value of \fBTime::Zero\fP means that the client will use the system default timeout (which is usually pretty long)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIrequest\fP \fBRequest\fP to send 
+.br
+\fItimeout\fP Maximum time to wait
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Server's response 
+.RE
+.PP
+
+.SS "void sf::Http::setHost (const std::string & host, unsigned short port = \fR0\fP)"
+
+.PP
+Set the target host\&. This function just stores the host address and port, it doesn't actually connect to it until you send a request\&. The port has a default value of 0, which means that the HTTP client will use the right port according to the protocol used (80 for HTTP)\&. You should leave it like this unless you really need a port other than the standard one, or use an unknown protocol\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIhost\fP Web server to connect to 
+.br
+\fIport\fP Port to use for connection 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

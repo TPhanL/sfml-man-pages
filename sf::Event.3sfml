@@ -1,0 +1,336 @@
+.TH "sf::Event" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event \- Defines a system event and its parameters\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBJoystickButtonEvent\fP"
+.br
+.RI "\fBJoystick\fP buttons events parameters (JoystickButtonPressed, JoystickButtonReleased) "
+.ti -1c
+.RI "struct \fBJoystickConnectEvent\fP"
+.br
+.RI "\fBJoystick\fP connection events parameters (JoystickConnected, JoystickDisconnected) "
+.ti -1c
+.RI "struct \fBJoystickMoveEvent\fP"
+.br
+.RI "\fBJoystick\fP axis move event parameters (JoystickMoved) "
+.ti -1c
+.RI "struct \fBKeyEvent\fP"
+.br
+.RI "\fBKeyboard\fP event parameters (KeyPressed, KeyReleased) "
+.ti -1c
+.RI "struct \fBMouseButtonEvent\fP"
+.br
+.RI "\fBMouse\fP buttons events parameters (MouseButtonPressed, MouseButtonReleased) "
+.ti -1c
+.RI "struct \fBMouseMoveEvent\fP"
+.br
+.RI "\fBMouse\fP move event parameters (MouseMoved) "
+.ti -1c
+.RI "struct \fBMouseWheelEvent\fP"
+.br
+.RI "\fBMouse\fP wheel events parameters (MouseWheelMoved) "
+.ti -1c
+.RI "struct \fBMouseWheelScrollEvent\fP"
+.br
+.RI "\fBMouse\fP wheel events parameters (MouseWheelScrolled) "
+.ti -1c
+.RI "struct \fBSensorEvent\fP"
+.br
+.RI "\fBSensor\fP event parameters (SensorChanged) "
+.ti -1c
+.RI "struct \fBSizeEvent\fP"
+.br
+.RI "Size events parameters (Resized) "
+.ti -1c
+.RI "struct \fBTextEvent\fP"
+.br
+.RI "\fBText\fP event parameters (TextEntered) "
+.ti -1c
+.RI "struct \fBTouchEvent\fP"
+.br
+.RI "\fBTouch\fP events parameters (TouchBegan, TouchMoved, TouchEnded) "
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBEventType\fP { \fBClosed\fP, \fBResized\fP, \fBLostFocus\fP, \fBGainedFocus\fP, \fBTextEntered\fP, \fBKeyPressed\fP, \fBKeyReleased\fP, \fBMouseWheelMoved\fP, \fBMouseWheelScrolled\fP, \fBMouseButtonPressed\fP, \fBMouseButtonReleased\fP, \fBMouseMoved\fP, \fBMouseEntered\fP, \fBMouseLeft\fP, \fBJoystickButtonPressed\fP, \fBJoystickButtonReleased\fP, \fBJoystickMoved\fP, \fBJoystickConnected\fP, \fBJoystickDisconnected\fP, \fBTouchBegan\fP, \fBTouchMoved\fP, \fBTouchEnded\fP, \fBSensorChanged\fP, \fBCount\fP }"
+.br
+.RI "Enumeration of the different types of events\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBEventType\fP \fBtype\fP"
+.br
+.RI "Type of the event\&. "
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   \fBSizeEvent\fP \fBsize\fP"
+.br
+.RI "Size event parameters (\fBEvent::Resized\fP) "
+.ti -1c
+.RI "   \fBKeyEvent\fP \fBkey\fP"
+.br
+.RI "Key event parameters (\fBEvent::KeyPressed\fP, \fBEvent::KeyReleased\fP) "
+.ti -1c
+.RI "   \fBTextEvent\fP \fBtext\fP"
+.br
+.RI "\fBText\fP event parameters (\fBEvent::TextEntered\fP) "
+.ti -1c
+.RI "   \fBMouseMoveEvent\fP \fBmouseMove\fP"
+.br
+.RI "\fBMouse\fP move event parameters (\fBEvent::MouseMoved\fP) "
+.ti -1c
+.RI "   \fBMouseButtonEvent\fP \fBmouseButton\fP"
+.br
+.RI "\fBMouse\fP button event parameters (\fBEvent::MouseButtonPressed\fP, \fBEvent::MouseButtonReleased\fP) "
+.ti -1c
+.RI "   \fBMouseWheelEvent\fP \fBmouseWheel\fP"
+.br
+.RI "\fBMouse\fP wheel event parameters (\fBEvent::MouseWheelMoved\fP) (deprecated) "
+.ti -1c
+.RI "   \fBMouseWheelScrollEvent\fP \fBmouseWheelScroll\fP"
+.br
+.RI "\fBMouse\fP wheel event parameters (\fBEvent::MouseWheelScrolled\fP) "
+.ti -1c
+.RI "   \fBJoystickMoveEvent\fP \fBjoystickMove\fP"
+.br
+.RI "\fBJoystick\fP move event parameters (\fBEvent::JoystickMoved\fP) "
+.ti -1c
+.RI "   \fBJoystickButtonEvent\fP \fBjoystickButton\fP"
+.br
+.RI "\fBJoystick\fP button event parameters (\fBEvent::JoystickButtonPressed\fP, \fBEvent::JoystickButtonReleased\fP) "
+.ti -1c
+.RI "   \fBJoystickConnectEvent\fP \fBjoystickConnect\fP"
+.br
+.RI "\fBJoystick\fP (dis)connect event parameters (\fBEvent::JoystickConnected\fP, \fBEvent::JoystickDisconnected\fP) "
+.ti -1c
+.RI "   \fBTouchEvent\fP \fBtouch\fP"
+.br
+.RI "\fBTouch\fP events parameters (\fBEvent::TouchBegan\fP, \fBEvent::TouchMoved\fP, \fBEvent::TouchEnded\fP) "
+.ti -1c
+.RI "   \fBSensorEvent\fP \fBsensor\fP"
+.br
+.RI "\fBSensor\fP event parameters (\fBEvent::SensorChanged\fP) "
+.ti -1c
+.RI "}; "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines a system event and its parameters\&. 
+
+\fBsf::Event\fP holds all the informations about a system event that just happened\&.
+.PP
+Events are retrieved using the \fBsf::Window::pollEvent\fP and \fBsf::Window::waitEvent\fP functions\&.
+.PP
+A \fBsf::Event\fP instance contains the type of the event (mouse moved, key pressed, window closed, \&.\&.\&.) as well as the details about this particular event\&. Please note that the event parameters are defined in a union, which means that only the member matching the type of the event will be properly filled; all other members will have undefined values and must not be read if the type of the event doesn't match\&. For example, if you received a KeyPressed event, then you must read the event\&.key member, all other members such as event\&.mouseMove or event\&.text will have undefined values\&.
+.PP
+Usage example: 
+.PP
+.nf
+sf::Event event;
+while (window\&.pollEvent(event))
+{
+    // Request for closing the window
+    if (event\&.type == sf::Event::Closed)
+        window\&.close();
+
+    // The escape key was pressed
+    if ((event\&.type == sf::Event::KeyPressed) && (event\&.key\&.code == sf::Keyboard::Escape))
+        window\&.close();
+
+    // The window was resized
+    if (event\&.type == sf::Event::Resized)
+        doSomethingWithTheNewSize(event\&.size\&.width, event\&.size\&.height);
+
+    // etc \&.\&.\&.
+}
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB44\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBsf::Event::EventType\fP"
+
+.PP
+Enumeration of the different types of events\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIClosed \fP\fP
+The window requested to be closed (no data) 
+.TP
+\fB\fIResized \fP\fP
+The window was resized (data in event\&.size) 
+.TP
+\fB\fILostFocus \fP\fP
+The window lost the focus (no data) 
+.TP
+\fB\fIGainedFocus \fP\fP
+The window gained the focus (no data) 
+.TP
+\fB\fITextEntered \fP\fP
+A character was entered (data in event\&.text) 
+.TP
+\fB\fIKeyPressed \fP\fP
+A key was pressed (data in event\&.key) 
+.TP
+\fB\fIKeyReleased \fP\fP
+A key was released (data in event\&.key) 
+.TP
+\fB\fIMouseWheelMoved \fP\fP
+The mouse wheel was scrolled (data in event\&.mouseWheel) (deprecated) 
+.TP
+\fB\fIMouseWheelScrolled \fP\fP
+The mouse wheel was scrolled (data in event\&.mouseWheelScroll) 
+.TP
+\fB\fIMouseButtonPressed \fP\fP
+A mouse button was pressed (data in event\&.mouseButton) 
+.TP
+\fB\fIMouseButtonReleased \fP\fP
+A mouse button was released (data in event\&.mouseButton) 
+.TP
+\fB\fIMouseMoved \fP\fP
+The mouse cursor moved (data in event\&.mouseMove) 
+.TP
+\fB\fIMouseEntered \fP\fP
+The mouse cursor entered the area of the window (no data) 
+.TP
+\fB\fIMouseLeft \fP\fP
+The mouse cursor left the area of the window (no data) 
+.TP
+\fB\fIJoystickButtonPressed \fP\fP
+A joystick button was pressed (data in event\&.joystickButton) 
+.TP
+\fB\fIJoystickButtonReleased \fP\fP
+A joystick button was released (data in event\&.joystickButton) 
+.TP
+\fB\fIJoystickMoved \fP\fP
+The joystick moved along an axis (data in event\&.joystickMove) 
+.TP
+\fB\fIJoystickConnected \fP\fP
+A joystick was connected (data in event\&.joystickConnect) 
+.TP
+\fB\fIJoystickDisconnected \fP\fP
+A joystick was disconnected (data in event\&.joystickConnect) 
+.TP
+\fB\fITouchBegan \fP\fP
+A touch event began (data in event\&.touch) 
+.TP
+\fB\fITouchMoved \fP\fP
+A touch moved (data in event\&.touch) 
+.TP
+\fB\fITouchEnded \fP\fP
+A touch event ended (data in event\&.touch) 
+.TP
+\fB\fISensorChanged \fP\fP
+A sensor value changed (data in event\&.sensor) 
+.TP
+\fB\fICount \fP\fP
+Keep last -- the total number of event types\&. 
+.PP
+Definition at line \fB188\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBJoystickButtonEvent\fP sf::Event::joystickButton"
+
+.PP
+\fBJoystick\fP button event parameters (\fBEvent::JoystickButtonPressed\fP, \fBEvent::JoystickButtonReleased\fP) 
+.PP
+Definition at line \fB232\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBJoystickConnectEvent\fP sf::Event::joystickConnect"
+
+.PP
+\fBJoystick\fP (dis)connect event parameters (\fBEvent::JoystickConnected\fP, \fBEvent::JoystickDisconnected\fP) 
+.PP
+Definition at line \fB233\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBJoystickMoveEvent\fP sf::Event::joystickMove"
+
+.PP
+\fBJoystick\fP move event parameters (\fBEvent::JoystickMoved\fP) 
+.PP
+Definition at line \fB231\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBKeyEvent\fP sf::Event::key"
+
+.PP
+Key event parameters (\fBEvent::KeyPressed\fP, \fBEvent::KeyReleased\fP) 
+.PP
+Definition at line \fB225\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBMouseButtonEvent\fP sf::Event::mouseButton"
+
+.PP
+\fBMouse\fP button event parameters (\fBEvent::MouseButtonPressed\fP, \fBEvent::MouseButtonReleased\fP) 
+.PP
+Definition at line \fB228\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBMouseMoveEvent\fP sf::Event::mouseMove"
+
+.PP
+\fBMouse\fP move event parameters (\fBEvent::MouseMoved\fP) 
+.PP
+Definition at line \fB227\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBMouseWheelEvent\fP sf::Event::mouseWheel"
+
+.PP
+\fBMouse\fP wheel event parameters (\fBEvent::MouseWheelMoved\fP) (deprecated) 
+.PP
+Definition at line \fB229\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBMouseWheelScrollEvent\fP sf::Event::mouseWheelScroll"
+
+.PP
+\fBMouse\fP wheel event parameters (\fBEvent::MouseWheelScrolled\fP) 
+.PP
+Definition at line \fB230\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBSensorEvent\fP sf::Event::sensor"
+
+.PP
+\fBSensor\fP event parameters (\fBEvent::SensorChanged\fP) 
+.PP
+Definition at line \fB235\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBSizeEvent\fP sf::Event::size"
+
+.PP
+Size event parameters (\fBEvent::Resized\fP) 
+.PP
+Definition at line \fB224\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBTextEvent\fP sf::Event::text"
+
+.PP
+\fBText\fP event parameters (\fBEvent::TextEntered\fP) 
+.PP
+Definition at line \fB226\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBTouchEvent\fP sf::Event::touch"
+
+.PP
+\fBTouch\fP events parameters (\fBEvent::TouchBegan\fP, \fBEvent::TouchMoved\fP, \fBEvent::TouchEnded\fP) 
+.PP
+Definition at line \fB234\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBEventType\fP sf::Event::type"
+
+.PP
+Type of the event\&. 
+.PP
+Definition at line \fB220\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

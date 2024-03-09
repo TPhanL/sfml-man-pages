@@ -1,0 +1,168 @@
+.TH "sf::FileInputStream" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::FileInputStream \- Implementation of input stream based on a file\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/FileInputStream\&.hpp>\fP
+.PP
+Inherits \fBsf::InputStream\fP, and \fBsf::NonCopyable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFileInputStream\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "virtual \fB~FileInputStream\fP ()"
+.br
+.RI "Default destructor\&. "
+.ti -1c
+.RI "bool \fBopen\fP (const std::string &filename)"
+.br
+.RI "Open the stream from a file path\&. "
+.ti -1c
+.RI "virtual Int64 \fBread\fP (void *data, Int64 size)"
+.br
+.RI "Read data from the stream\&. "
+.ti -1c
+.RI "virtual Int64 \fBseek\fP (Int64 position)"
+.br
+.RI "Change the current reading position\&. "
+.ti -1c
+.RI "virtual Int64 \fBtell\fP ()"
+.br
+.RI "Get the current reading position in the stream\&. "
+.ti -1c
+.RI "virtual Int64 \fBgetSize\fP ()"
+.br
+.RI "Return the size of the stream\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implementation of input stream based on a file\&. 
+
+This class is a specialization of \fBInputStream\fP that reads from a file on disk\&.
+.PP
+It wraps a file in the common \fBInputStream\fP interface and therefore allows to use generic classes or functions that accept such a stream, with a file on disk as the data source\&.
+.PP
+In addition to the virtual functions inherited from \fBInputStream\fP, \fBFileInputStream\fP adds a function to specify the file to open\&.
+.PP
+SFML resource classes can usually be loaded directly from a filename, so this class shouldn't be useful to you unless you create your own algorithms that operate on an \fBInputStream\fP\&.
+.PP
+Usage example: 
+.PP
+.nf
+void process(InputStream& stream);
+
+FileInputStream stream;
+if (stream\&.open("some_file\&.dat"))
+   process(stream);
+
+.fi
+.PP
+.PP
+\fBInputStream\fP, \fBMemoryInputStream\fP 
+.PP
+Definition at line \fB55\fP of file \fBFileInputStream\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::FileInputStream::FileInputStream ()"
+
+.PP
+Default constructor\&. 
+.SS "virtual sf::FileInputStream::~FileInputStream ()\fR [virtual]\fP"
+
+.PP
+Default destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual Int64 sf::FileInputStream::getSize ()\fR [virtual]\fP"
+
+.PP
+Return the size of the stream\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The total number of bytes available in the stream, or -1 on error 
+.RE
+.PP
+
+.PP
+Implements \fBsf::InputStream\fP\&.
+.SS "bool sf::FileInputStream::open (const std::string & filename)"
+
+.PP
+Open the stream from a file path\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfilename\fP Name of the file to open
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True on success, false on error 
+.RE
+.PP
+
+.SS "virtual Int64 sf::FileInputStream::read (void * data, Int64 size)\fR [virtual]\fP"
+
+.PP
+Read data from the stream\&. After reading, the stream's reading position must be advanced by the amount of bytes read\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Buffer where to copy the read data 
+.br
+\fIsize\fP Desired number of bytes to read
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The number of bytes actually read, or -1 on error 
+.RE
+.PP
+
+.PP
+Implements \fBsf::InputStream\fP\&.
+.SS "virtual Int64 sf::FileInputStream::seek (Int64 position)\fR [virtual]\fP"
+
+.PP
+Change the current reading position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP The position to seek to, from the beginning
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The position actually sought to, or -1 on error 
+.RE
+.PP
+
+.PP
+Implements \fBsf::InputStream\fP\&.
+.SS "virtual Int64 sf::FileInputStream::tell ()\fR [virtual]\fP"
+
+.PP
+Get the current reading position in the stream\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The current position, or -1 on error\&. 
+.RE
+.PP
+
+.PP
+Implements \fBsf::InputStream\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

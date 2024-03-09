@@ -1,0 +1,174 @@
+.TH "sf::ThreadLocalPtr< T >" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::ThreadLocalPtr< T > \- Pointer to a thread-local variable\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/ThreadLocalPtr\&.hpp>\fP
+.PP
+Inherits \fBsf::ThreadLocal\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBThreadLocalPtr\fP (T *value=NULL)"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "T & \fBoperator*\fP () const"
+.br
+.RI "Overload of unary operator *\&. "
+.ti -1c
+.RI "T * \fBoperator\->\fP () const"
+.br
+.RI "Overload of operator -> "
+.ti -1c
+.RI "\fBoperator T*\fP () const"
+.br
+.RI "Conversion operator to implicitly convert the pointer to its raw pointer type (T*) "
+.ti -1c
+.RI "\fBThreadLocalPtr\fP< T > & \fBoperator=\fP (T *value)"
+.br
+.RI "Assignment operator for a raw pointer parameter\&. "
+.ti -1c
+.RI "\fBThreadLocalPtr\fP< T > & \fBoperator=\fP (const \fBThreadLocalPtr\fP< T > &right)"
+.br
+.RI "Assignment operator for a \fBThreadLocalPtr\fP parameter\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class sf::ThreadLocalPtr< T >"Pointer to a thread-local variable\&. 
+
+\fBsf::ThreadLocalPtr\fP is a type-safe wrapper for storing pointers to thread-local variables\&.
+.PP
+A thread-local variable holds a different value for each different thread, unlike normal variables that are shared\&.
+.PP
+Its usage is completely transparent, so that it is similar to manipulating the raw pointer directly (like any smart pointer)\&.
+.PP
+Usage example: 
+.PP
+.nf
+MyClass object1;
+MyClass object2;
+sf::ThreadLocalPtr<MyClass> objectPtr;
+
+void thread1()
+{
+    objectPtr = &object1; // doesn't impact thread2
+    \&.\&.\&.
+}
+
+void thread2()
+{
+    objectPtr = &object2; // doesn't impact thread1
+    \&.\&.\&.
+}
+
+int main()
+{
+    // Create and launch the two threads
+    sf::Thread t1(&thread1);
+    sf::Thread t2(&thread2);
+    t1\&.launch();
+    t2\&.launch();
+
+    return 0;
+}
+
+.fi
+.PP
+.PP
+\fBThreadLocalPtr\fP is designed for internal use; however you can use it if you feel like it fits well your implementation\&. 
+.PP
+Definition at line \fB41\fP of file \fBThreadLocalPtr\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBsf::ThreadLocalPtr\fP< T >::ThreadLocalPtr (T * value = \fRNULL\fP)"
+
+.PP
+Default constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP Optional value to initialize the variable 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > \fBsf::ThreadLocalPtr\fP< T >::operator T* () const"
+
+.PP
+Conversion operator to implicitly convert the pointer to its raw pointer type (T*) 
+.PP
+\fBReturns\fP
+.RS 4
+Pointer to the actual object 
+.RE
+.PP
+
+.SS "template<typename T > T & \fBsf::ThreadLocalPtr\fP< T >::operator* () const"
+
+.PP
+Overload of unary operator *\&. Like raw pointers, applying the * operator returns a reference to the pointed-to object\&.
+.PP
+\fBReturns\fP
+.RS 4
+Reference to the thread-local variable 
+.RE
+.PP
+
+.SS "template<typename T > T * \fBsf::ThreadLocalPtr\fP< T >::operator\-> () const"
+
+.PP
+Overload of operator -> Similarly to raw pointers, applying the -> operator returns the pointed-to object\&.
+.PP
+\fBReturns\fP
+.RS 4
+Pointer to the thread-local variable 
+.RE
+.PP
+
+.SS "template<typename T > \fBThreadLocalPtr\fP< T > & \fBsf::ThreadLocalPtr\fP< T >::operator= (const \fBThreadLocalPtr\fP< T > & right)"
+
+.PP
+Assignment operator for a \fBThreadLocalPtr\fP parameter\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIright\fP \fBThreadLocalPtr\fP to assign
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to self 
+.RE
+.PP
+
+.SS "template<typename T > \fBThreadLocalPtr\fP< T > & \fBsf::ThreadLocalPtr\fP< T >::operator= (T * value)"
+
+.PP
+Assignment operator for a raw pointer parameter\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP Pointer to assign
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to self 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

@@ -1,0 +1,775 @@
+.TH "sf::Time" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Time \- Represents a time value\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/Time\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTime\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "float \fBasSeconds\fP () const"
+.br
+.RI "Return the time value as a number of seconds\&. "
+.ti -1c
+.RI "Int32 \fBasMilliseconds\fP () const"
+.br
+.RI "Return the time value as a number of milliseconds\&. "
+.ti -1c
+.RI "Int64 \fBasMicroseconds\fP () const"
+.br
+.RI "Return the time value as a number of microseconds\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const \fBTime\fP \fBZero\fP"
+.br
+.RI "Predefined 'zero' time value\&. "
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "\fBTime\fP \fBseconds\fP (float)"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBmilliseconds\fP (Int32)"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBmicroseconds\fP (Int64)"
+.br
+.in -1c
+.SS "Related Symbols"
+(Note that these are not member symbols\&.) 
+.in +1c
+.ti -1c
+.RI "\fBTime\fP \fBseconds\fP (float amount)"
+.br
+.RI "Construct a time value from a number of seconds\&. "
+.ti -1c
+.RI "\fBTime\fP \fBmilliseconds\fP (Int32 amount)"
+.br
+.RI "Construct a time value from a number of milliseconds\&. "
+.ti -1c
+.RI "\fBTime\fP \fBmicroseconds\fP (Int64 amount)"
+.br
+.RI "Construct a time value from a number of microseconds\&. "
+.ti -1c
+.RI "bool \fBoperator==\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of == operator to compare two time values\&. "
+.ti -1c
+.RI "bool \fBoperator!=\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of != operator to compare two time values\&. "
+.ti -1c
+.RI "bool \fBoperator<\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of < operator to compare two time values\&. "
+.ti -1c
+.RI "bool \fBoperator>\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of > operator to compare two time values\&. "
+.ti -1c
+.RI "bool \fBoperator<=\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of <= operator to compare two time values\&. "
+.ti -1c
+.RI "bool \fBoperator>=\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of >= operator to compare two time values\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator\-\fP (\fBTime\fP right)"
+.br
+.RI "Overload of unary - operator to negate a time value\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator+\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of binary + operator to add two time values\&. "
+.ti -1c
+.RI "\fBTime\fP & \fBoperator+=\fP (\fBTime\fP &left, \fBTime\fP right)"
+.br
+.RI "Overload of binary += operator to add/assign two time values\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator\-\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of binary - operator to subtract two time values\&. "
+.ti -1c
+.RI "\fBTime\fP & \fBoperator\-=\fP (\fBTime\fP &left, \fBTime\fP right)"
+.br
+.RI "Overload of binary -= operator to subtract/assign two time values\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator*\fP (\fBTime\fP left, float right)"
+.br
+.RI "Overload of binary * operator to scale a time value\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator*\fP (\fBTime\fP left, Int64 right)"
+.br
+.RI "Overload of binary * operator to scale a time value\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator*\fP (float left, \fBTime\fP right)"
+.br
+.RI "Overload of binary * operator to scale a time value\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator*\fP (Int64 left, \fBTime\fP right)"
+.br
+.RI "Overload of binary * operator to scale a time value\&. "
+.ti -1c
+.RI "\fBTime\fP & \fBoperator*=\fP (\fBTime\fP &left, float right)"
+.br
+.RI "Overload of binary *= operator to scale/assign a time value\&. "
+.ti -1c
+.RI "\fBTime\fP & \fBoperator*=\fP (\fBTime\fP &left, Int64 right)"
+.br
+.RI "Overload of binary *= operator to scale/assign a time value\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator/\fP (\fBTime\fP left, float right)"
+.br
+.RI "Overload of binary / operator to scale a time value\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator/\fP (\fBTime\fP left, Int64 right)"
+.br
+.RI "Overload of binary / operator to scale a time value\&. "
+.ti -1c
+.RI "\fBTime\fP & \fBoperator/=\fP (\fBTime\fP &left, float right)"
+.br
+.RI "Overload of binary /= operator to scale/assign a time value\&. "
+.ti -1c
+.RI "\fBTime\fP & \fBoperator/=\fP (\fBTime\fP &left, Int64 right)"
+.br
+.RI "Overload of binary /= operator to scale/assign a time value\&. "
+.ti -1c
+.RI "float \fBoperator/\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of binary / operator to compute the ratio of two time values\&. "
+.ti -1c
+.RI "\fBTime\fP \fBoperator%\fP (\fBTime\fP left, \fBTime\fP right)"
+.br
+.RI "Overload of binary % operator to compute remainder of a time value\&. "
+.ti -1c
+.RI "\fBTime\fP & \fBoperator%=\fP (\fBTime\fP &left, \fBTime\fP right)"
+.br
+.RI "Overload of binary %= operator to compute/assign remainder of a time value\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a time value\&. 
+
+\fBsf::Time\fP encapsulates a time value in a flexible way\&.
+.PP
+It allows to define a time value either as a number of seconds, milliseconds or microseconds\&. It also works the other way round: you can read a time value as either a number of seconds, milliseconds or microseconds\&.
+.PP
+By using such a flexible interface, the API doesn't impose any fixed type or resolution for time values, and let the user choose its own favorite representation\&.
+.PP
+\fBTime\fP values support the usual mathematical operations: you can add or subtract two times, multiply or divide a time by a number, compare two times, etc\&.
+.PP
+Since they represent a time span and not an absolute time value, times can also be negative\&.
+.PP
+Usage example: 
+.PP
+.nf
+sf::Time t1 = sf::seconds(0\&.1f);
+Int32 milli = t1\&.asMilliseconds(); // 100
+
+sf::Time t2 = sf::milliseconds(30);
+Int64 micro = t2\&.asMicroseconds(); // 30000
+
+sf::Time t3 = sf::microseconds(\-800000);
+float sec = t3\&.asSeconds(); // \-0\&.8
+
+.fi
+.PP
+.PP
+.PP
+.nf
+void update(sf::Time elapsed)
+{
+   position += speed * elapsed\&.asSeconds();
+}
+
+update(sf::milliseconds(100));
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Clock\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB40\fP of file \fBTime\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Time::Time ()"
+
+.PP
+Default constructor\&. Sets the time value to zero\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "Int64 sf::Time::asMicroseconds () const"
+
+.PP
+Return the time value as a number of microseconds\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fBTime\fP in microseconds
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBasSeconds\fP, \fBasMilliseconds\fP 
+.RE
+.PP
+
+.SS "Int32 sf::Time::asMilliseconds () const"
+
+.PP
+Return the time value as a number of milliseconds\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fBTime\fP in milliseconds
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBasSeconds\fP, \fBasMicroseconds\fP 
+.RE
+.PP
+
+.SS "float sf::Time::asSeconds () const"
+
+.PP
+Return the time value as a number of seconds\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fBTime\fP in seconds
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBasMilliseconds\fP, \fBasMicroseconds\fP 
+.RE
+.PP
+
+.SH "Friends And Related Symbol Documentation"
+.PP 
+.SS "\fBTime\fP microseconds (Int64 amount)\fR [related]\fP"
+
+.PP
+Construct a time value from a number of microseconds\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIamount\fP Number of microseconds
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBTime\fP value constructed from the amount of microseconds
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+seconds, milliseconds 
+.RE
+.PP
+
+.SS "\fBTime\fP milliseconds (Int32 amount)\fR [related]\fP"
+
+.PP
+Construct a time value from a number of milliseconds\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIamount\fP Number of milliseconds
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBTime\fP value constructed from the amount of milliseconds
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+seconds, microseconds 
+.RE
+.PP
+
+.SS "bool operator!= (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of != operator to compare two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if both time values are different 
+.RE
+.PP
+
+.SS "\fBTime\fP operator% (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary % operator to compute remainder of a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP modulo \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP & operator%= (\fBTime\fP & left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary %= operator to compute/assign remainder of a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP modulo \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP operator* (float left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary * operator to scale a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a number) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP multiplied by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP operator* (Int64 left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary * operator to scale a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a number) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP multiplied by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP operator* (\fBTime\fP left, float right)\fR [related]\fP"
+
+.PP
+Overload of binary * operator to scale a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP multiplied by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP operator* (\fBTime\fP left, Int64 right)\fR [related]\fP"
+
+.PP
+Overload of binary * operator to scale a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP multiplied by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP & operator*= (\fBTime\fP & left, float right)\fR [related]\fP"
+
+.PP
+Overload of binary *= operator to scale/assign a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP multiplied by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP & operator*= (\fBTime\fP & left, Int64 right)\fR [related]\fP"
+
+.PP
+Overload of binary *= operator to scale/assign a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP multiplied by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP operator+ (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary + operator to add two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Sum of the two times values 
+.RE
+.PP
+
+.SS "\fBTime\fP & operator+= (\fBTime\fP & left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary += operator to add/assign two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Sum of the two times values 
+.RE
+.PP
+
+.SS "\fBTime\fP operator\- (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary - operator to subtract two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Difference of the two times values 
+.RE
+.PP
+
+.SS "\fBTime\fP operator\- (\fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of unary - operator to negate a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Opposite of the time value 
+.RE
+.PP
+
+.SS "\fBTime\fP & operator\-= (\fBTime\fP & left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary -= operator to subtract/assign two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Difference of the two times values 
+.RE
+.PP
+
+.SS "\fBTime\fP operator/ (\fBTime\fP left, float right)\fR [related]\fP"
+
+.PP
+Overload of binary / operator to scale a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP divided by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP operator/ (\fBTime\fP left, Int64 right)\fR [related]\fP"
+
+.PP
+Overload of binary / operator to scale a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP divided by \fIright\fP 
+.RE
+.PP
+
+.SS "float operator/ (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of binary / operator to compute the ratio of two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP divided by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP & operator/= (\fBTime\fP & left, float right)\fR [related]\fP"
+
+.PP
+Overload of binary /= operator to scale/assign a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP divided by \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP & operator/= (\fBTime\fP & left, Int64 right)\fR [related]\fP"
+
+.PP
+Overload of binary /= operator to scale/assign a time value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a number)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fIleft\fP divided by \fIright\fP 
+.RE
+.PP
+
+.SS "bool operator< (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of < operator to compare two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is lesser than \fIright\fP 
+.RE
+.PP
+
+.SS "bool operator<= (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of <= operator to compare two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is lesser or equal than \fIright\fP 
+.RE
+.PP
+
+.SS "bool operator== (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of == operator to compare two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if both time values are equal 
+.RE
+.PP
+
+.SS "bool operator> (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of > operator to compare two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is greater than \fIright\fP 
+.RE
+.PP
+
+.SS "bool operator>= (\fBTime\fP left, \fBTime\fP right)\fR [related]\fP"
+
+.PP
+Overload of >= operator to compare two time values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a time) 
+.br
+\fIright\fP Right operand (a time)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is greater or equal than \fIright\fP 
+.RE
+.PP
+
+.SS "\fBTime\fP seconds (float amount)\fR [related]\fP"
+
+.PP
+Construct a time value from a number of seconds\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIamount\fP Number of seconds
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBTime\fP value constructed from the amount of seconds
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+milliseconds, microseconds 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "const \fBTime\fP sf::Time::Zero\fR [static]\fP"
+
+.PP
+Predefined 'zero' time value\&. 
+.PP
+Definition at line \fB85\fP of file \fBTime\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

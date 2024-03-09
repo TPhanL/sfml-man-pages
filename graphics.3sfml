@@ -1,0 +1,198 @@
+.TH "graphics" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+graphics \- Graphics module
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBsf::Glsl\fP"
+.br
+.RI "Namespace with GLSL types\&. "
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBsf::BlendMode\fP"
+.br
+.RI "Blending modes for drawing\&. "
+.ti -1c
+.RI "class \fBsf::CircleShape\fP"
+.br
+.RI "Specialized shape representing a circle\&. "
+.ti -1c
+.RI "class \fBsf::Color\fP"
+.br
+.RI "Utility class for manipulating RGBA colors\&. "
+.ti -1c
+.RI "class \fBsf::ConvexShape\fP"
+.br
+.RI "Specialized shape representing a convex polygon\&. "
+.ti -1c
+.RI "class \fBsf::Drawable\fP"
+.br
+.RI "Abstract base class for objects that can be drawn to a render target\&. "
+.ti -1c
+.RI "class \fBsf::Font\fP"
+.br
+.RI "Class for loading and manipulating character fonts\&. "
+.ti -1c
+.RI "class \fBsf::Glyph\fP"
+.br
+.RI "Structure describing a glyph\&. "
+.ti -1c
+.RI "class \fBsf::Image\fP"
+.br
+.RI "Class for loading, manipulating and saving images\&. "
+.ti -1c
+.RI "class \fBsf::Rect< T >\fP"
+.br
+.RI "Utility class for manipulating 2D axis aligned rectangles\&. "
+.ti -1c
+.RI "class \fBsf::RectangleShape\fP"
+.br
+.RI "Specialized shape representing a rectangle\&. "
+.ti -1c
+.RI "class \fBsf::RenderStates\fP"
+.br
+.RI "Define the states used for drawing to a \fBRenderTarget\fP\&. "
+.ti -1c
+.RI "class \fBsf::RenderTarget\fP"
+.br
+.RI "Base class for all render targets (window, texture, \&.\&.\&.) "
+.ti -1c
+.RI "class \fBsf::RenderTexture\fP"
+.br
+.RI "Target for off-screen 2D rendering into a texture\&. "
+.ti -1c
+.RI "class \fBsf::RenderWindow\fP"
+.br
+.RI "\fBWindow\fP that can serve as a target for 2D drawing\&. "
+.ti -1c
+.RI "class \fBsf::Shader\fP"
+.br
+.RI "\fBShader\fP class (vertex, geometry and fragment) "
+.ti -1c
+.RI "class \fBsf::Shape\fP"
+.br
+.RI "Base class for textured shapes with outline\&. "
+.ti -1c
+.RI "class \fBsf::Sprite\fP"
+.br
+.RI "\fBDrawable\fP representation of a texture, with its own transformations, color, etc\&. "
+.ti -1c
+.RI "class \fBsf::Text\fP"
+.br
+.RI "Graphical text that can be drawn to a render target\&. "
+.ti -1c
+.RI "class \fBsf::Texture\fP"
+.br
+.RI "\fBImage\fP living on the graphics card that can be used for drawing\&. "
+.ti -1c
+.RI "class \fBsf::Transform\fP"
+.br
+.RI "Define a 3x3 transform matrix\&. "
+.ti -1c
+.RI "class \fBsf::Transformable\fP"
+.br
+.RI "Decomposed transform defined by a position, a rotation and a scale\&. "
+.ti -1c
+.RI "class \fBsf::Vertex\fP"
+.br
+.RI "Define a point with color and texture coordinates\&. "
+.ti -1c
+.RI "class \fBsf::VertexArray\fP"
+.br
+.RI "Define a set of one or more 2D primitives\&. "
+.ti -1c
+.RI "class \fBsf::VertexBuffer\fP"
+.br
+.RI "\fBVertex\fP buffer storage for one or more 2D primitives\&. "
+.ti -1c
+.RI "class \fBsf::View\fP"
+.br
+.RI "2D camera that defines what region is shown on screen "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBsf::PrimitiveType\fP { \fBsf::Points\fP, \fBsf::Lines\fP, \fBsf::LineStrip\fP, \fBsf::Triangles\fP, \fBsf::TriangleStrip\fP, \fBsf::TriangleFan\fP, \fBsf::Quads\fP, \fBsf::LinesStrip\fP = LineStrip, \fBsf::TrianglesStrip\fP = TriangleStrip, \fBsf::TrianglesFan\fP = TriangleFan }"
+.br
+.RI "Types of primitives that a \fBsf::VertexArray\fP can render\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+
+2D graphics module: sprites, text, shapes, \&.\&.\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBsf::PrimitiveType\fP"
+
+.PP
+Types of primitives that a \fBsf::VertexArray\fP can render\&. Points and lines have no area, therefore their thickness will always be 1 pixel, regardless the current transform and view\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIPoints \fP\fP
+List of individual points\&. 
+.TP
+\fB\fILines \fP\fP
+List of individual lines\&. 
+.TP
+\fB\fILineStrip \fP\fP
+List of connected lines, a point uses the previous point to form a line\&. 
+.TP
+\fB\fITriangles \fP\fP
+List of individual triangles\&. 
+.TP
+\fB\fITriangleStrip \fP\fP
+List of connected triangles, a point uses the two previous points to form a triangle\&. 
+.TP
+\fB\fITriangleFan \fP\fP
+List of connected triangles, a point uses the common center and the previous point to form a triangle\&. 
+.TP
+\fB\fIQuads \fP\fP
+List of individual quads (deprecated, don't work with OpenGL ES) 
+.TP
+\fB\fILinesStrip \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use LineStrip instead 
+.RE
+.PP
+
+.TP
+\fB\fITrianglesStrip \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use TriangleStrip instead 
+.RE
+.PP
+
+.TP
+\fB\fITrianglesFan \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use TriangleFan instead 
+.RE
+.PP
+
+.PP
+Definition at line \fB39\fP of file \fBPrimitiveType\&.hpp\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

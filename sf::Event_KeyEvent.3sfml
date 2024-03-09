@@ -1,0 +1,86 @@
+.TH "sf::Event::KeyEvent" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event::KeyEvent \- \fBKeyboard\fP event parameters (KeyPressed, KeyReleased)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBKeyboard::Key\fP \fBcode\fP"
+.br
+.RI "Code of the key that has been pressed\&. "
+.ti -1c
+.RI "\fBKeyboard::Scancode\fP \fBscancode\fP"
+.br
+.RI "Physical code of the key that has been pressed\&. "
+.ti -1c
+.RI "bool \fBalt\fP"
+.br
+.RI "Is the Alt key pressed? "
+.ti -1c
+.RI "bool \fBcontrol\fP"
+.br
+.RI "Is the Control key pressed? "
+.ti -1c
+.RI "bool \fBshift\fP"
+.br
+.RI "Is the Shift key pressed? "
+.ti -1c
+.RI "bool \fBsystem\fP"
+.br
+.RI "Is the System key pressed? "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBKeyboard\fP event parameters (KeyPressed, KeyReleased) 
+.PP
+Definition at line \fB62\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "bool sf::Event::KeyEvent::alt"
+
+.PP
+Is the Alt key pressed? 
+.PP
+Definition at line \fB66\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBKeyboard::Key\fP sf::Event::KeyEvent::code"
+
+.PP
+Code of the key that has been pressed\&. 
+.PP
+Definition at line \fB64\fP of file \fBEvent\&.hpp\fP\&.
+.SS "bool sf::Event::KeyEvent::control"
+
+.PP
+Is the Control key pressed? 
+.PP
+Definition at line \fB67\fP of file \fBEvent\&.hpp\fP\&.
+.SS "\fBKeyboard::Scancode\fP sf::Event::KeyEvent::scancode"
+
+.PP
+Physical code of the key that has been pressed\&. 
+.PP
+Definition at line \fB65\fP of file \fBEvent\&.hpp\fP\&.
+.SS "bool sf::Event::KeyEvent::shift"
+
+.PP
+Is the Shift key pressed? 
+.PP
+Definition at line \fB68\fP of file \fBEvent\&.hpp\fP\&.
+.SS "bool sf::Event::KeyEvent::system"
+
+.PP
+Is the System key pressed? 
+.PP
+Definition at line \fB69\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

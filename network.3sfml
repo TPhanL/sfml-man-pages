@@ -1,0 +1,56 @@
+.TH "network" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+network \- Network module
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBsf::Ftp\fP"
+.br
+.RI "A FTP client\&. "
+.ti -1c
+.RI "class \fBsf::Http\fP"
+.br
+.RI "A HTTP client\&. "
+.ti -1c
+.RI "class \fBsf::IpAddress\fP"
+.br
+.RI "Encapsulate an IPv4 network address\&. "
+.ti -1c
+.RI "class \fBsf::Packet\fP"
+.br
+.RI "Utility class to build blocks of data to transfer over the network\&. "
+.ti -1c
+.RI "class \fBsf::Socket\fP"
+.br
+.RI "Base class for all the socket types\&. "
+.ti -1c
+.RI "class \fBsf::SocketSelector\fP"
+.br
+.RI "Multiplexer that allows to read from multiple sockets\&. "
+.ti -1c
+.RI "class \fBsf::TcpListener\fP"
+.br
+.RI "\fBSocket\fP that listens to new TCP connections\&. "
+.ti -1c
+.RI "class \fBsf::TcpSocket\fP"
+.br
+.RI "Specialized socket using the TCP protocol\&. "
+.ti -1c
+.RI "class \fBsf::UdpSocket\fP"
+.br
+.RI "Specialized socket using the UDP protocol\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+
+Socket-based communication, utilities and higher-level network protocols (HTTP, FTP)\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

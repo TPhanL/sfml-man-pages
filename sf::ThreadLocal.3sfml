@@ -1,0 +1,89 @@
+.TH "sf::ThreadLocal" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::ThreadLocal \- Defines variables with thread-local storage\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/ThreadLocal\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.PP
+Inherited by \fBsf::ThreadLocalPtr< T >\fP\fR [private]\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBThreadLocal\fP (void *value=NULL)"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~ThreadLocal\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "void \fBsetValue\fP (void *value)"
+.br
+.RI "Set the thread-specific value of the variable\&. "
+.ti -1c
+.RI "void * \fBgetValue\fP () const"
+.br
+.RI "Retrieve the thread-specific value of the variable\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines variables with thread-local storage\&. 
+
+This class manipulates void* parameters and thus is not appropriate for strongly-typed variables\&.
+.PP
+You should rather use the \fBsf::ThreadLocalPtr\fP template class\&. 
+.PP
+Definition at line \fB47\fP of file \fBThreadLocal\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::ThreadLocal::ThreadLocal (void * value = \fRNULL\fP)"
+
+.PP
+Default constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP Optional value to initialize the variable 
+.RE
+.PP
+
+.SS "sf::ThreadLocal::~ThreadLocal ()"
+
+.PP
+Destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void * sf::ThreadLocal::getValue () const"
+
+.PP
+Retrieve the thread-specific value of the variable\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Value of the variable for the current thread 
+.RE
+.PP
+
+.SS "void sf::ThreadLocal::setValue (void * value)"
+
+.PP
+Set the thread-specific value of the variable\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP Value of the variable for the current thread 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

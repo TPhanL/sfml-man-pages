@@ -1,0 +1,46 @@
+.TH "sf::Event::SizeEvent" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event::SizeEvent \- Size events parameters (Resized)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBwidth\fP"
+.br
+.RI "New width, in pixels\&. "
+.ti -1c
+.RI "unsigned int \fBheight\fP"
+.br
+.RI "New height, in pixels\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Size events parameters (Resized) 
+.PP
+Definition at line \fB52\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "unsigned int sf::Event::SizeEvent::height"
+
+.PP
+New height, in pixels\&. 
+.PP
+Definition at line \fB55\fP of file \fBEvent\&.hpp\fP\&.
+.SS "unsigned int sf::Event::SizeEvent::width"
+
+.PP
+New width, in pixels\&. 
+.PP
+Definition at line \fB54\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

@@ -1,0 +1,237 @@
+.TH "sf::Thread" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Thread \- Utility class to manipulate threads\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/Thread\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename F > \fBThread\fP (F function)"
+.br
+.RI "Construct the thread from a functor with no argument\&. "
+.ti -1c
+.RI "template<typename F , typename A > \fBThread\fP (F function, A argument)"
+.br
+.RI "Construct the thread from a functor with an argument\&. "
+.ti -1c
+.RI "template<typename C > \fBThread\fP (void(C::*function)(), C *object)"
+.br
+.RI "Construct the thread from a member function and an object\&. "
+.ti -1c
+.RI "\fB~Thread\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "void \fBlaunch\fP ()"
+.br
+.RI "Run the thread\&. "
+.ti -1c
+.RI "void \fBwait\fP ()"
+.br
+.RI "Wait until the thread finishes\&. "
+.ti -1c
+.RI "void \fBterminate\fP ()"
+.br
+.RI "Terminate the thread\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Utility class to manipulate threads\&. 
+
+Threads provide a way to run multiple parts of the code in parallel\&.
+.PP
+When you launch a new thread, the execution is split and both the new thread and the caller run in parallel\&.
+.PP
+To use a \fBsf::Thread\fP, you construct it directly with the function to execute as the entry point of the thread\&. \fBsf::Thread\fP has multiple template constructors, which means that you can use several types of entry points: 
+.PD 0
+.IP "\(bu" 1
+non-member functions with no argument 
+.IP "\(bu" 1
+non-member functions with one argument of any type 
+.IP "\(bu" 1
+functors with no argument (this one is particularly useful for compatibility with boost/std::bind) 
+.IP "\(bu" 1
+functors with one argument of any type 
+.IP "\(bu" 1
+member functions from any class with no argument
+.PP
+The function argument, if any, is copied in the \fBsf::Thread\fP instance, as well as the functor (if the corresponding constructor is used)\&. Class instances, however, are passed by pointer so you must make sure that the object won't be destroyed while the thread is still using it\&.
+.PP
+The thread ends when its function is terminated\&. If the owner \fBsf::Thread\fP instance is destroyed before the thread is finished, the destructor will wait (see \fBwait()\fP)
+.PP
+Usage examples: 
+.PP
+.nf
+// example 1: non member function with one argument
+
+void threadFunc(int argument)
+{
+    \&.\&.\&.
+}
+
+sf::Thread thread(&threadFunc, 5);
+thread\&.launch(); // start the thread (internally calls threadFunc(5))
+
+.fi
+.PP
+.PP
+.PP
+.nf
+// example 2: member function
+
+class Task
+{
+public:
+    void run()
+    {
+        \&.\&.\&.
+    }
+};
+
+Task task;
+sf::Thread thread(&Task::run, &task);
+thread\&.launch(); // start the thread (internally calls task\&.run())
+.fi
+.PP
+.PP
+.PP
+.nf
+// example 3: functor
+
+struct Task
+{
+    void operator()()
+    {
+        \&.\&.\&.
+    }
+};
+
+sf::Thread thread(Task());
+thread\&.launch(); // start the thread (internally calls operator() on the Task instance)
+.fi
+.PP
+.PP
+Creating parallel threads of execution can be dangerous: all threads inside the same process share the same memory space, which means that you may end up accessing the same variable from multiple threads at the same time\&. To prevent this kind of situations, you can use mutexes (see \fBsf::Mutex\fP)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Mutex\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB48\fP of file \fBThread\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename F > sf::Thread::Thread (F function)"
+
+.PP
+Construct the thread from a functor with no argument\&. This constructor works for function objects, as well as free functions\&.
+.PP
+Use this constructor for this kind of function: 
+.PP
+.nf
+void function();
+
+// \-\-\- or \-\-\-\-
+
+struct Functor
+{
+    void operator()();
+};
+
+.fi
+.PP
+ Note: this does \fInot\fP run the thread, use \fBlaunch()\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfunction\fP Functor or free function to use as the entry point of the thread 
+.RE
+.PP
+
+.SS "template<typename F , typename A > sf::Thread::Thread (F function, A argument)"
+
+.PP
+Construct the thread from a functor with an argument\&. This constructor works for function objects, as well as free functions\&. It is a template, which means that the argument can have any type (int, std::string, void*, Toto, \&.\&.\&.)\&.
+.PP
+Use this constructor for this kind of function: 
+.PP
+.nf
+void function(int arg);
+
+// \-\-\- or \-\-\-\-
+
+struct Functor
+{
+    void operator()(std::string arg);
+};
+
+.fi
+.PP
+ Note: this does \fInot\fP run the thread, use \fBlaunch()\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfunction\fP Functor or free function to use as the entry point of the thread 
+.br
+\fIargument\fP argument to forward to the function 
+.RE
+.PP
+
+.SS "template<typename C > sf::Thread::Thread (void(C::*)() function, C * object)"
+
+.PP
+Construct the thread from a member function and an object\&. This constructor is a template, which means that you can use it with any class\&. Use this constructor for this kind of function: 
+.PP
+.nf
+class MyClass
+{
+public:
+
+    void function();
+};
+
+.fi
+.PP
+ Note: this does \fInot\fP run the thread, use \fBlaunch()\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfunction\fP Entry point of the thread 
+.br
+\fIobject\fP Pointer to the object to use 
+.RE
+.PP
+
+.SS "sf::Thread::~Thread ()"
+
+.PP
+Destructor\&. This destructor calls \fBwait()\fP, so that the internal thread cannot survive after its \fBsf::Thread\fP instance is destroyed\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void sf::Thread::launch ()"
+
+.PP
+Run the thread\&. This function starts the entry point passed to the thread's constructor, and returns immediately\&. After this function returns, the thread's function is running in parallel to the calling code\&. 
+.SS "void sf::Thread::terminate ()"
+
+.PP
+Terminate the thread\&. This function immediately stops the thread, without waiting for its function to finish\&. Terminating a thread with this function is not safe, and can lead to local variables not being destroyed on some operating systems\&. You should rather try to make the thread function terminate by itself\&. 
+.SS "void sf::Thread::wait ()"
+
+.PP
+Wait until the thread finishes\&. This function will block the execution until the thread's function ends\&. Warning: if the thread function never ends, the calling thread will block forever\&. If this function is called from its owner thread, it returns without doing anything\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

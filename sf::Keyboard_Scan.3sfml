@@ -1,0 +1,482 @@
+.TH "sf::Keyboard::Scan" 3sfml "2.6.1" "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Keyboard::Scan \- Scancodes\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Keyboard\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBScancode\fP { \fBUnknown\fP = -1, \fBA\fP = 0, \fBB\fP, \fBC\fP, \fBD\fP, \fBE\fP, \fBF\fP, \fBG\fP, \fBH\fP, \fBI\fP, \fBJ\fP, \fBK\fP, \fBL\fP, \fBM\fP, \fBN\fP, \fBO\fP, \fBP\fP, \fBQ\fP, \fBR\fP, \fBS\fP, \fBT\fP, \fBU\fP, \fBV\fP, \fBW\fP, \fBX\fP, \fBY\fP, \fBZ\fP, \fBNum1\fP, \fBNum2\fP, \fBNum3\fP, \fBNum4\fP, \fBNum5\fP, \fBNum6\fP, \fBNum7\fP, \fBNum8\fP, \fBNum9\fP, \fBNum0\fP, \fBEnter\fP, \fBEscape\fP, \fBBackspace\fP, \fBTab\fP, \fBSpace\fP, \fBHyphen\fP, \fBEqual\fP, \fBLBracket\fP, \fBRBracket\fP, \fBBackslash\fP, \fBSemicolon\fP, \fBApostrophe\fP, \fBGrave\fP, \fBComma\fP, \fBPeriod\fP, \fBSlash\fP, \fBF1\fP, \fBF2\fP, \fBF3\fP, \fBF4\fP, \fBF5\fP, \fBF6\fP, \fBF7\fP, \fBF8\fP, \fBF9\fP, \fBF10\fP, \fBF11\fP, \fBF12\fP, \fBF13\fP, \fBF14\fP, \fBF15\fP, \fBF16\fP, \fBF17\fP, \fBF18\fP, \fBF19\fP, \fBF20\fP, \fBF21\fP, \fBF22\fP, \fBF23\fP, \fBF24\fP, \fBCapsLock\fP, \fBPrintScreen\fP, \fBScrollLock\fP, \fBPause\fP, \fBInsert\fP, \fBHome\fP, \fBPageUp\fP, \fBDelete\fP, \fBEnd\fP, \fBPageDown\fP, \fBRight\fP, \fBLeft\fP, \fBDown\fP, \fBUp\fP, \fBNumLock\fP, \fBNumpadDivide\fP, \fBNumpadMultiply\fP, \fBNumpadMinus\fP, \fBNumpadPlus\fP, \fBNumpadEqual\fP, \fBNumpadEnter\fP, \fBNumpadDecimal\fP, \fBNumpad1\fP, \fBNumpad2\fP, \fBNumpad3\fP, \fBNumpad4\fP, \fBNumpad5\fP, \fBNumpad6\fP, \fBNumpad7\fP, \fBNumpad8\fP, \fBNumpad9\fP, \fBNumpad0\fP, \fBNonUsBackslash\fP, \fBApplication\fP, \fBExecute\fP, \fBModeChange\fP, \fBHelp\fP, \fBMenu\fP, \fBSelect\fP, \fBRedo\fP, \fBUndo\fP, \fBCut\fP, \fBCopy\fP, \fBPaste\fP, \fBVolumeMute\fP, \fBVolumeUp\fP, \fBVolumeDown\fP, \fBMediaPlayPause\fP, \fBMediaStop\fP, \fBMediaNextTrack\fP, \fBMediaPreviousTrack\fP, \fBLControl\fP, \fBLShift\fP, \fBLAlt\fP, \fBLSystem\fP, \fBRControl\fP, \fBRShift\fP, \fBRAlt\fP, \fBRSystem\fP, \fBBack\fP, \fBForward\fP, \fBRefresh\fP, \fBStop\fP, \fBSearch\fP, \fBFavorites\fP, \fBHomePage\fP, \fBLaunchApplication1\fP, \fBLaunchApplication2\fP, \fBLaunchMail\fP, \fBLaunchMediaSelect\fP, \fBScancodeCount\fP }"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Scancodes\&. 
+
+The enumerators are bound to a physical key and do not depend on the keyboard layout used by the operating system\&. Usually, the AT-101 keyboard can be used as reference for the physical position of the keys\&. 
+.PP
+Definition at line \fB180\fP of file \fBKeyboard\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBsf::Keyboard::Scan::Scancode\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUnknown \fP\fP
+Represents any scancode not present in this enum\&. 
+.TP
+\fB\fIA \fP\fP
+\fBKeyboard\fP a and A key\&. 
+.TP
+\fB\fIB \fP\fP
+\fBKeyboard\fP b and B key\&. 
+.TP
+\fB\fIC \fP\fP
+\fBKeyboard\fP c and C key\&. 
+.TP
+\fB\fID \fP\fP
+\fBKeyboard\fP d and D key\&. 
+.TP
+\fB\fIE \fP\fP
+\fBKeyboard\fP e and E key\&. 
+.TP
+\fB\fIF \fP\fP
+\fBKeyboard\fP f and F key\&. 
+.TP
+\fB\fIG \fP\fP
+\fBKeyboard\fP g and G key\&. 
+.TP
+\fB\fIH \fP\fP
+\fBKeyboard\fP h and H key\&. 
+.TP
+\fB\fII \fP\fP
+\fBKeyboard\fP i and I key\&. 
+.TP
+\fB\fIJ \fP\fP
+\fBKeyboard\fP j and J key\&. 
+.TP
+\fB\fIK \fP\fP
+\fBKeyboard\fP k and K key\&. 
+.TP
+\fB\fIL \fP\fP
+\fBKeyboard\fP l and L key\&. 
+.TP
+\fB\fIM \fP\fP
+\fBKeyboard\fP m and M key\&. 
+.TP
+\fB\fIN \fP\fP
+\fBKeyboard\fP n and N key\&. 
+.TP
+\fB\fIO \fP\fP
+\fBKeyboard\fP o and O key\&. 
+.TP
+\fB\fIP \fP\fP
+\fBKeyboard\fP p and P key\&. 
+.TP
+\fB\fIQ \fP\fP
+\fBKeyboard\fP q and Q key\&. 
+.TP
+\fB\fIR \fP\fP
+\fBKeyboard\fP r and R key\&. 
+.TP
+\fB\fIS \fP\fP
+\fBKeyboard\fP s and S key\&. 
+.TP
+\fB\fIT \fP\fP
+\fBKeyboard\fP t and T key\&. 
+.TP
+\fB\fIU \fP\fP
+\fBKeyboard\fP u and U key\&. 
+.TP
+\fB\fIV \fP\fP
+\fBKeyboard\fP v and V key\&. 
+.TP
+\fB\fIW \fP\fP
+\fBKeyboard\fP w and W key\&. 
+.TP
+\fB\fIX \fP\fP
+\fBKeyboard\fP x and X key\&. 
+.TP
+\fB\fIY \fP\fP
+\fBKeyboard\fP y and Y key\&. 
+.TP
+\fB\fIZ \fP\fP
+\fBKeyboard\fP z and Z key\&. 
+.TP
+\fB\fINum1 \fP\fP
+\fBKeyboard\fP 1 and ! key\&. 
+.TP
+\fB\fINum2 \fP\fP
+\fBKeyboard\fP 2 and @ key\&. 
+.TP
+\fB\fINum3 \fP\fP
+\fBKeyboard\fP 3 and # key\&. 
+.TP
+\fB\fINum4 \fP\fP
+\fBKeyboard\fP 4 and $ key\&. 
+.TP
+\fB\fINum5 \fP\fP
+\fBKeyboard\fP 5 and % key\&. 
+.TP
+\fB\fINum6 \fP\fP
+\fBKeyboard\fP 6 and ^ key\&. 
+.TP
+\fB\fINum7 \fP\fP
+\fBKeyboard\fP 7 and & key\&. 
+.TP
+\fB\fINum8 \fP\fP
+\fBKeyboard\fP 8 and * key\&. 
+.TP
+\fB\fINum9 \fP\fP
+\fBKeyboard\fP 9 and ) key\&. 
+.TP
+\fB\fINum0 \fP\fP
+\fBKeyboard\fP 0 and ) key\&. 
+.TP
+\fB\fIEnter \fP\fP
+\fBKeyboard\fP Enter/Return key\&. 
+.TP
+\fB\fIEscape \fP\fP
+\fBKeyboard\fP Escape key\&. 
+.TP
+\fB\fIBackspace \fP\fP
+\fBKeyboard\fP Backspace key\&. 
+.TP
+\fB\fITab \fP\fP
+\fBKeyboard\fP Tab key\&. 
+.TP
+\fB\fISpace \fP\fP
+\fBKeyboard\fP Space key\&. 
+.TP
+\fB\fIHyphen \fP\fP
+\fBKeyboard\fP - and _ key\&. 
+.TP
+\fB\fIEqual \fP\fP
+\fBKeyboard\fP = and +\&. 
+.TP
+\fB\fILBracket \fP\fP
+\fBKeyboard\fP [ and { key\&. 
+.TP
+\fB\fIRBracket \fP\fP
+\fBKeyboard\fP ] and } key\&. 
+.TP
+\fB\fIBackslash \fP\fP
+\fBKeyboard\fP \\ and | key OR various keys for Non-US keyboards\&. 
+.TP
+\fB\fISemicolon \fP\fP
+\fBKeyboard\fP ; and : key\&. 
+.TP
+\fB\fIApostrophe \fP\fP
+\fBKeyboard\fP ' and " key\&. 
+.TP
+\fB\fIGrave \fP\fP
+\fBKeyboard\fP ` and ~ key\&. 
+.TP
+\fB\fIComma \fP\fP
+\fBKeyboard\fP , and < key\&. 
+.TP
+\fB\fIPeriod \fP\fP
+\fBKeyboard\fP \&. and > key\&. 
+.TP
+\fB\fISlash \fP\fP
+\fBKeyboard\fP / and ? key\&. 
+.TP
+\fB\fIF1 \fP\fP
+\fBKeyboard\fP F1 key\&. 
+.TP
+\fB\fIF2 \fP\fP
+\fBKeyboard\fP F2 key\&. 
+.TP
+\fB\fIF3 \fP\fP
+\fBKeyboard\fP F3 key\&. 
+.TP
+\fB\fIF4 \fP\fP
+\fBKeyboard\fP F4 key\&. 
+.TP
+\fB\fIF5 \fP\fP
+\fBKeyboard\fP F5 key\&. 
+.TP
+\fB\fIF6 \fP\fP
+\fBKeyboard\fP F6 key\&. 
+.TP
+\fB\fIF7 \fP\fP
+\fBKeyboard\fP F7 key\&. 
+.TP
+\fB\fIF8 \fP\fP
+\fBKeyboard\fP F8 key\&. 
+.TP
+\fB\fIF9 \fP\fP
+\fBKeyboard\fP F9 key\&. 
+.TP
+\fB\fIF10 \fP\fP
+\fBKeyboard\fP F10 key\&. 
+.TP
+\fB\fIF11 \fP\fP
+\fBKeyboard\fP F11 key\&. 
+.TP
+\fB\fIF12 \fP\fP
+\fBKeyboard\fP F12 key\&. 
+.TP
+\fB\fIF13 \fP\fP
+\fBKeyboard\fP F13 key\&. 
+.TP
+\fB\fIF14 \fP\fP
+\fBKeyboard\fP F14 key\&. 
+.TP
+\fB\fIF15 \fP\fP
+\fBKeyboard\fP F15 key\&. 
+.TP
+\fB\fIF16 \fP\fP
+\fBKeyboard\fP F16 key\&. 
+.TP
+\fB\fIF17 \fP\fP
+\fBKeyboard\fP F17 key\&. 
+.TP
+\fB\fIF18 \fP\fP
+\fBKeyboard\fP F18 key\&. 
+.TP
+\fB\fIF19 \fP\fP
+\fBKeyboard\fP F19 key\&. 
+.TP
+\fB\fIF20 \fP\fP
+\fBKeyboard\fP F20 key\&. 
+.TP
+\fB\fIF21 \fP\fP
+\fBKeyboard\fP F21 key\&. 
+.TP
+\fB\fIF22 \fP\fP
+\fBKeyboard\fP F22 key\&. 
+.TP
+\fB\fIF23 \fP\fP
+\fBKeyboard\fP F23 key\&. 
+.TP
+\fB\fIF24 \fP\fP
+\fBKeyboard\fP F24 key\&. 
+.TP
+\fB\fICapsLock \fP\fP
+\fBKeyboard\fP Caps Lock key\&. 
+.TP
+\fB\fIPrintScreen \fP\fP
+\fBKeyboard\fP Print Screen key\&. 
+.TP
+\fB\fIScrollLock \fP\fP
+\fBKeyboard\fP Scroll Lock key\&. 
+.TP
+\fB\fIPause \fP\fP
+\fBKeyboard\fP Pause key\&. 
+.TP
+\fB\fIInsert \fP\fP
+\fBKeyboard\fP Insert key\&. 
+.TP
+\fB\fIHome \fP\fP
+\fBKeyboard\fP Home key\&. 
+.TP
+\fB\fIPageUp \fP\fP
+\fBKeyboard\fP Page Up key\&. 
+.TP
+\fB\fIDelete \fP\fP
+\fBKeyboard\fP Delete Forward key\&. 
+.TP
+\fB\fIEnd \fP\fP
+\fBKeyboard\fP End key\&. 
+.TP
+\fB\fIPageDown \fP\fP
+\fBKeyboard\fP Page Down key\&. 
+.TP
+\fB\fIRight \fP\fP
+\fBKeyboard\fP Right Arrow key\&. 
+.TP
+\fB\fILeft \fP\fP
+\fBKeyboard\fP Left Arrow key\&. 
+.TP
+\fB\fIDown \fP\fP
+\fBKeyboard\fP Down Arrow key\&. 
+.TP
+\fB\fIUp \fP\fP
+\fBKeyboard\fP Up Arrow key\&. 
+.TP
+\fB\fINumLock \fP\fP
+Keypad Num Lock and Clear key\&. 
+.TP
+\fB\fINumpadDivide \fP\fP
+Keypad / key\&. 
+.TP
+\fB\fINumpadMultiply \fP\fP
+Keypad * key\&. 
+.TP
+\fB\fINumpadMinus \fP\fP
+Keypad - key\&. 
+.TP
+\fB\fINumpadPlus \fP\fP
+Keypad + key\&. 
+.TP
+\fB\fINumpadEqual \fP\fP
+keypad = key 
+.TP
+\fB\fINumpadEnter \fP\fP
+Keypad Enter/Return key\&. 
+.TP
+\fB\fINumpadDecimal \fP\fP
+Keypad \&. and Delete key\&. 
+.TP
+\fB\fINumpad1 \fP\fP
+Keypad 1 and End key\&. 
+.TP
+\fB\fINumpad2 \fP\fP
+Keypad 2 and Down Arrow key\&. 
+.TP
+\fB\fINumpad3 \fP\fP
+Keypad 3 and Page Down key\&. 
+.TP
+\fB\fINumpad4 \fP\fP
+Keypad 4 and Left Arrow key\&. 
+.TP
+\fB\fINumpad5 \fP\fP
+Keypad 5 key\&. 
+.TP
+\fB\fINumpad6 \fP\fP
+Keypad 6 and Right Arrow key\&. 
+.TP
+\fB\fINumpad7 \fP\fP
+Keypad 7 and Home key\&. 
+.TP
+\fB\fINumpad8 \fP\fP
+Keypad 8 and Up Arrow key\&. 
+.TP
+\fB\fINumpad9 \fP\fP
+Keypad 9 and Page Up key\&. 
+.TP
+\fB\fINumpad0 \fP\fP
+Keypad 0 and Insert key\&. 
+.TP
+\fB\fINonUsBackslash \fP\fP
+\fBKeyboard\fP Non-US \\ and | key\&. 
+.TP
+\fB\fIApplication \fP\fP
+\fBKeyboard\fP Application key\&. 
+.TP
+\fB\fIExecute \fP\fP
+\fBKeyboard\fP Execute key\&. 
+.TP
+\fB\fIModeChange \fP\fP
+\fBKeyboard\fP Mode Change key\&. 
+.TP
+\fB\fIHelp \fP\fP
+\fBKeyboard\fP Help key\&. 
+.TP
+\fB\fIMenu \fP\fP
+\fBKeyboard\fP Menu key\&. 
+.TP
+\fB\fISelect \fP\fP
+\fBKeyboard\fP Select key\&. 
+.TP
+\fB\fIRedo \fP\fP
+\fBKeyboard\fP Redo key\&. 
+.TP
+\fB\fIUndo \fP\fP
+\fBKeyboard\fP Undo key\&. 
+.TP
+\fB\fICut \fP\fP
+\fBKeyboard\fP Cut key\&. 
+.TP
+\fB\fICopy \fP\fP
+\fBKeyboard\fP Copy key\&. 
+.TP
+\fB\fIPaste \fP\fP
+\fBKeyboard\fP Paste key\&. 
+.TP
+\fB\fIVolumeMute \fP\fP
+\fBKeyboard\fP Volume Mute key\&. 
+.TP
+\fB\fIVolumeUp \fP\fP
+\fBKeyboard\fP Volume Up key\&. 
+.TP
+\fB\fIVolumeDown \fP\fP
+\fBKeyboard\fP Volume Down key\&. 
+.TP
+\fB\fIMediaPlayPause \fP\fP
+\fBKeyboard\fP Media Play Pause key\&. 
+.TP
+\fB\fIMediaStop \fP\fP
+\fBKeyboard\fP Media Stop key\&. 
+.TP
+\fB\fIMediaNextTrack \fP\fP
+\fBKeyboard\fP Media Next Track key\&. 
+.TP
+\fB\fIMediaPreviousTrack \fP\fP
+\fBKeyboard\fP Media Previous Track key\&. 
+.TP
+\fB\fILControl \fP\fP
+\fBKeyboard\fP Left Control key\&. 
+.TP
+\fB\fILShift \fP\fP
+\fBKeyboard\fP Left Shift key\&. 
+.TP
+\fB\fILAlt \fP\fP
+\fBKeyboard\fP Left Alt key\&. 
+.TP
+\fB\fILSystem \fP\fP
+\fBKeyboard\fP Left System key\&. 
+.TP
+\fB\fIRControl \fP\fP
+\fBKeyboard\fP Right Control key\&. 
+.TP
+\fB\fIRShift \fP\fP
+\fBKeyboard\fP Right Shift key\&. 
+.TP
+\fB\fIRAlt \fP\fP
+\fBKeyboard\fP Right Alt key\&. 
+.TP
+\fB\fIRSystem \fP\fP
+\fBKeyboard\fP Right System key\&. 
+.TP
+\fB\fIBack \fP\fP
+\fBKeyboard\fP Back key\&. 
+.TP
+\fB\fIForward \fP\fP
+\fBKeyboard\fP Forward key\&. 
+.TP
+\fB\fIRefresh \fP\fP
+\fBKeyboard\fP Refresh key\&. 
+.TP
+\fB\fIStop \fP\fP
+\fBKeyboard\fP Stop key\&. 
+.TP
+\fB\fISearch \fP\fP
+\fBKeyboard\fP Search key\&. 
+.TP
+\fB\fIFavorites \fP\fP
+\fBKeyboard\fP Favorites key\&. 
+.TP
+\fB\fIHomePage \fP\fP
+\fBKeyboard\fP Home Page key\&. 
+.TP
+\fB\fILaunchApplication1 \fP\fP
+\fBKeyboard\fP Launch Application 1 key\&. 
+.TP
+\fB\fILaunchApplication2 \fP\fP
+\fBKeyboard\fP Launch Application 2 key\&. 
+.TP
+\fB\fILaunchMail \fP\fP
+\fBKeyboard\fP Launch Mail key\&. 
+.TP
+\fB\fILaunchMediaSelect \fP\fP
+\fBKeyboard\fP Launch Media Select key\&. 
+.TP
+\fB\fIScancodeCount \fP\fP
+Keep last -- the total number of scancodes\&. 
+.PP
+Definition at line \fB192\fP of file \fBKeyboard\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.
