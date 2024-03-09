@@ -1,0 +1,324 @@
+.TH "sf::TcpListener" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::TcpListener \- \fBSocket\fP that listens to new TCP connections\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Network/TcpListener\&.hpp>\fP
+.PP
+Inherits \fBsf::Socket\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBStatus\fP { \fBDone\fP, \fBNotReady\fP, \fBPartial\fP, \fBDisconnected\fP, \fBError\fP }"
+.br
+.RI "Status codes that may be returned by socket functions\&. "
+.ti -1c
+.RI "enum { \fBAnyPort\fP = 0 }"
+.br
+.RI "Some special values used by sockets\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTcpListener\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "unsigned short \fBgetLocalPort\fP () const"
+.br
+.RI "Get the port to which the socket is bound locally\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBlisten\fP (unsigned short port, const \fBIpAddress\fP &address=\fBIpAddress::Any\fP)"
+.br
+.RI "Start listening for incoming connection attempts\&. "
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.RI "Stop listening and close the socket\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBaccept\fP (\fBTcpSocket\fP &socket)"
+.br
+.RI "Accept a new connection\&. "
+.ti -1c
+.RI "void \fBsetBlocking\fP (bool blocking)"
+.br
+.RI "Set the blocking state of the socket\&. "
+.ti -1c
+.RI "bool \fBisBlocking\fP () const"
+.br
+.RI "Tell whether the socket is in blocking or non-blocking mode\&. "
+.in -1c
+.SS "Protected Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBType\fP { \fBTcp\fP, \fBUdp\fP }"
+.br
+.RI "Types of protocols that the socket can use\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "SocketHandle \fBgetHandle\fP () const"
+.br
+.RI "Return the internal handle of the socket\&. "
+.ti -1c
+.RI "void \fBcreate\fP ()"
+.br
+.RI "Create the internal representation of the socket\&. "
+.ti -1c
+.RI "void \fBcreate\fP (SocketHandle handle)"
+.br
+.RI "Create the internal representation of the socket from a socket handle\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBSocket\fP that listens to new TCP connections\&. 
+
+A listener socket is a special type of socket that listens to a given port and waits for connections on that port\&.
+.PP
+This is all it can do\&.
+.PP
+When a new connection is received, you must call accept and the listener returns a new instance of \fBsf::TcpSocket\fP that is properly initialized and can be used to communicate with the new client\&.
+.PP
+\fBListener\fP sockets are specific to the TCP protocol, UDP sockets are connectionless and can therefore communicate directly\&. As a consequence, a listener socket will always return the new connections as \fBsf::TcpSocket\fP instances\&.
+.PP
+A listener is automatically closed on destruction, like all other types of socket\&. However if you want to stop listening before the socket is destroyed, you can call its \fBclose()\fP function\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Create a listener socket and make it wait for new
+// connections on port 55001
+sf::TcpListener listener;
+listener\&.listen(55001);
+
+// Endless loop that waits for new connections
+while (running)
+{
+    sf::TcpSocket client;
+    if (listener\&.accept(client) == sf::Socket::Done)
+    {
+        // A new client just connected!
+        std::cout << "New connection received from " << client\&.getRemoteAddress() << std::endl;
+        doSomethingWith(client);
+    }
+}
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::TcpSocket\fP, \fBsf::Socket\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB44\fP of file \fBTcpListener\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum\fR [inherited]\fP"
+
+.PP
+Some special values used by sockets\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIAnyPort \fP\fP
+Special value that tells the system to pick any available port\&. 
+.PP
+Definition at line \fB66\fP of file \fBSocket\&.hpp\fP\&.
+.SS "enum \fBsf::Socket::Status\fP\fR [inherited]\fP"
+
+.PP
+Status codes that may be returned by socket functions\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIDone \fP\fP
+The socket has sent / received the data\&. 
+.TP
+\fB\fINotReady \fP\fP
+The socket is not ready to send / receive data yet\&. 
+.TP
+\fB\fIPartial \fP\fP
+The socket sent a part of the data\&. 
+.TP
+\fB\fIDisconnected \fP\fP
+The TCP socket has been disconnected\&. 
+.TP
+\fB\fIError \fP\fP
+An unexpected error happened\&. 
+.PP
+Definition at line \fB53\fP of file \fBSocket\&.hpp\fP\&.
+.SS "enum \fBsf::Socket::Type\fP\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Types of protocols that the socket can use\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fITcp \fP\fP
+TCP protocol\&. 
+.TP
+\fB\fIUdp \fP\fP
+UDP protocol\&. 
+.PP
+Definition at line \fB114\fP of file \fBSocket\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::TcpListener::TcpListener ()"
+
+.PP
+Default constructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBStatus\fP sf::TcpListener::accept (\fBTcpSocket\fP & socket)"
+
+.PP
+Accept a new connection\&. If the socket is in blocking mode, this function will not return until a connection is actually received\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsocket\fP \fBSocket\fP that will hold the new connection
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Status code
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBlisten\fP 
+.RE
+.PP
+
+.SS "void sf::TcpListener::close ()"
+
+.PP
+Stop listening and close the socket\&. This function gracefully stops the listener\&. If the socket is not listening, this function has no effect\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBlisten\fP 
+.RE
+.PP
+
+.SS "void sf::Socket::create ()\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Create the internal representation of the socket\&. This function can only be accessed by derived classes\&. 
+.SS "void sf::Socket::create (SocketHandle handle)\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Create the internal representation of the socket from a socket handle\&. This function can only be accessed by derived classes\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIhandle\fP OS-specific handle of the socket to wrap 
+.RE
+.PP
+
+.SS "SocketHandle sf::Socket::getHandle () const\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Return the internal handle of the socket\&. The returned handle may be invalid if the socket was not created yet (or already destroyed)\&. This function can only be accessed by derived classes\&.
+.PP
+\fBReturns\fP
+.RS 4
+The internal (OS-specific) handle of the socket 
+.RE
+.PP
+
+.SS "unsigned short sf::TcpListener::getLocalPort () const"
+
+.PP
+Get the port to which the socket is bound locally\&. If the socket is not listening to a port, this function returns 0\&.
+.PP
+\fBReturns\fP
+.RS 4
+Port to which the socket is bound
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBlisten\fP 
+.RE
+.PP
+
+.SS "bool sf::Socket::isBlocking () const\fR [inherited]\fP"
+
+.PP
+Tell whether the socket is in blocking or non-blocking mode\&. 
+.PP
+\fBReturns\fP
+.RS 4
+True if the socket is blocking, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetBlocking\fP 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::TcpListener::listen (unsigned short port, const \fBIpAddress\fP & address = \fR\fBIpAddress::Any\fP\fP)"
+
+.PP
+Start listening for incoming connection attempts\&. This function makes the socket start listening on the specified port, waiting for incoming connection attempts\&.
+.PP
+If the socket is already listening on a port when this function is called, it will stop listening on the old port before starting to listen on the new port\&.
+.PP
+When providing \fBsf::Socket::AnyPort\fP as port, the listener will request an available port from the system\&. The chosen port can be retrieved by calling \fBgetLocalPort()\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP Port to listen on for incoming connection attempts 
+.br
+\fIaddress\fP Address of the interface to listen on
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Status code
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBaccept\fP, \fBclose\fP 
+.RE
+.PP
+
+.SS "void sf::Socket::setBlocking (bool blocking)\fR [inherited]\fP"
+
+.PP
+Set the blocking state of the socket\&. In blocking mode, calls will not return until they have completed their task\&. For example, a call to Receive in blocking mode won't return until some data was actually received\&. In non-blocking mode, calls will always return immediately, using the return code to signal whether there was data available or not\&. By default, all sockets are blocking\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIblocking\fP True to set the socket as blocking, false for non-blocking
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBisBlocking\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

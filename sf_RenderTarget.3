@@ -1,0 +1,501 @@
+.TH "sf::RenderTarget" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::RenderTarget \- Base class for all render targets (window, texture, \&.\&.\&.)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/RenderTarget\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.PP
+Inherited by \fBsf::RenderTexture\fP, and \fBsf::RenderWindow\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~RenderTarget\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "void \fBclear\fP (const \fBColor\fP &color=\fBColor\fP(0, 0, 0, 255))"
+.br
+.RI "Clear the entire target with a single color\&. "
+.ti -1c
+.RI "void \fBsetView\fP (const \fBView\fP &view)"
+.br
+.RI "Change the current active view\&. "
+.ti -1c
+.RI "const \fBView\fP & \fBgetView\fP () const"
+.br
+.RI "Get the view currently in use in the render target\&. "
+.ti -1c
+.RI "const \fBView\fP & \fBgetDefaultView\fP () const"
+.br
+.RI "Get the default view of the render target\&. "
+.ti -1c
+.RI "\fBIntRect\fP \fBgetViewport\fP (const \fBView\fP &view) const"
+.br
+.RI "Get the viewport of a view, applied to this render target\&. "
+.ti -1c
+.RI "\fBVector2f\fP \fBmapPixelToCoords\fP (const \fBVector2i\fP &point) const"
+.br
+.RI "Convert a point from target coordinates to world coordinates, using the current view\&. "
+.ti -1c
+.RI "\fBVector2f\fP \fBmapPixelToCoords\fP (const \fBVector2i\fP &point, const \fBView\fP &view) const"
+.br
+.RI "Convert a point from target coordinates to world coordinates\&. "
+.ti -1c
+.RI "\fBVector2i\fP \fBmapCoordsToPixel\fP (const \fBVector2f\fP &point) const"
+.br
+.RI "Convert a point from world coordinates to target coordinates, using the current view\&. "
+.ti -1c
+.RI "\fBVector2i\fP \fBmapCoordsToPixel\fP (const \fBVector2f\fP &point, const \fBView\fP &view) const"
+.br
+.RI "Convert a point from world coordinates to target coordinates\&. "
+.ti -1c
+.RI "void \fBdraw\fP (const \fBDrawable\fP &drawable, const \fBRenderStates\fP &states=\fBRenderStates::Default\fP)"
+.br
+.RI "Draw a drawable object to the render target\&. "
+.ti -1c
+.RI "void \fBdraw\fP (const \fBVertex\fP *vertices, std::size_t vertexCount, \fBPrimitiveType\fP type, const \fBRenderStates\fP &states=\fBRenderStates::Default\fP)"
+.br
+.RI "Draw primitives defined by an array of vertices\&. "
+.ti -1c
+.RI "void \fBdraw\fP (const \fBVertexBuffer\fP &vertexBuffer, const \fBRenderStates\fP &states=\fBRenderStates::Default\fP)"
+.br
+.RI "Draw primitives defined by a vertex buffer\&. "
+.ti -1c
+.RI "void \fBdraw\fP (const \fBVertexBuffer\fP &vertexBuffer, std::size_t firstVertex, std::size_t vertexCount, const \fBRenderStates\fP &states=\fBRenderStates::Default\fP)"
+.br
+.RI "Draw primitives defined by a vertex buffer\&. "
+.ti -1c
+.RI "virtual \fBVector2u\fP \fBgetSize\fP () const =0"
+.br
+.RI "Return the size of the rendering region of the target\&. "
+.ti -1c
+.RI "virtual bool \fBisSrgb\fP () const"
+.br
+.RI "Tell if the render target will use sRGB encoding when drawing on it\&. "
+.ti -1c
+.RI "virtual bool \fBsetActive\fP (bool active=true)"
+.br
+.RI "Activate or deactivate the render target for rendering\&. "
+.ti -1c
+.RI "void \fBpushGLStates\fP ()"
+.br
+.RI "Save the current OpenGL render states and matrices\&. "
+.ti -1c
+.RI "void \fBpopGLStates\fP ()"
+.br
+.RI "Restore the previously saved OpenGL render states and matrices\&. "
+.ti -1c
+.RI "void \fBresetGLStates\fP ()"
+.br
+.RI "Reset the internal OpenGL states so that the target is ready for drawing\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRenderTarget\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "void \fBinitialize\fP ()"
+.br
+.RI "Performs the common initialization step after creation\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for all render targets (window, texture, \&.\&.\&.) 
+
+\fBsf::RenderTarget\fP defines the common behavior of all the 2D render targets usable in the graphics module\&.
+.PP
+It makes it possible to draw 2D entities like sprites, shapes, text without using any OpenGL command directly\&.
+.PP
+A \fBsf::RenderTarget\fP is also able to use views (\fBsf::View\fP), which are a kind of 2D cameras\&. With views you can globally scroll, rotate or zoom everything that is drawn, without having to transform every single entity\&. See the documentation of \fBsf::View\fP for more details and sample pieces of code about this class\&.
+.PP
+On top of that, render targets are still able to render direct OpenGL stuff\&. It is even possible to mix together OpenGL calls and regular SFML drawing commands\&. When doing so, make sure that OpenGL states are not messed up by calling the pushGLStates/popGLStates functions\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::RenderWindow\fP, \fBsf::RenderTexture\fP, \fBsf::View\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB52\fP of file \fBRenderTarget\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual sf::RenderTarget::~RenderTarget ()\fR [virtual]\fP"
+
+.PP
+Destructor\&. 
+.SS "sf::RenderTarget::RenderTarget ()\fR [protected]\fP"
+
+.PP
+Default constructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void sf::RenderTarget::clear (const \fBColor\fP & color = \fR\fBColor\fP(0, 0, 0, 255)\fP)"
+
+.PP
+Clear the entire target with a single color\&. This function is usually called once every frame, to clear the previous contents of the target\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcolor\fP Fill color to use to clear the render target 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::draw (const \fBDrawable\fP & drawable, const \fBRenderStates\fP & states = \fR\fBRenderStates::Default\fP\fP)"
+
+.PP
+Draw a drawable object to the render target\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdrawable\fP Object to draw 
+.br
+\fIstates\fP Render states to use for drawing 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::draw (const \fBVertex\fP * vertices, std::size_t vertexCount, \fBPrimitiveType\fP type, const \fBRenderStates\fP & states = \fR\fBRenderStates::Default\fP\fP)"
+
+.PP
+Draw primitives defined by an array of vertices\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertices\fP Pointer to the vertices 
+.br
+\fIvertexCount\fP Number of vertices in the array 
+.br
+\fItype\fP Type of primitives to draw 
+.br
+\fIstates\fP Render states to use for drawing 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::draw (const \fBVertexBuffer\fP & vertexBuffer, const \fBRenderStates\fP & states = \fR\fBRenderStates::Default\fP\fP)"
+
+.PP
+Draw primitives defined by a vertex buffer\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertexBuffer\fP \fBVertex\fP buffer 
+.br
+\fIstates\fP Render states to use for drawing 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::draw (const \fBVertexBuffer\fP & vertexBuffer, std::size_t firstVertex, std::size_t vertexCount, const \fBRenderStates\fP & states = \fR\fBRenderStates::Default\fP\fP)"
+
+.PP
+Draw primitives defined by a vertex buffer\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvertexBuffer\fP \fBVertex\fP buffer 
+.br
+\fIfirstVertex\fP Index of the first vertex to render 
+.br
+\fIvertexCount\fP Number of vertices to render 
+.br
+\fIstates\fP Render states to use for drawing 
+.RE
+.PP
+
+.SS "const \fBView\fP & sf::RenderTarget::getDefaultView () const"
+
+.PP
+Get the default view of the render target\&. The default view has the initial size of the render target, and never changes after the target has been created\&.
+.PP
+\fBReturns\fP
+.RS 4
+The default view of the render target
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetView\fP, \fBgetView\fP 
+.RE
+.PP
+
+.SS "virtual \fBVector2u\fP sf::RenderTarget::getSize () const\fR [pure virtual]\fP"
+
+.PP
+Return the size of the rendering region of the target\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Size in pixels 
+.RE
+.PP
+
+.PP
+Implemented in \fBsf::RenderTexture\fP, and \fBsf::RenderWindow\fP\&.
+.SS "const \fBView\fP & sf::RenderTarget::getView () const"
+
+.PP
+Get the view currently in use in the render target\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The view object that is currently used
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetView\fP, \fBgetDefaultView\fP 
+.RE
+.PP
+
+.SS "\fBIntRect\fP sf::RenderTarget::getViewport (const \fBView\fP & view) const"
+
+.PP
+Get the viewport of a view, applied to this render target\&. The viewport is defined in the view as a ratio, this function simply applies this ratio to the current dimensions of the render target to calculate the pixels rectangle that the viewport actually covers in the target\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIview\fP The view for which we want to compute the viewport
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Viewport rectangle, expressed in pixels 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::initialize ()\fR [protected]\fP"
+
+.PP
+Performs the common initialization step after creation\&. The derived classes must call this function after the target is created and ready for drawing\&. 
+.SS "virtual bool sf::RenderTarget::isSrgb () const\fR [virtual]\fP"
+
+.PP
+Tell if the render target will use sRGB encoding when drawing on it\&. 
+.PP
+\fBReturns\fP
+.RS 4
+True if the render target use sRGB encoding, false otherwise 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBsf::RenderTexture\fP, and \fBsf::RenderWindow\fP\&.
+.SS "\fBVector2i\fP sf::RenderTarget::mapCoordsToPixel (const \fBVector2f\fP & point) const"
+
+.PP
+Convert a point from world coordinates to target coordinates, using the current view\&. This function is an overload of the mapCoordsToPixel function that implicitly uses the current view\&. It is equivalent to: 
+.PP
+.nf
+target\&.mapCoordsToPixel(point, target\&.getView());
+
+.fi
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIpoint\fP Point to convert
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The converted point, in target coordinates (pixels)
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmapPixelToCoords\fP 
+.RE
+.PP
+
+.SS "\fBVector2i\fP sf::RenderTarget::mapCoordsToPixel (const \fBVector2f\fP & point, const \fBView\fP & view) const"
+
+.PP
+Convert a point from world coordinates to target coordinates\&. This function finds the pixel of the render target that matches the given 2D point\&. In other words, it goes through the same process as the graphics card, to compute the final position of a rendered point\&.
+.PP
+Initially, both coordinate systems (world units and target pixels) match perfectly\&. But if you define a custom view or resize your render target, this assertion is not true anymore, i\&.e\&. a point located at (150, 75) in your 2D world may map to the pixel (10, 50) of your render target -- if the view is translated by (140, 25)\&.
+.PP
+This version uses a custom view for calculations, see the other overload of the function if you want to use the current view of the render target\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpoint\fP Point to convert 
+.br
+\fIview\fP The view to use for converting the point
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The converted point, in target coordinates (pixels)
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmapPixelToCoords\fP 
+.RE
+.PP
+
+.SS "\fBVector2f\fP sf::RenderTarget::mapPixelToCoords (const \fBVector2i\fP & point) const"
+
+.PP
+Convert a point from target coordinates to world coordinates, using the current view\&. This function is an overload of the mapPixelToCoords function that implicitly uses the current view\&. It is equivalent to: 
+.PP
+.nf
+target\&.mapPixelToCoords(point, target\&.getView());
+
+.fi
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIpoint\fP Pixel to convert
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The converted point, in 'world' coordinates
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmapCoordsToPixel\fP 
+.RE
+.PP
+
+.SS "\fBVector2f\fP sf::RenderTarget::mapPixelToCoords (const \fBVector2i\fP & point, const \fBView\fP & view) const"
+
+.PP
+Convert a point from target coordinates to world coordinates\&. This function finds the 2D position that matches the given pixel of the render target\&. In other words, it does the inverse of what the graphics card does, to find the initial position of a rendered pixel\&.
+.PP
+Initially, both coordinate systems (world units and target pixels) match perfectly\&. But if you define a custom view or resize your render target, this assertion is not true anymore, i\&.e\&. a point located at (10, 50) in your render target may map to the point (150, 75) in your 2D world -- if the view is translated by (140, 25)\&.
+.PP
+For render-windows, this function is typically used to find which point (or object) is located below the mouse cursor\&.
+.PP
+This version uses a custom view for calculations, see the other overload of the function if you want to use the current view of the render target\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpoint\fP Pixel to convert 
+.br
+\fIview\fP The view to use for converting the point
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The converted point, in 'world' units
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmapCoordsToPixel\fP 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::popGLStates ()"
+
+.PP
+Restore the previously saved OpenGL render states and matrices\&. See the description of pushGLStates to get a detailed description of these functions\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBpushGLStates\fP 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::pushGLStates ()"
+
+.PP
+Save the current OpenGL render states and matrices\&. This function can be used when you mix SFML drawing and direct OpenGL rendering\&. Combined with popGLStates, it ensures that: 
+.PD 0
+.IP "\(bu" 1
+SFML's internal states are not messed up by your OpenGL code 
+.IP "\(bu" 1
+your OpenGL states are not modified by a call to a SFML function
+.PP
+More specifically, it must be used around code that calls Draw functions\&. Example: 
+.PP
+.nf
+// OpenGL code here\&.\&.\&.
+window\&.pushGLStates();
+window\&.draw(\&.\&.\&.);
+window\&.draw(\&.\&.\&.);
+window\&.popGLStates();
+// OpenGL code here\&.\&.\&.
+
+.fi
+.PP
+.PP
+Note that this function is quite expensive: it saves all the possible OpenGL states and matrices, even the ones you don't care about\&. Therefore it should be used wisely\&. It is provided for convenience, but the best results will be achieved if you handle OpenGL states yourself (because you know which states have really changed, and need to be saved and restored)\&. Take a look at the resetGLStates function if you do so\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBpopGLStates\fP 
+.RE
+.PP
+
+.SS "void sf::RenderTarget::resetGLStates ()"
+
+.PP
+Reset the internal OpenGL states so that the target is ready for drawing\&. This function can be used when you mix SFML drawing and direct OpenGL rendering, if you choose not to use pushGLStates/popGLStates\&. It makes sure that all OpenGL states needed by SFML are set, so that subsequent \fBdraw()\fP calls will work as expected\&.
+.PP
+Example: 
+.PP
+.nf
+// OpenGL code here\&.\&.\&.
+glPushAttrib(\&.\&.\&.);
+window\&.resetGLStates();
+window\&.draw(\&.\&.\&.);
+window\&.draw(\&.\&.\&.);
+glPopAttrib(\&.\&.\&.);
+// OpenGL code here\&.\&.\&.
+
+.fi
+.PP
+ 
+.SS "virtual bool sf::RenderTarget::setActive (bool active = \fRtrue\fP)\fR [virtual]\fP"
+
+.PP
+Activate or deactivate the render target for rendering\&. This function makes the render target's context current for future OpenGL rendering operations (so you shouldn't care about it if you're not doing direct OpenGL stuff)\&. A render target's context is active only on the current thread, if you want to make it active on another thread you have to deactivate it on the previous thread first if it was active\&. Only one context can be current in a thread, so if you want to draw OpenGL geometry to another render target don't forget to activate it again\&. Activating a render target will automatically deactivate the previously active context (if any)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIactive\fP True to activate, false to deactivate
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if operation was successful, false otherwise 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBsf::RenderTexture\fP, and \fBsf::RenderWindow\fP\&.
+.SS "void sf::RenderTarget::setView (const \fBView\fP & view)"
+
+.PP
+Change the current active view\&. The view is like a 2D camera, it controls which part of the 2D scene is visible, and how it is viewed in the render target\&. The new view will affect everything that is drawn, until another view is set\&. The render target keeps its own copy of the view object, so it is not necessary to keep the original one alive after calling this function\&. To restore the original view of the target, you can pass the result of \fBgetDefaultView()\fP to this function\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIview\fP New view to use
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetView\fP, \fBgetDefaultView\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

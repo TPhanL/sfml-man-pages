@@ -1,0 +1,409 @@
+.TH "sf::Vector3< T >" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Vector3< T > \- Utility template class for manipulating 3-dimensional vectors\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/Vector3\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVector3\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBVector3\fP (T X, T Y, T Z)"
+.br
+.RI "Construct the vector from its coordinates\&. "
+.ti -1c
+.RI "template<typename U > \fBVector3\fP (const \fBVector3\fP< U > &vector)"
+.br
+.RI "Construct the vector from another type of vector\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "T \fBx\fP"
+.br
+.RI "X coordinate of the vector\&. "
+.ti -1c
+.RI "T \fBy\fP"
+.br
+.RI "Y coordinate of the vector\&. "
+.ti -1c
+.RI "T \fBz\fP"
+.br
+.RI "Z coordinate of the vector\&. "
+.in -1c
+.SS "Related Symbols"
+(Note that these are not member symbols\&.) 
+.in +1c
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > \fBoperator\-\fP (const \fBVector3\fP< T > &left)"
+.br
+.RI "Overload of unary operator -\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > & \fBoperator+=\fP (\fBVector3\fP< T > &left, const \fBVector3\fP< T > &right)"
+.br
+.RI "Overload of binary operator +=\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > & \fBoperator\-=\fP (\fBVector3\fP< T > &left, const \fBVector3\fP< T > &right)"
+.br
+.RI "Overload of binary operator -=\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > \fBoperator+\fP (const \fBVector3\fP< T > &left, const \fBVector3\fP< T > &right)"
+.br
+.RI "Overload of binary operator +\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > \fBoperator\-\fP (const \fBVector3\fP< T > &left, const \fBVector3\fP< T > &right)"
+.br
+.RI "Overload of binary operator -\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > \fBoperator*\fP (const \fBVector3\fP< T > &left, T right)"
+.br
+.RI "Overload of binary operator *\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > \fBoperator*\fP (T left, const \fBVector3\fP< T > &right)"
+.br
+.RI "Overload of binary operator *\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > & \fBoperator*=\fP (\fBVector3\fP< T > &left, T right)"
+.br
+.RI "Overload of binary operator *=\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > \fBoperator/\fP (const \fBVector3\fP< T > &left, T right)"
+.br
+.RI "Overload of binary operator /\&. "
+.ti -1c
+.RI "template<typename T > \fBVector3\fP< T > & \fBoperator/=\fP (\fBVector3\fP< T > &left, T right)"
+.br
+.RI "Overload of binary operator /=\&. "
+.ti -1c
+.RI "template<typename T > bool \fBoperator==\fP (const \fBVector3\fP< T > &left, const \fBVector3\fP< T > &right)"
+.br
+.RI "Overload of binary operator ==\&. "
+.ti -1c
+.RI "template<typename T > bool \fBoperator!=\fP (const \fBVector3\fP< T > &left, const \fBVector3\fP< T > &right)"
+.br
+.RI "Overload of binary operator !=\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class sf::Vector3< T >"Utility template class for manipulating 3-dimensional vectors\&. 
+
+\fBsf::Vector3\fP is a simple class that defines a mathematical vector with three coordinates (x, y and z)\&.
+.PP
+It can be used to represent anything that has three dimensions: a size, a point, a velocity, etc\&.
+.PP
+The template parameter T is the type of the coordinates\&. It can be any type that supports arithmetic operations (+, -, /, *) and comparisons (==, !=), for example int or float\&.
+.PP
+You generally don't have to care about the templated form (sf::Vector3<T>), the most common specializations have special typedefs: 
+.PD 0
+.IP "\(bu" 1
+sf::Vector3<float> is sf::Vector3f 
+.IP "\(bu" 1
+sf::Vector3<int> is sf::Vector3i
+.PP
+The \fBsf::Vector3\fP class has a small and simple interface, its x and y members can be accessed directly (there are no accessors like setX(), getX()) and it contains no mathematical function like dot product, cross product, length, etc\&.
+.PP
+Usage example: 
+.PP
+.nf
+sf::Vector3f v1(16\&.5f, 24\&.f, \-8\&.2f);
+v1\&.x = 18\&.2f;
+float y = v1\&.y;
+float z = v1\&.z;
+
+sf::Vector3f v2 = v1 * 5\&.f;
+sf::Vector3f v3;
+v3 = v1 + v2;
+
+bool different = (v2 != v3);
+
+.fi
+.PP
+.PP
+Note: for 2-dimensional vectors, see \fBsf::Vector2\fP\&. 
+.PP
+Definition at line \fB37\fP of file \fBVector3\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBsf::Vector3\fP< T >::Vector3 ()"
+
+.PP
+Default constructor\&. Creates a Vector3(0, 0, 0)\&. 
+.SS "template<typename T > \fBsf::Vector3\fP< T >::Vector3 (T X, T Y, T Z)"
+
+.PP
+Construct the vector from its coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIX\fP X coordinate 
+.br
+\fIY\fP Y coordinate 
+.br
+\fIZ\fP Z coordinate 
+.RE
+.PP
+
+.SS "template<typename T > template<typename U > \fBsf::Vector3\fP< T >::Vector3 (const \fBVector3\fP< U > & vector)\fR [explicit]\fP"
+
+.PP
+Construct the vector from another type of vector\&. This constructor doesn't replace the copy constructor, it's called only when U != T\&. A call to this constructor will fail to compile if U is not convertible to T\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvector\fP Vector to convert 
+.RE
+.PP
+
+.SH "Friends And Related Symbol Documentation"
+.PP 
+.SS "template<typename T > bool operator!= (const \fBVector3\fP< T > & left, const \fBVector3\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator !=\&. This operator compares strict difference between two vectors\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a vector)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is not equal to \fIright\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > operator* (const \fBVector3\fP< T > & left, T right)\fR [related]\fP"
+
+.PP
+Overload of binary operator *\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a scalar value)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Memberwise multiplication by \fIright\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > operator* (T left, const \fBVector3\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator *\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a scalar value) 
+.br
+\fIright\fP Right operand (a vector)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Memberwise multiplication by \fIleft\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > & operator*= (\fBVector3\fP< T > & left, T right)\fR [related]\fP"
+
+.PP
+Overload of binary operator *=\&. This operator performs a memberwise multiplication by \fIright\fP, and assigns the result to \fIleft\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a scalar value)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to \fIleft\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > operator+ (const \fBVector3\fP< T > & left, const \fBVector3\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator +\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a vector)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Memberwise addition of both vectors 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > & operator+= (\fBVector3\fP< T > & left, const \fBVector3\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator +=\&. This operator performs a memberwise addition of both vectors, and assigns the result to \fIleft\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a vector)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to \fIleft\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > operator\- (const \fBVector3\fP< T > & left)\fR [related]\fP"
+
+.PP
+Overload of unary operator -\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Vector to negate
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Memberwise opposite of the vector 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > operator\- (const \fBVector3\fP< T > & left, const \fBVector3\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator -\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a vector)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Memberwise subtraction of both vectors 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > & operator\-= (\fBVector3\fP< T > & left, const \fBVector3\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator -=\&. This operator performs a memberwise subtraction of both vectors, and assigns the result to \fIleft\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a vector)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to \fIleft\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > operator/ (const \fBVector3\fP< T > & left, T right)\fR [related]\fP"
+
+.PP
+Overload of binary operator /\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a scalar value)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Memberwise division by \fIright\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBVector3\fP< T > & operator/= (\fBVector3\fP< T > & left, T right)\fR [related]\fP"
+
+.PP
+Overload of binary operator /=\&. This operator performs a memberwise division by \fIright\fP, and assigns the result to \fIleft\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a scalar value)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to \fIleft\fP 
+.RE
+.PP
+
+.SS "template<typename T > bool operator== (const \fBVector3\fP< T > & left, const \fBVector3\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator ==\&. This operator compares strict equality between two vectors\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a vector) 
+.br
+\fIright\fP Right operand (a vector)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is equal to \fIright\fP 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename T > T \fBsf::Vector3\fP< T >::x"
+
+.PP
+X coordinate of the vector\&. 
+.PP
+Definition at line \fB76\fP of file \fBVector3\&.hpp\fP\&.
+.SS "template<typename T > T \fBsf::Vector3\fP< T >::y"
+
+.PP
+Y coordinate of the vector\&. 
+.PP
+Definition at line \fB77\fP of file \fBVector3\&.hpp\fP\&.
+.SS "template<typename T > T \fBsf::Vector3\fP< T >::z"
+
+.PP
+Z coordinate of the vector\&. 
+.PP
+Definition at line \fB78\fP of file \fBVector3\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

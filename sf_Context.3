@@ -1,0 +1,200 @@
+.TH "sf::Context" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Context \- Class holding a valid drawing context\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Context\&.hpp>\fP
+.PP
+Inherits \fBsf::GlResource\fP, and \fBsf::NonCopyable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBContext\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~Context\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "bool \fBsetActive\fP (bool active)"
+.br
+.RI "Activate or deactivate explicitly the context\&. "
+.ti -1c
+.RI "const \fBContextSettings\fP & \fBgetSettings\fP () const"
+.br
+.RI "Get the settings of the context\&. "
+.ti -1c
+.RI "\fBContext\fP (const \fBContextSettings\fP &settings, unsigned int width, unsigned int height)"
+.br
+.RI "Construct a in-memory context\&. "
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBisExtensionAvailable\fP (const char *name)"
+.br
+.RI "Check whether a given OpenGL extension is available\&. "
+.ti -1c
+.RI "static GlFunctionPointer \fBgetFunction\fP (const char *name)"
+.br
+.RI "Get the address of an OpenGL function\&. "
+.ti -1c
+.RI "static const \fBContext\fP * \fBgetActiveContext\fP ()"
+.br
+.RI "Get the currently active context\&. "
+.ti -1c
+.RI "static Uint64 \fBgetActiveContextId\fP ()"
+.br
+.RI "Get the currently active context's ID\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class holding a valid drawing context\&. 
+
+If you need to make OpenGL calls without having an active window (like in a thread), you can use an instance of this class to get a valid context\&.
+.PP
+Having a valid context is necessary for \fIevery\fP OpenGL call\&.
+.PP
+Note that a context is only active in its current thread, if you create a new thread it will have no valid context by default\&.
+.PP
+To use a \fBsf::Context\fP instance, just construct it and let it live as long as you need a valid context\&. No explicit activation is needed, all it has to do is to exist\&. Its destructor will take care of deactivating and freeing all the attached resources\&.
+.PP
+Usage example: 
+.PP
+.nf
+void threadFunction(void*)
+{
+   sf::Context context;
+   // from now on, you have a valid context
+
+   // you can make OpenGL calls
+   glClear(GL_DEPTH_BUFFER_BIT);
+}
+// the context is automatically deactivated and destroyed
+// by the sf::Context destructor
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB50\fP of file \fBContext\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Context::Context ()"
+
+.PP
+Default constructor\&. The constructor creates and activates the context 
+.SS "sf::Context::~Context ()"
+
+.PP
+Destructor\&. The destructor deactivates and destroys the context 
+.SS "sf::Context::Context (const \fBContextSettings\fP & settings, unsigned int width, unsigned int height)"
+
+.PP
+Construct a in-memory context\&. This constructor is for internal use, you don't need to bother with it\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsettings\fP Creation parameters 
+.br
+\fIwidth\fP Back buffer width 
+.br
+\fIheight\fP Back buffer height 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "static const \fBContext\fP * sf::Context::getActiveContext ()\fR [static]\fP"
+
+.PP
+Get the currently active context\&. This function will only return \fBsf::Context\fP objects\&. Contexts created e\&.g\&. by RenderTargets or for internal use will not be returned by this function\&.
+.PP
+\fBReturns\fP
+.RS 4
+The currently active context or NULL if none is active 
+.RE
+.PP
+
+.SS "static Uint64 sf::Context::getActiveContextId ()\fR [static]\fP"
+
+.PP
+Get the currently active context's ID\&. The context ID is used to identify contexts when managing unshareable OpenGL resources\&.
+.PP
+\fBReturns\fP
+.RS 4
+The active context's ID or 0 if no context is currently active 
+.RE
+.PP
+
+.SS "static GlFunctionPointer sf::Context::getFunction (const char * name)\fR [static]\fP"
+
+.PP
+Get the address of an OpenGL function\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP Name of the function to get the address of
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Address of the OpenGL function, 0 on failure 
+.RE
+.PP
+
+.SS "const \fBContextSettings\fP & sf::Context::getSettings () const"
+
+.PP
+Get the settings of the context\&. Note that these settings may be different than the ones passed to the constructor; they are indeed adjusted if the original settings are not directly supported by the system\&.
+.PP
+\fBReturns\fP
+.RS 4
+Structure containing the settings 
+.RE
+.PP
+
+.SS "static bool sf::Context::isExtensionAvailable (const char * name)\fR [static]\fP"
+
+.PP
+Check whether a given OpenGL extension is available\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP Name of the extension to check for
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if available, false if unavailable 
+.RE
+.PP
+
+.SS "bool sf::Context::setActive (bool active)"
+
+.PP
+Activate or deactivate explicitly the context\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIactive\fP True to activate, false to deactivate
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True on success, false on failure 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

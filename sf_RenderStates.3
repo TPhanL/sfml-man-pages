@@ -1,0 +1,227 @@
+.TH "sf::RenderStates" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::RenderStates \- Define the states used for drawing to a \fBRenderTarget\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/RenderStates\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRenderStates\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBRenderStates\fP (const \fBBlendMode\fP &theBlendMode)"
+.br
+.RI "Construct a default set of render states with a custom blend mode\&. "
+.ti -1c
+.RI "\fBRenderStates\fP (const \fBTransform\fP &theTransform)"
+.br
+.RI "Construct a default set of render states with a custom transform\&. "
+.ti -1c
+.RI "\fBRenderStates\fP (const \fBTexture\fP *theTexture)"
+.br
+.RI "Construct a default set of render states with a custom texture\&. "
+.ti -1c
+.RI "\fBRenderStates\fP (const \fBShader\fP *theShader)"
+.br
+.RI "Construct a default set of render states with a custom shader\&. "
+.ti -1c
+.RI "\fBRenderStates\fP (const \fBBlendMode\fP &theBlendMode, const \fBTransform\fP &theTransform, const \fBTexture\fP *theTexture, const \fBShader\fP *theShader)"
+.br
+.RI "Construct a set of render states with all its attributes\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBBlendMode\fP \fBblendMode\fP"
+.br
+.RI "Blending mode\&. "
+.ti -1c
+.RI "\fBTransform\fP \fBtransform\fP"
+.br
+.RI "\fBTransform\fP\&. "
+.ti -1c
+.RI "const \fBTexture\fP * \fBtexture\fP"
+.br
+.RI "\fBTexture\fP\&. "
+.ti -1c
+.RI "const \fBShader\fP * \fBshader\fP"
+.br
+.RI "\fBShader\fP\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const \fBRenderStates\fP \fBDefault\fP"
+.br
+.RI "Special instance holding the default render states\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Define the states used for drawing to a \fBRenderTarget\fP\&. 
+
+There are four global states that can be applied to the drawn objects:
+.PP
+.PD 0
+.IP "\(bu" 1
+the blend mode: how pixels of the object are blended with the background 
+.IP "\(bu" 1
+the transform: how the object is positioned/rotated/scaled 
+.IP "\(bu" 1
+the texture: what image is mapped to the object 
+.IP "\(bu" 1
+the shader: what custom effect is applied to the object
+.PP
+High-level objects such as sprites or text force some of these states when they are drawn\&. For example, a sprite will set its own texture, so that you don't have to care about it when drawing the sprite\&.
+.PP
+The transform is a special case: sprites, texts and shapes (and it's a good idea to do it with your own drawable classes too) combine their transform with the one that is passed in the \fBRenderStates\fP structure\&. So that you can use a 'global' transform on top of each object's transform\&.
+.PP
+Most objects, especially high-level drawables, can be drawn directly without defining render states explicitly -- the default set of states is ok in most cases\&. 
+.PP
+.nf
+window\&.draw(sprite);
+
+.fi
+.PP
+.PP
+If you want to use a single specific render state, for example a shader, you can pass it directly to the Draw function: \fBsf::RenderStates\fP has an implicit one-argument constructor for each state\&. 
+.PP
+.nf
+window\&.draw(sprite, shader);
+
+.fi
+.PP
+.PP
+When you're inside the Draw function of a drawable object (inherited from \fBsf::Drawable\fP), you can either pass the render states unmodified, or change some of them\&. For example, a transformable object will combine the current transform with its own transform\&. A sprite will set its texture\&. Etc\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::RenderTarget\fP, \fBsf::Drawable\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB45\fP of file \fBRenderStates\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::RenderStates::RenderStates ()"
+
+.PP
+Default constructor\&. Constructing a default set of render states is equivalent to using \fBsf::RenderStates::Default\fP\&. The default set defines: 
+.PD 0
+.IP "\(bu" 1
+the BlendAlpha blend mode 
+.IP "\(bu" 1
+the identity transform 
+.IP "\(bu" 1
+a null texture 
+.IP "\(bu" 1
+a null shader 
+.PP
+
+.SS "sf::RenderStates::RenderStates (const \fBBlendMode\fP & theBlendMode)"
+
+.PP
+Construct a default set of render states with a custom blend mode\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItheBlendMode\fP Blend mode to use 
+.RE
+.PP
+
+.SS "sf::RenderStates::RenderStates (const \fBTransform\fP & theTransform)"
+
+.PP
+Construct a default set of render states with a custom transform\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItheTransform\fP \fBTransform\fP to use 
+.RE
+.PP
+
+.SS "sf::RenderStates::RenderStates (const \fBTexture\fP * theTexture)"
+
+.PP
+Construct a default set of render states with a custom texture\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItheTexture\fP \fBTexture\fP to use 
+.RE
+.PP
+
+.SS "sf::RenderStates::RenderStates (const \fBShader\fP * theShader)"
+
+.PP
+Construct a default set of render states with a custom shader\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItheShader\fP \fBShader\fP to use 
+.RE
+.PP
+
+.SS "sf::RenderStates::RenderStates (const \fBBlendMode\fP & theBlendMode, const \fBTransform\fP & theTransform, const \fBTexture\fP * theTexture, const \fBShader\fP * theShader)"
+
+.PP
+Construct a set of render states with all its attributes\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItheBlendMode\fP Blend mode to use 
+.br
+\fItheTransform\fP \fBTransform\fP to use 
+.br
+\fItheTexture\fP \fBTexture\fP to use 
+.br
+\fItheShader\fP \fBShader\fP to use 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBBlendMode\fP sf::RenderStates::blendMode"
+
+.PP
+Blending mode\&. 
+.PP
+Definition at line \fB115\fP of file \fBRenderStates\&.hpp\fP\&.
+.SS "const \fBRenderStates\fP sf::RenderStates::Default\fR [static]\fP"
+
+.PP
+Special instance holding the default render states\&. 
+.PP
+Definition at line \fB110\fP of file \fBRenderStates\&.hpp\fP\&.
+.SS "const \fBShader\fP* sf::RenderStates::shader"
+
+.PP
+\fBShader\fP\&. 
+.PP
+Definition at line \fB118\fP of file \fBRenderStates\&.hpp\fP\&.
+.SS "const \fBTexture\fP* sf::RenderStates::texture"
+
+.PP
+\fBTexture\fP\&. 
+.PP
+Definition at line \fB117\fP of file \fBRenderStates\&.hpp\fP\&.
+.SS "\fBTransform\fP sf::RenderStates::transform"
+
+.PP
+\fBTransform\fP\&. 
+.PP
+Definition at line \fB116\fP of file \fBRenderStates\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

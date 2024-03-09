@@ -1,0 +1,591 @@
+.TH "sf::WindowBase" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::WindowBase \- \fBWindow\fP that serves as a base for other windows\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/WindowBase\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.PP
+Inherited by \fBsf::Window\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWindowBase\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBWindowBase\fP (\fBVideoMode\fP mode, const \fBString\fP &title, Uint32 style=\fBStyle::Default\fP)"
+.br
+.RI "Construct a new window\&. "
+.ti -1c
+.RI "\fBWindowBase\fP (WindowHandle handle)"
+.br
+.RI "Construct the window from an existing control\&. "
+.ti -1c
+.RI "virtual \fB~WindowBase\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "virtual void \fBcreate\fP (\fBVideoMode\fP mode, const \fBString\fP &title, Uint32 style=\fBStyle::Default\fP)"
+.br
+.RI "Create (or recreate) the window\&. "
+.ti -1c
+.RI "virtual void \fBcreate\fP (WindowHandle handle)"
+.br
+.RI "Create (or recreate) the window from an existing control\&. "
+.ti -1c
+.RI "virtual void \fBclose\fP ()"
+.br
+.RI "Close the window and destroy all the attached resources\&. "
+.ti -1c
+.RI "bool \fBisOpen\fP () const"
+.br
+.RI "Tell whether or not the window is open\&. "
+.ti -1c
+.RI "bool \fBpollEvent\fP (\fBEvent\fP &event)"
+.br
+.RI "Pop the event on top of the event queue, if any, and return it\&. "
+.ti -1c
+.RI "bool \fBwaitEvent\fP (\fBEvent\fP &event)"
+.br
+.RI "Wait for an event and return it\&. "
+.ti -1c
+.RI "\fBVector2i\fP \fBgetPosition\fP () const"
+.br
+.RI "Get the position of the window\&. "
+.ti -1c
+.RI "void \fBsetPosition\fP (const \fBVector2i\fP &position)"
+.br
+.RI "Change the position of the window on screen\&. "
+.ti -1c
+.RI "\fBVector2u\fP \fBgetSize\fP () const"
+.br
+.RI "Get the size of the rendering region of the window\&. "
+.ti -1c
+.RI "void \fBsetSize\fP (const \fBVector2u\fP &size)"
+.br
+.RI "Change the size of the rendering region of the window\&. "
+.ti -1c
+.RI "void \fBsetTitle\fP (const \fBString\fP &title)"
+.br
+.RI "Change the title of the window\&. "
+.ti -1c
+.RI "void \fBsetIcon\fP (unsigned int width, unsigned int height, const Uint8 *pixels)"
+.br
+.RI "Change the window's icon\&. "
+.ti -1c
+.RI "void \fBsetVisible\fP (bool visible)"
+.br
+.RI "Show or hide the window\&. "
+.ti -1c
+.RI "void \fBsetMouseCursorVisible\fP (bool visible)"
+.br
+.RI "Show or hide the mouse cursor\&. "
+.ti -1c
+.RI "void \fBsetMouseCursorGrabbed\fP (bool grabbed)"
+.br
+.RI "Grab or release the mouse cursor\&. "
+.ti -1c
+.RI "void \fBsetMouseCursor\fP (const \fBCursor\fP &cursor)"
+.br
+.RI "Set the displayed cursor to a native system cursor\&. "
+.ti -1c
+.RI "void \fBsetKeyRepeatEnabled\fP (bool enabled)"
+.br
+.RI "Enable or disable automatic key-repeat\&. "
+.ti -1c
+.RI "void \fBsetJoystickThreshold\fP (float threshold)"
+.br
+.RI "Change the joystick threshold\&. "
+.ti -1c
+.RI "void \fBrequestFocus\fP ()"
+.br
+.RI "Request the current window to be made the active foreground window\&. "
+.ti -1c
+.RI "bool \fBhasFocus\fP () const"
+.br
+.RI "Check whether the window has the input focus\&. "
+.ti -1c
+.RI "WindowHandle \fBgetSystemHandle\fP () const"
+.br
+.RI "Get the OS-specific handle of the window\&. "
+.ti -1c
+.RI "bool \fBcreateVulkanSurface\fP (const VkInstance &instance, VkSurfaceKHR &surface, const VkAllocationCallbacks *allocator=0)"
+.br
+.RI "Create a \fBVulkan\fP rendering surface\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBonCreate\fP ()"
+.br
+.RI "Function called after the window has been created\&. "
+.ti -1c
+.RI "virtual void \fBonResize\fP ()"
+.br
+.RI "Function called after the window has been resized\&. "
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBWindow\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBWindow\fP that serves as a base for other windows\&. 
+
+\fBsf::WindowBase\fP serves as the base class for all Windows\&.
+.PP
+A \fBsf::WindowBase\fP can create its own new window, or be embedded into an already existing control using the create(handle) function\&.
+.PP
+The \fBsf::WindowBase\fP class provides a simple interface for manipulating the window: move, resize, show/hide, control mouse cursor, etc\&. It also provides event handling through its \fBpollEvent()\fP and \fBwaitEvent()\fP functions\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Declare and create a new window
+sf::WindowBase window(sf::VideoMode(800, 600), "SFML window");
+
+// The main loop \- ends as soon as the window is closed
+while (window\&.isOpen())
+{
+   // Event processing
+   sf::Event event;
+   while (window\&.pollEvent(event))
+   {
+       // Request for closing the window
+       if (event\&.type == sf::Event::Closed)
+           window\&.close();
+   }
+
+   // Do things with the window here\&.\&.\&.
+}
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB56\fP of file \fBWindowBase\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::WindowBase::WindowBase ()"
+
+.PP
+Default constructor\&. This constructor doesn't actually create the window, use the other constructors or call \fBcreate()\fP to do so\&. 
+.SS "sf::WindowBase::WindowBase (\fBVideoMode\fP mode, const \fBString\fP & title, Uint32 style = \fR\fBStyle::Default\fP\fP)"
+
+.PP
+Construct a new window\&. This constructor creates the window with the size and pixel depth defined in \fImode\fP\&. An optional style can be passed to customize the look and behavior of the window (borders, title bar, resizable, closable, \&.\&.\&.)\&. If \fIstyle\fP contains \fBStyle::Fullscreen\fP, then \fImode\fP must be a valid video mode\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImode\fP Video mode to use (defines the width, height and depth of the rendering area of the window) 
+.br
+\fItitle\fP Title of the window 
+.br
+\fIstyle\fP Window style, a bitwise OR combination of sf::Style enumerators 
+.RE
+.PP
+
+.SS "sf::WindowBase::WindowBase (WindowHandle handle)\fR [explicit]\fP"
+
+.PP
+Construct the window from an existing control\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhandle\fP Platform-specific handle of the control 
+.RE
+.PP
+
+.SS "virtual sf::WindowBase::~WindowBase ()\fR [virtual]\fP"
+
+.PP
+Destructor\&. Closes the window and frees all the resources attached to it\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void sf::WindowBase::close ()\fR [virtual]\fP"
+
+.PP
+Close the window and destroy all the attached resources\&. After calling this function, the \fBsf::Window\fP instance remains valid and you can call \fBcreate()\fP to recreate the window\&. All other functions such as \fBpollEvent()\fP or display() will still work (i\&.e\&. you don't have to test \fBisOpen()\fP every time), and will have no effect on closed windows\&. 
+.PP
+Reimplemented in \fBsf::Window\fP\&.
+.SS "virtual void sf::WindowBase::create (\fBVideoMode\fP mode, const \fBString\fP & title, Uint32 style = \fR\fBStyle::Default\fP\fP)\fR [virtual]\fP"
+
+.PP
+Create (or recreate) the window\&. If the window was already created, it closes it first\&. If \fIstyle\fP contains \fBStyle::Fullscreen\fP, then \fImode\fP must be a valid video mode\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImode\fP Video mode to use (defines the width, height and depth of the rendering area of the window) 
+.br
+\fItitle\fP Title of the window 
+.br
+\fIstyle\fP Window style, a bitwise OR combination of sf::Style enumerators 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBsf::Window\fP\&.
+.SS "virtual void sf::WindowBase::create (WindowHandle handle)\fR [virtual]\fP"
+
+.PP
+Create (or recreate) the window from an existing control\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhandle\fP Platform-specific handle of the control 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBsf::Window\fP\&.
+.SS "bool sf::WindowBase::createVulkanSurface (const VkInstance & instance, VkSurfaceKHR & surface, const VkAllocationCallbacks * allocator = \fR0\fP)"
+
+.PP
+Create a \fBVulkan\fP rendering surface\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIinstance\fP \fBVulkan\fP instance 
+.br
+\fIsurface\fP Created surface 
+.br
+\fIallocator\fP Allocator to use
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if surface creation was successful, false otherwise 
+.RE
+.PP
+
+.SS "\fBVector2i\fP sf::WindowBase::getPosition () const"
+
+.PP
+Get the position of the window\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Position of the window, in pixels
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetPosition\fP 
+.RE
+.PP
+
+.SS "\fBVector2u\fP sf::WindowBase::getSize () const"
+
+.PP
+Get the size of the rendering region of the window\&. The size doesn't include the titlebar and borders of the window\&.
+.PP
+\fBReturns\fP
+.RS 4
+Size in pixels
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetSize\fP 
+.RE
+.PP
+
+.SS "WindowHandle sf::WindowBase::getSystemHandle () const"
+
+.PP
+Get the OS-specific handle of the window\&. The type of the returned handle is sf::WindowHandle, which is a typedef to the handle type defined by the OS\&. You shouldn't need to use this function, unless you have very specific stuff to implement that SFML doesn't support, or implement a temporary workaround until a bug is fixed\&.
+.PP
+\fBReturns\fP
+.RS 4
+System handle of the window 
+.RE
+.PP
+
+.SS "bool sf::WindowBase::hasFocus () const"
+
+.PP
+Check whether the window has the input focus\&. At any given time, only one window may have the input focus to receive input events such as keystrokes or most mouse events\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if window has focus, false otherwise 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBrequestFocus\fP 
+.RE
+.PP
+
+.SS "bool sf::WindowBase::isOpen () const"
+
+.PP
+Tell whether or not the window is open\&. This function returns whether or not the window exists\&. Note that a hidden window (setVisible(false)) is open (therefore this function would return true)\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if the window is open, false if it has been closed 
+.RE
+.PP
+
+.SS "virtual void sf::WindowBase::onCreate ()\fR [protected]\fP, \fR [virtual]\fP"
+
+.PP
+Function called after the window has been created\&. This function is called so that derived classes can perform their own specific initialization as soon as the window is created\&. 
+.PP
+Reimplemented in \fBsf::RenderWindow\fP\&.
+.SS "virtual void sf::WindowBase::onResize ()\fR [protected]\fP, \fR [virtual]\fP"
+
+.PP
+Function called after the window has been resized\&. This function is called so that derived classes can perform custom actions when the size of the window changes\&. 
+.PP
+Reimplemented in \fBsf::RenderWindow\fP\&.
+.SS "bool sf::WindowBase::pollEvent (\fBEvent\fP & event)"
+
+.PP
+Pop the event on top of the event queue, if any, and return it\&. This function is not blocking: if there's no pending event then it will return false and leave \fIevent\fP unmodified\&. Note that more than one event may be present in the event queue, thus you should always call this function in a loop to make sure that you process every pending event\&. 
+.PP
+.nf
+sf::Event event;
+while (window\&.pollEvent(event))
+{
+   // process event\&.\&.\&.
+}
+
+.fi
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP \fBEvent\fP to be returned
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if an event was returned, or false if the event queue was empty
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBwaitEvent\fP 
+.RE
+.PP
+
+.SS "void sf::WindowBase::requestFocus ()"
+
+.PP
+Request the current window to be made the active foreground window\&. At any given time, only one window may have the input focus to receive input events such as keystrokes or mouse events\&. If a window requests focus, it only hints to the operating system, that it would like to be focused\&. The operating system is free to deny the request\&. This is not to be confused with setActive()\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBhasFocus\fP 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setIcon (unsigned int width, unsigned int height, const Uint8 * pixels)"
+
+.PP
+Change the window's icon\&. \fIpixels\fP must be an array of \fIwidth\fP x \fIheight\fP pixels in 32-bits RGBA format\&.
+.PP
+The OS default icon is used by default\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidth\fP Icon's width, in pixels 
+.br
+\fIheight\fP Icon's height, in pixels 
+.br
+\fIpixels\fP Pointer to the array of pixels in memory\&. The pixels are copied, so you need not keep the source alive after calling this function\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetTitle\fP 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setJoystickThreshold (float threshold)"
+
+.PP
+Change the joystick threshold\&. The joystick threshold is the value below which no JoystickMoved event will be generated\&.
+.PP
+The threshold value is 0\&.1 by default\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIthreshold\fP New threshold, in the range [0, 100] 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setKeyRepeatEnabled (bool enabled)"
+
+.PP
+Enable or disable automatic key-repeat\&. If key repeat is enabled, you will receive repeated KeyPressed events while keeping a key pressed\&. If it is disabled, you will only get a single event when the key is pressed\&.
+.PP
+Key repeat is enabled by default\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIenabled\fP True to enable, false to disable 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setMouseCursor (const \fBCursor\fP & cursor)"
+
+.PP
+Set the displayed cursor to a native system cursor\&. Upon window creation, the arrow cursor is used by default\&.
+.PP
+\fBWarning\fP
+.RS 4
+The cursor must not be destroyed while in use by the window\&.
+.PP
+Features related to \fBCursor\fP are not supported on iOS and Android\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIcursor\fP Native system cursor type to display
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Cursor::loadFromSystem\fP 
+.PP
+\fBsf::Cursor::loadFromPixels\fP 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setMouseCursorGrabbed (bool grabbed)"
+
+.PP
+Grab or release the mouse cursor\&. If set, grabs the mouse cursor inside this window's client area so it may no longer be moved outside its bounds\&. Note that grabbing is only active while the window has focus\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIgrabbed\fP True to enable, false to disable 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setMouseCursorVisible (bool visible)"
+
+.PP
+Show or hide the mouse cursor\&. The mouse cursor is visible by default\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvisible\fP True to show the mouse cursor, false to hide it 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setPosition (const \fBVector2i\fP & position)"
+
+.PP
+Change the position of the window on screen\&. This function only works for top-level windows (i\&.e\&. it will be ignored for windows created from the handle of a child window/control)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP New position, in pixels
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetPosition\fP 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setSize (const \fBVector2u\fP & size)"
+
+.PP
+Change the size of the rendering region of the window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsize\fP New size, in pixels
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetSize\fP 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setTitle (const \fBString\fP & title)"
+
+.PP
+Change the title of the window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItitle\fP New title
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetIcon\fP 
+.RE
+.PP
+
+.SS "void sf::WindowBase::setVisible (bool visible)"
+
+.PP
+Show or hide the window\&. The window is shown by default\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvisible\fP True to show the window, false to hide it 
+.RE
+.PP
+
+.SS "bool sf::WindowBase::waitEvent (\fBEvent\fP & event)"
+
+.PP
+Wait for an event and return it\&. This function is blocking: if there's no pending event then it will wait until an event is received\&. After this function returns (and no error occurred), the \fIevent\fP object is always valid and filled properly\&. This function is typically used when you have a thread that is dedicated to events handling: you want to make this thread sleep as long as no new event is received\&. 
+.PP
+.nf
+sf::Event event;
+if (window\&.waitEvent(event))
+{
+   // process event\&.\&.\&.
+}
+
+.fi
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP \fBEvent\fP to be returned
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+False if any error occurred
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBpollEvent\fP 
+.RE
+.PP
+
+.SH "Friends And Related Symbol Documentation"
+.PP 
+.SS "friend class \fBWindow\fP\fR [friend]\fP"
+
+.PP
+Definition at line \fB432\fP of file \fBWindowBase\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

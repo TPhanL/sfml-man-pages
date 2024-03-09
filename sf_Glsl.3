@@ -1,0 +1,211 @@
+.TH "sf::Glsl" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Glsl \- Namespace with GLSL types\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBVector2\fP< float > \fBVec2\fP"
+.br
+.RI "2D float vector (\fRvec2\fP in GLSL) "
+.ti -1c
+.RI "typedef \fBVector2\fP< int > \fBIvec2\fP"
+.br
+.RI "2D int vector (\fRivec2\fP in GLSL) "
+.ti -1c
+.RI "typedef \fBVector2\fP< bool > \fBBvec2\fP"
+.br
+.RI "2D bool vector (\fRbvec2\fP in GLSL) "
+.ti -1c
+.RI "typedef \fBVector3\fP< float > \fBVec3\fP"
+.br
+.RI "3D float vector (\fRvec3\fP in GLSL) "
+.ti -1c
+.RI "typedef \fBVector3\fP< int > \fBIvec3\fP"
+.br
+.RI "3D int vector (\fRivec3\fP in GLSL) "
+.ti -1c
+.RI "typedef \fBVector3\fP< bool > \fBBvec3\fP"
+.br
+.RI "3D bool vector (\fRbvec3\fP in GLSL) "
+.ti -1c
+.RI "typedef implementation defined \fBVec4\fP"
+.br
+.RI "4D float vector (\fRvec4\fP in GLSL) "
+.ti -1c
+.RI "typedef implementation defined \fBIvec4\fP"
+.br
+.RI "4D int vector (\fRivec4\fP in GLSL) "
+.ti -1c
+.RI "typedef implementation defined \fBBvec4\fP"
+.br
+.RI "4D bool vector (\fRbvec4\fP in GLSL) "
+.ti -1c
+.RI "typedef implementation defined \fBMat3\fP"
+.br
+.RI "3x3 float matrix (\fRmat3\fP in GLSL) "
+.ti -1c
+.RI "typedef implementation defined \fBMat4\fP"
+.br
+.RI "4x4 float matrix (\fRmat4\fP in GLSL) "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Namespace with GLSL types\&. 
+
+The \fBsf::Glsl\fP namespace contains types that match their equivalents in GLSL, the OpenGL shading language\&. These types are exclusively used by the \fBsf::Shader\fP class\&.
+.PP
+Types that already exist in SFML, such as \fBsf::Vector2<T>\fP and \fBsf::Vector3<T>\fP, are reused as typedefs, so you can use the types in this namespace as well as the original ones\&. Others are newly defined, such as \fBGlsl::Vec4\fP or \fBGlsl::Mat3\fP\&. Their actual type is an implementation detail and should not be used\&.
+.PP
+All vector types support a default constructor that initializes every component to zero, in addition to a constructor with one parameter for each component\&. The components are stored in member variables called x, y, z, and w\&.
+.PP
+All matrix types support a constructor with a float* parameter that points to a float array of the appropriate size (that is, 9 in a 3x3 matrix, 16 in a 4x4 matrix)\&. Furthermore, they can be converted from \fBsf::Transform\fP objects\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Shader\fP 
+.RE
+.PP
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef \fBVector2\fP<bool> \fBsf::Glsl::Bvec2\fP"
+
+.PP
+2D bool vector (\fRbvec2\fP in GLSL) 
+.PP
+Definition at line \fB76\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef \fBVector3\fP<bool> \fBsf::Glsl::Bvec3\fP"
+
+.PP
+3D bool vector (\fRbvec3\fP in GLSL) 
+.PP
+Definition at line \fB94\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef implementation defined \fBsf::Glsl::Bvec4\fP"
+
+.PP
+4D bool vector (\fRbvec4\fP in GLSL) 
+.PP
+Definition at line \fB130\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef \fBVector2\fP<int> \fBsf::Glsl::Ivec2\fP"
+
+.PP
+2D int vector (\fRivec2\fP in GLSL) 
+.PP
+Definition at line \fB70\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef \fBVector3\fP<int> \fBsf::Glsl::Ivec3\fP"
+
+.PP
+3D int vector (\fRivec3\fP in GLSL) 
+.PP
+Definition at line \fB88\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef implementation defined \fBsf::Glsl::Ivec4\fP"
+
+.PP
+4D int vector (\fRivec4\fP in GLSL) 4D int vectors can be implicitly converted from \fBsf::Color\fP instances\&. Each color channel remains unchanged inside the integer interval [0, 255]\&. 
+.PP
+.nf
+sf::Glsl::Ivec4 zeroVector;
+sf::Glsl::Ivec4 vector(1, 2, 3, 4);
+sf::Glsl::Ivec4 color = sf::Color::Cyan;
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB124\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef implementation defined \fBsf::Glsl::Mat3\fP"
+
+.PP
+3x3 float matrix (\fRmat3\fP in GLSL) The matrix can be constructed from an array with 3x3 elements, aligned in column-major order\&. For example, a translation by (x, y) looks as follows: 
+.PP
+.nf
+float array[9] =
+{
+    1, 0, 0,
+    0, 1, 0,
+    x, y, 1
+};
+
+sf::Glsl::Mat3 matrix(array);
+
+.fi
+.PP
+.PP
+Mat3 can also be implicitly converted from \fBsf::Transform\fP: 
+.PP
+.nf
+sf::Transform transform;
+sf::Glsl::Mat3 matrix = transform;
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB155\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef implementation defined \fBsf::Glsl::Mat4\fP"
+
+.PP
+4x4 float matrix (\fRmat4\fP in GLSL) The matrix can be constructed from an array with 4x4 elements, aligned in column-major order\&. For example, a translation by (x, y, z) looks as follows: 
+.PP
+.nf
+float array[16] =
+{
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    x, y, z, 1
+};
+
+sf::Glsl::Mat4 matrix(array);
+
+.fi
+.PP
+.PP
+Mat4 can also be implicitly converted from \fBsf::Transform\fP: 
+.PP
+.nf
+sf::Transform transform;
+sf::Glsl::Mat4 matrix = transform;
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB181\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef \fBVector2\fP<float> \fBsf::Glsl::Vec2\fP"
+
+.PP
+2D float vector (\fRvec2\fP in GLSL) 
+.PP
+Definition at line \fB64\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef \fBVector3\fP<float> \fBsf::Glsl::Vec3\fP"
+
+.PP
+3D float vector (\fRvec3\fP in GLSL) 
+.PP
+Definition at line \fB82\fP of file \fBGlsl\&.hpp\fP\&.
+.SS "typedef implementation defined \fBsf::Glsl::Vec4\fP"
+
+.PP
+4D float vector (\fRvec4\fP in GLSL) 4D float vectors can be implicitly converted from \fBsf::Color\fP instances\&. Each color channel is normalized from integers in [0, 255] to floating point values in [0, 1]\&. 
+.PP
+.nf
+sf::Glsl::Vec4 zeroVector;
+sf::Glsl::Vec4 vector(1\&.f, 2\&.f, 3\&.f, 4\&.f);
+sf::Glsl::Vec4 color = sf::Color::Cyan;
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB110\fP of file \fBGlsl\&.hpp\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

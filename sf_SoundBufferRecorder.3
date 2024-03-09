@@ -1,0 +1,345 @@
+.TH "sf::SoundBufferRecorder" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::SoundBufferRecorder \- Specialized \fBSoundRecorder\fP which stores the captured audio data into a sound buffer\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Audio/SoundBufferRecorder\&.hpp>\fP
+.PP
+Inherits \fBsf::SoundRecorder\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB~SoundBufferRecorder\fP ()"
+.br
+.RI "destructor "
+.ti -1c
+.RI "const \fBSoundBuffer\fP & \fBgetBuffer\fP () const"
+.br
+.RI "Get the sound buffer containing the captured audio data\&. "
+.ti -1c
+.RI "bool \fBstart\fP (unsigned int sampleRate=44100)"
+.br
+.RI "Start the capture\&. "
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.RI "Stop the capture\&. "
+.ti -1c
+.RI "unsigned int \fBgetSampleRate\fP () const"
+.br
+.RI "Get the sample rate\&. "
+.ti -1c
+.RI "bool \fBsetDevice\fP (const std::string &name)"
+.br
+.RI "Set the audio capture device\&. "
+.ti -1c
+.RI "const std::string & \fBgetDevice\fP () const"
+.br
+.RI "Get the name of the current audio capture device\&. "
+.ti -1c
+.RI "void \fBsetChannelCount\fP (unsigned int channelCount)"
+.br
+.RI "Set the channel count of the audio capture device\&. "
+.ti -1c
+.RI "unsigned int \fBgetChannelCount\fP () const"
+.br
+.RI "Get the number of channels used by this recorder\&. "
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static std::vector< std::string > \fBgetAvailableDevices\fP ()"
+.br
+.RI "Get a list of the names of all available audio capture devices\&. "
+.ti -1c
+.RI "static std::string \fBgetDefaultDevice\fP ()"
+.br
+.RI "Get the name of the default audio capture device\&. "
+.ti -1c
+.RI "static bool \fBisAvailable\fP ()"
+.br
+.RI "Check if the system supports audio capture\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual bool \fBonStart\fP ()"
+.br
+.RI "Start capturing audio data\&. "
+.ti -1c
+.RI "virtual bool \fBonProcessSamples\fP (const Int16 *samples, std::size_t sampleCount)"
+.br
+.RI "Process a new chunk of recorded samples\&. "
+.ti -1c
+.RI "virtual void \fBonStop\fP ()"
+.br
+.RI "Stop capturing audio data\&. "
+.ti -1c
+.RI "void \fBsetProcessingInterval\fP (\fBTime\fP interval)"
+.br
+.RI "Set the processing interval\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Specialized \fBSoundRecorder\fP which stores the captured audio data into a sound buffer\&. 
+
+\fBsf::SoundBufferRecorder\fP allows to access a recorded sound through a \fBsf::SoundBuffer\fP, so that it can be played, saved to a file, etc\&.
+.PP
+It has the same simple interface as its base class (\fBstart()\fP, \fBstop()\fP) and adds a function to retrieve the recorded sound buffer (\fBgetBuffer()\fP)\&.
+.PP
+As usual, don't forget to call the \fBisAvailable()\fP function before using this class (see \fBsf::SoundRecorder\fP for more details about this)\&.
+.PP
+Usage example: 
+.PP
+.nf
+if (sf::SoundBufferRecorder::isAvailable())
+{
+    // Record some audio data
+    sf::SoundBufferRecorder recorder;
+    recorder\&.start();
+    \&.\&.\&.
+    recorder\&.stop();
+
+    // Get the buffer containing the captured audio data
+    const sf::SoundBuffer& buffer = recorder\&.getBuffer();
+
+    // Save it to a file (for example\&.\&.\&.)
+    buffer\&.saveToFile("my_record\&.ogg");
+}
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::SoundRecorder\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB44\fP of file \fBSoundBufferRecorder\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::SoundBufferRecorder::~SoundBufferRecorder ()"
+
+.PP
+destructor 
+.SH "Member Function Documentation"
+.PP 
+.SS "static std::vector< std::string > sf::SoundRecorder::getAvailableDevices ()\fR [static]\fP, \fR [inherited]\fP"
+
+.PP
+Get a list of the names of all available audio capture devices\&. This function returns a vector of strings, containing the names of all available audio capture devices\&.
+.PP
+\fBReturns\fP
+.RS 4
+A vector of strings containing the names 
+.RE
+.PP
+
+.SS "const \fBSoundBuffer\fP & sf::SoundBufferRecorder::getBuffer () const"
+
+.PP
+Get the sound buffer containing the captured audio data\&. The sound buffer is valid only after the capture has ended\&. This function provides a read-only access to the internal sound buffer, but it can be copied if you need to make any modification to it\&.
+.PP
+\fBReturns\fP
+.RS 4
+Read-only access to the sound buffer 
+.RE
+.PP
+
+.SS "unsigned int sf::SoundRecorder::getChannelCount () const\fR [inherited]\fP"
+
+.PP
+Get the number of channels used by this recorder\&. Currently only mono and stereo are supported, so the value is either 1 (for mono) or 2 (for stereo)\&.
+.PP
+\fBReturns\fP
+.RS 4
+Number of channels
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetChannelCount\fP 
+.RE
+.PP
+
+.SS "static std::string sf::SoundRecorder::getDefaultDevice ()\fR [static]\fP, \fR [inherited]\fP"
+
+.PP
+Get the name of the default audio capture device\&. This function returns the name of the default audio capture device\&. If none is available, an empty string is returned\&.
+.PP
+\fBReturns\fP
+.RS 4
+The name of the default audio capture device 
+.RE
+.PP
+
+.SS "const std::string & sf::SoundRecorder::getDevice () const\fR [inherited]\fP"
+
+.PP
+Get the name of the current audio capture device\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The name of the current audio capture device 
+.RE
+.PP
+
+.SS "unsigned int sf::SoundRecorder::getSampleRate () const\fR [inherited]\fP"
+
+.PP
+Get the sample rate\&. The sample rate defines the number of audio samples captured per second\&. The higher, the better the quality (for example, 44100 samples/sec is CD quality)\&.
+.PP
+\fBReturns\fP
+.RS 4
+Sample rate, in samples per second 
+.RE
+.PP
+
+.SS "static bool sf::SoundRecorder::isAvailable ()\fR [static]\fP, \fR [inherited]\fP"
+
+.PP
+Check if the system supports audio capture\&. This function should always be called before using the audio capture features\&. If it returns false, then any attempt to use \fBsf::SoundRecorder\fP or one of its derived classes will fail\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if audio capture is supported, false otherwise 
+.RE
+.PP
+
+.SS "virtual bool sf::SoundBufferRecorder::onProcessSamples (const Int16 * samples, std::size_t sampleCount)\fR [protected]\fP, \fR [virtual]\fP"
+
+.PP
+Process a new chunk of recorded samples\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsamples\fP Pointer to the new chunk of recorded samples 
+.br
+\fIsampleCount\fP Number of samples pointed by \fIsamples\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True to continue the capture, or false to stop it 
+.RE
+.PP
+
+.PP
+Implements \fBsf::SoundRecorder\fP\&.
+.SS "virtual bool sf::SoundBufferRecorder::onStart ()\fR [protected]\fP, \fR [virtual]\fP"
+
+.PP
+Start capturing audio data\&. 
+.PP
+\fBReturns\fP
+.RS 4
+True to start the capture, or false to abort it 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBsf::SoundRecorder\fP\&.
+.SS "virtual void sf::SoundBufferRecorder::onStop ()\fR [protected]\fP, \fR [virtual]\fP"
+
+.PP
+Stop capturing audio data\&. 
+.PP
+Reimplemented from \fBsf::SoundRecorder\fP\&.
+.SS "void sf::SoundRecorder::setChannelCount (unsigned int channelCount)\fR [inherited]\fP"
+
+.PP
+Set the channel count of the audio capture device\&. This method allows you to specify the number of channels used for recording\&. Currently only 16-bit mono and 16-bit stereo are supported\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIchannelCount\fP Number of channels\&. Currently only mono (1) and stereo (2) are supported\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetChannelCount\fP 
+.RE
+.PP
+
+.SS "bool sf::SoundRecorder::setDevice (const std::string & name)\fR [inherited]\fP"
+
+.PP
+Set the audio capture device\&. This function sets the audio capture device to the device with the given \fIname\fP\&. It can be called on the fly (i\&.e: while recording)\&. If you do so while recording and opening the device fails, it stops the recording\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name of the audio capture device
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True, if it was able to set the requested device
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetAvailableDevices\fP, \fBgetDefaultDevice\fP 
+.RE
+.PP
+
+.SS "void sf::SoundRecorder::setProcessingInterval (\fBTime\fP interval)\fR [protected]\fP, \fR [inherited]\fP"
+
+.PP
+Set the processing interval\&. The processing interval controls the period between calls to the onProcessSamples function\&. You may want to use a small interval if you want to process the recorded data in real time, for example\&.
+.PP
+Note: this is only a hint, the actual period may vary\&. So don't rely on this parameter to implement precise timing\&.
+.PP
+The default processing interval is 100 ms\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIinterval\fP Processing interval 
+.RE
+.PP
+
+.SS "bool sf::SoundRecorder::start (unsigned int sampleRate = \fR44100\fP)\fR [inherited]\fP"
+
+.PP
+Start the capture\&. The \fIsampleRate\fP parameter defines the number of audio samples captured per second\&. The higher, the better the quality (for example, 44100 samples/sec is CD quality)\&. This function uses its own thread so that it doesn't block the rest of the program while the capture runs\&. Please note that only one capture can happen at the same time\&. You can select which capture device will be used, by passing the name to the \fBsetDevice()\fP method\&. If none was selected before, the default capture device will be used\&. You can get a list of the names of all available capture devices by calling \fBgetAvailableDevices()\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsampleRate\fP Desired capture rate, in number of samples per second
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True, if start of capture was successful
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBstop\fP, \fBgetAvailableDevices\fP 
+.RE
+.PP
+
+.SS "void sf::SoundRecorder::stop ()\fR [inherited]\fP"
+
+.PP
+Stop the capture\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBstart\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

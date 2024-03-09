@@ -1,0 +1,167 @@
+.TH "sf::InputStream" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::InputStream \- Abstract class for custom file input streams\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/InputStream\&.hpp>\fP
+.PP
+Inherited by \fBsf::FileInputStream\fP, and \fBsf::MemoryInputStream\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~InputStream\fP ()"
+.br
+.RI "Virtual destructor\&. "
+.ti -1c
+.RI "virtual Int64 \fBread\fP (void *data, Int64 size)=0"
+.br
+.RI "Read data from the stream\&. "
+.ti -1c
+.RI "virtual Int64 \fBseek\fP (Int64 position)=0"
+.br
+.RI "Change the current reading position\&. "
+.ti -1c
+.RI "virtual Int64 \fBtell\fP ()=0"
+.br
+.RI "Get the current reading position in the stream\&. "
+.ti -1c
+.RI "virtual Int64 \fBgetSize\fP ()=0"
+.br
+.RI "Return the size of the stream\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Abstract class for custom file input streams\&. 
+
+This class allows users to define their own file input sources from which SFML can load resources\&.
+.PP
+SFML resource classes like \fBsf::Texture\fP and \fBsf::SoundBuffer\fP provide loadFromFile and loadFromMemory functions, which read data from conventional sources\&. However, if you have data coming from a different source (over a network, embedded, encrypted, compressed, etc) you can derive your own class from \fBsf::InputStream\fP and load SFML resources with their loadFromStream function\&.
+.PP
+Usage example: 
+.PP
+.nf
+// custom stream class that reads from inside a zip file
+class ZipStream : public sf::InputStream
+{
+public:
+
+    ZipStream(std::string archive);
+
+    bool open(std::string filename);
+
+    Int64 read(void* data, Int64 size);
+
+    Int64 seek(Int64 position);
+
+    Int64 tell();
+
+    Int64 getSize();
+
+private:
+
+    \&.\&.\&.
+};
+
+// now you can load textures\&.\&.\&.
+sf::Texture texture;
+ZipStream stream("resources\&.zip");
+stream\&.open("images/img\&.png");
+texture\&.loadFromStream(stream);
+
+// musics\&.\&.\&.
+sf::Music music;
+ZipStream stream("resources\&.zip");
+stream\&.open("musics/msc\&.ogg");
+music\&.openFromStream(stream);
+
+// etc\&.
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB41\fP of file \fBInputStream\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual sf::InputStream::~InputStream ()\fR [inline]\fP, \fR [virtual]\fP"
+
+.PP
+Virtual destructor\&. 
+.PP
+Definition at line \fB49\fP of file \fBInputStream\&.hpp\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual Int64 sf::InputStream::getSize ()\fR [pure virtual]\fP"
+
+.PP
+Return the size of the stream\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The total number of bytes available in the stream, or -1 on error 
+.RE
+.PP
+
+.PP
+Implemented in \fBsf::FileInputStream\fP, and \fBsf::MemoryInputStream\fP\&.
+.SS "virtual Int64 sf::InputStream::read (void * data, Int64 size)\fR [pure virtual]\fP"
+
+.PP
+Read data from the stream\&. After reading, the stream's reading position must be advanced by the amount of bytes read\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Buffer where to copy the read data 
+.br
+\fIsize\fP Desired number of bytes to read
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The number of bytes actually read, or -1 on error 
+.RE
+.PP
+
+.PP
+Implemented in \fBsf::FileInputStream\fP, and \fBsf::MemoryInputStream\fP\&.
+.SS "virtual Int64 sf::InputStream::seek (Int64 position)\fR [pure virtual]\fP"
+
+.PP
+Change the current reading position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP The position to seek to, from the beginning
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The position actually sought to, or -1 on error 
+.RE
+.PP
+
+.PP
+Implemented in \fBsf::FileInputStream\fP, and \fBsf::MemoryInputStream\fP\&.
+.SS "virtual Int64 sf::InputStream::tell ()\fR [pure virtual]\fP"
+
+.PP
+Get the current reading position in the stream\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The current position, or -1 on error\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBsf::FileInputStream\fP, and \fBsf::MemoryInputStream\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

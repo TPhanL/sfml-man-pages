@@ -1,0 +1,126 @@
+.TH "sf::OutputSoundFile" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::OutputSoundFile \- Provide write access to sound files\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Audio/OutputSoundFile\&.hpp>\fP
+.PP
+Inherits \fBsf::NonCopyable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBOutputSoundFile\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~OutputSoundFile\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "bool \fBopenFromFile\fP (const std::string &filename, unsigned int sampleRate, unsigned int channelCount)"
+.br
+.RI "Open the sound file from the disk for writing\&. "
+.ti -1c
+.RI "void \fBwrite\fP (const Int16 *samples, Uint64 count)"
+.br
+.RI "Write audio samples to the file\&. "
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.RI "Close the current file\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provide write access to sound files\&. 
+
+This class encodes audio samples to a sound file\&.
+.PP
+It is used internally by higher-level classes such as \fBsf::SoundBuffer\fP, but can also be useful if you want to create audio files from custom data sources, like generated audio samples\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Create a sound file, ogg/vorbis format, 44100 Hz, stereo
+sf::OutputSoundFile file;
+if (!file\&.openFromFile("music\&.ogg", 44100, 2))
+    /* error */;
+
+while (\&.\&.\&.)
+{
+    // Read or generate audio samples from your custom source
+    std::vector<sf::Int16> samples = \&.\&.\&.;
+
+    // Write them to the file
+    file\&.write(samples\&.data(), samples\&.size());
+}
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::SoundFileWriter\fP, \fBsf::InputSoundFile\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB44\fP of file \fBOutputSoundFile\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::OutputSoundFile::OutputSoundFile ()"
+
+.PP
+Default constructor\&. 
+.SS "sf::OutputSoundFile::~OutputSoundFile ()"
+
+.PP
+Destructor\&. Closes the file if it was still open\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void sf::OutputSoundFile::close ()"
+
+.PP
+Close the current file\&. 
+.SS "bool sf::OutputSoundFile::openFromFile (const std::string & filename, unsigned int sampleRate, unsigned int channelCount)"
+
+.PP
+Open the sound file from the disk for writing\&. The supported audio formats are: WAV, OGG/Vorbis, FLAC\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfilename\fP Path of the sound file to write 
+.br
+\fIsampleRate\fP Sample rate of the sound 
+.br
+\fIchannelCount\fP Number of channels in the sound
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the file was successfully opened 
+.RE
+.PP
+
+.SS "void sf::OutputSoundFile::write (const Int16 * samples, Uint64 count)"
+
+.PP
+Write audio samples to the file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsamples\fP Pointer to the sample array to write 
+.br
+\fIcount\fP Number of samples to write 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

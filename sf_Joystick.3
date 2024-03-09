@@ -1,0 +1,278 @@
+.TH "sf::Joystick" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Joystick \- Give access to the real-time state of the joysticks\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Joystick\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBIdentification\fP"
+.br
+.RI "Structure holding a joystick's identification\&. "
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBCount\fP = 8, \fBButtonCount\fP = 32, \fBAxisCount\fP = 8 }"
+.br
+.RI "Constants related to joysticks capabilities\&. "
+.ti -1c
+.RI "enum \fBAxis\fP { \fBX\fP, \fBY\fP, \fBZ\fP, \fBR\fP, \fBU\fP, \fBV\fP, \fBPovX\fP, \fBPovY\fP }"
+.br
+.RI "Axes supported by SFML joysticks\&. "
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBisConnected\fP (unsigned int joystick)"
+.br
+.RI "Check if a joystick is connected\&. "
+.ti -1c
+.RI "static unsigned int \fBgetButtonCount\fP (unsigned int joystick)"
+.br
+.RI "Return the number of buttons supported by a joystick\&. "
+.ti -1c
+.RI "static bool \fBhasAxis\fP (unsigned int joystick, \fBAxis\fP axis)"
+.br
+.RI "Check if a joystick supports a given axis\&. "
+.ti -1c
+.RI "static bool \fBisButtonPressed\fP (unsigned int joystick, unsigned int button)"
+.br
+.RI "Check if a joystick button is pressed\&. "
+.ti -1c
+.RI "static float \fBgetAxisPosition\fP (unsigned int joystick, \fBAxis\fP axis)"
+.br
+.RI "Get the current position of a joystick axis\&. "
+.ti -1c
+.RI "static \fBIdentification\fP \fBgetIdentification\fP (unsigned int joystick)"
+.br
+.RI "Get the joystick information\&. "
+.ti -1c
+.RI "static void \fBupdate\fP ()"
+.br
+.RI "Update the states of all joysticks\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Give access to the real-time state of the joysticks\&. 
+
+\fBsf::Joystick\fP provides an interface to the state of the joysticks\&.
+.PP
+It only contains static functions, so it's not meant to be instantiated\&. Instead, each joystick is identified by an index that is passed to the functions of this class\&.
+.PP
+This class allows users to query the state of joysticks at any time and directly, without having to deal with a window and its events\&. Compared to the JoystickMoved, JoystickButtonPressed and JoystickButtonReleased events, \fBsf::Joystick\fP can retrieve the state of axes and buttons of joysticks at any time (you don't need to store and update a boolean on your side in order to know if a button is pressed or released), and you always get the real state of joysticks, even if they are moved, pressed or released when your window is out of focus and no event is triggered\&.
+.PP
+SFML supports: 
+.PD 0
+.IP "\(bu" 1
+8 joysticks (\fBsf::Joystick::Count\fP) 
+.IP "\(bu" 1
+32 buttons per joystick (\fBsf::Joystick::ButtonCount\fP) 
+.IP "\(bu" 1
+8 axes per joystick (\fBsf::Joystick::AxisCount\fP)
+.PP
+Unlike the keyboard or mouse, the state of joysticks is sometimes not directly available (depending on the OS), therefore an \fBupdate()\fP function must be called in order to update the current state of joysticks\&. When you have a window with event handling, this is done automatically, you don't need to call anything\&. But if you have no window, or if you want to check joysticks state before creating one, you must call \fBsf::Joystick::update\fP explicitly\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Is joystick #0 connected?
+bool connected = sf::Joystick::isConnected(0);
+
+// How many buttons does joystick #0 support?
+unsigned int buttons = sf::Joystick::getButtonCount(0);
+
+// Does joystick #0 define a X axis?
+bool hasX = sf::Joystick::hasAxis(0, sf::Joystick::X);
+
+// Is button #2 pressed on joystick #0?
+bool pressed = sf::Joystick::isButtonPressed(0, 2);
+
+// What's the current position of the Y axis on joystick #0?
+float position = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Keyboard\fP, \fBsf::Mouse\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB41\fP of file \fBJoystick\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+Constants related to joysticks capabilities\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICount \fP\fP
+Maximum number of supported joysticks\&. 
+.TP
+\fB\fIButtonCount \fP\fP
+Maximum number of supported buttons\&. 
+.TP
+\fB\fIAxisCount \fP\fP
+Maximum number of supported axes\&. 
+.PP
+Definition at line \fB49\fP of file \fBJoystick\&.hpp\fP\&.
+.SS "enum \fBsf::Joystick::Axis\fP"
+
+.PP
+Axes supported by SFML joysticks\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIX \fP\fP
+The X axis\&. 
+.TP
+\fB\fIY \fP\fP
+The Y axis\&. 
+.TP
+\fB\fIZ \fP\fP
+The Z axis\&. 
+.TP
+\fB\fIR \fP\fP
+The R axis\&. 
+.TP
+\fB\fIU \fP\fP
+The U axis\&. 
+.TP
+\fB\fIV \fP\fP
+The V axis\&. 
+.TP
+\fB\fIPovX \fP\fP
+The X axis of the point-of-view hat\&. 
+.TP
+\fB\fIPovY \fP\fP
+The Y axis of the point-of-view hat\&. 
+.PP
+Definition at line \fB60\fP of file \fBJoystick\&.hpp\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static float sf::Joystick::getAxisPosition (unsigned int joystick, \fBAxis\fP axis)\fR [static]\fP"
+
+.PP
+Get the current position of a joystick axis\&. If the joystick is not connected, this function returns 0\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjoystick\fP Index of the joystick 
+.br
+\fIaxis\fP Axis to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Current position of the axis, in range [-100 \&.\&. 100] 
+.RE
+.PP
+
+.SS "static unsigned int sf::Joystick::getButtonCount (unsigned int joystick)\fR [static]\fP"
+
+.PP
+Return the number of buttons supported by a joystick\&. If the joystick is not connected, this function returns 0\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjoystick\fP Index of the joystick
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Number of buttons supported by the joystick 
+.RE
+.PP
+
+.SS "static \fBIdentification\fP sf::Joystick::getIdentification (unsigned int joystick)\fR [static]\fP"
+
+.PP
+Get the joystick information\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIjoystick\fP Index of the joystick
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Structure containing joystick information\&. 
+.RE
+.PP
+
+.SS "static bool sf::Joystick::hasAxis (unsigned int joystick, \fBAxis\fP axis)\fR [static]\fP"
+
+.PP
+Check if a joystick supports a given axis\&. If the joystick is not connected, this function returns false\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjoystick\fP Index of the joystick 
+.br
+\fIaxis\fP Axis to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the joystick supports the axis, false otherwise 
+.RE
+.PP
+
+.SS "static bool sf::Joystick::isButtonPressed (unsigned int joystick, unsigned int button)\fR [static]\fP"
+
+.PP
+Check if a joystick button is pressed\&. If the joystick is not connected, this function returns false\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjoystick\fP Index of the joystick 
+.br
+\fIbutton\fP Button to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the button is pressed, false otherwise 
+.RE
+.PP
+
+.SS "static bool sf::Joystick::isConnected (unsigned int joystick)\fR [static]\fP"
+
+.PP
+Check if a joystick is connected\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIjoystick\fP Index of the joystick to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the joystick is connected, false otherwise 
+.RE
+.PP
+
+.SS "static void sf::Joystick::update ()\fR [static]\fP"
+
+.PP
+Update the states of all joysticks\&. This function is used internally by SFML, so you normally don't have to call it explicitly\&. However, you may need to call it if you have no window yet (or no window at all): in this case the joystick states are not updated automatically\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

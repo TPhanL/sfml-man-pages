@@ -1,0 +1,455 @@
+.TH "sf::Font" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Font \- Class for loading and manipulating character fonts\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/Font\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBInfo\fP"
+.br
+.RI "Holds various information about a font\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFont\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBFont\fP (const \fBFont\fP &copy)"
+.br
+.RI "Copy constructor\&. "
+.ti -1c
+.RI "\fB~Font\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "bool \fBloadFromFile\fP (const std::string &filename)"
+.br
+.RI "Load the font from a file\&. "
+.ti -1c
+.RI "bool \fBloadFromMemory\fP (const void *data, std::size_t sizeInBytes)"
+.br
+.RI "Load the font from a file in memory\&. "
+.ti -1c
+.RI "bool \fBloadFromStream\fP (\fBInputStream\fP &stream)"
+.br
+.RI "Load the font from a custom stream\&. "
+.ti -1c
+.RI "const \fBInfo\fP & \fBgetInfo\fP () const"
+.br
+.RI "Get the font information\&. "
+.ti -1c
+.RI "const \fBGlyph\fP & \fBgetGlyph\fP (Uint32 codePoint, unsigned int characterSize, bool bold, float outlineThickness=0) const"
+.br
+.RI "Retrieve a glyph of the font\&. "
+.ti -1c
+.RI "bool \fBhasGlyph\fP (Uint32 codePoint) const"
+.br
+.RI "Determine if this font has a glyph representing the requested code point\&. "
+.ti -1c
+.RI "float \fBgetKerning\fP (Uint32 first, Uint32 second, unsigned int characterSize, bool bold=false) const"
+.br
+.RI "Get the kerning offset of two glyphs\&. "
+.ti -1c
+.RI "float \fBgetLineSpacing\fP (unsigned int characterSize) const"
+.br
+.RI "Get the line spacing\&. "
+.ti -1c
+.RI "float \fBgetUnderlinePosition\fP (unsigned int characterSize) const"
+.br
+.RI "Get the position of the underline\&. "
+.ti -1c
+.RI "float \fBgetUnderlineThickness\fP (unsigned int characterSize) const"
+.br
+.RI "Get the thickness of the underline\&. "
+.ti -1c
+.RI "const \fBTexture\fP & \fBgetTexture\fP (unsigned int characterSize) const"
+.br
+.RI "Retrieve the texture containing the loaded glyphs of a certain size\&. "
+.ti -1c
+.RI "void \fBsetSmooth\fP (bool smooth)"
+.br
+.RI "Enable or disable the smooth filter\&. "
+.ti -1c
+.RI "bool \fBisSmooth\fP () const"
+.br
+.RI "Tell whether the smooth filter is enabled or not\&. "
+.ti -1c
+.RI "\fBFont\fP & \fBoperator=\fP (const \fBFont\fP &right)"
+.br
+.RI "Overload of assignment operator\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class for loading and manipulating character fonts\&. 
+
+Fonts can be loaded from a file, from memory or from a custom stream, and supports the most common types of fonts\&.
+.PP
+See the loadFromFile function for the complete list of supported formats\&.
+.PP
+Once it is loaded, a \fBsf::Font\fP instance provides three types of information about the font: 
+.PD 0
+.IP "\(bu" 1
+Global metrics, such as the line spacing 
+.IP "\(bu" 1
+Per-glyph metrics, such as bounding box or kerning 
+.IP "\(bu" 1
+Pixel representation of glyphs
+.PP
+Fonts alone are not very useful: they hold the font data but cannot make anything useful of it\&. To do so you need to use the \fBsf::Text\fP class, which is able to properly output text with several options such as character size, style, color, position, rotation, etc\&. This separation allows more flexibility and better performances: indeed a \fBsf::Font\fP is a heavy resource, and any operation on it is slow (often too slow for real-time applications)\&. On the other side, a \fBsf::Text\fP is a lightweight object which can combine the glyphs data and metrics of a \fBsf::Font\fP to display any text on a render target\&. Note that it is also possible to bind several \fBsf::Text\fP instances to the same \fBsf::Font\fP\&.
+.PP
+It is important to note that the \fBsf::Text\fP instance doesn't copy the font that it uses, it only keeps a reference to it\&. Thus, a \fBsf::Font\fP must not be destructed while it is used by a \fBsf::Text\fP (i\&.e\&. never write a function that uses a local \fBsf::Font\fP instance for creating a text)\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Declare a new font
+sf::Font font;
+
+// Load it from a file
+if (!font\&.loadFromFile("arial\&.ttf"))
+{
+    // error\&.\&.\&.
+}
+
+// Create a text which uses our font
+sf::Text text1;
+text1\&.setFont(font);
+text1\&.setCharacterSize(30);
+text1\&.setStyle(sf::Text::Regular);
+
+// Create another text using the same font, but with different parameters
+sf::Text text2;
+text2\&.setFont(font);
+text2\&.setCharacterSize(50);
+text2\&.setStyle(sf::Text::Italic);
+
+.fi
+.PP
+.PP
+Apart from loading font files, and passing them to instances of \fBsf::Text\fP, you should normally not have to deal directly with this class\&. However, it may be useful to access the font metrics or rasterized glyphs for advanced usage\&.
+.PP
+Note that if the font is a bitmap font, it is not scalable, thus not all requested sizes will be available to use\&. This needs to be taken into consideration when using \fBsf::Text\fP\&. If you need to display text of a certain size, make sure the corresponding bitmap font that supports that size is used\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Text\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB48\fP of file \fBFont\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Font::Font ()"
+
+.PP
+Default constructor\&. This constructor defines an empty font 
+.SS "sf::Font::Font (const \fBFont\fP & copy)"
+
+.PP
+Copy constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcopy\fP Instance to copy 
+.RE
+.PP
+
+.SS "sf::Font::~Font ()"
+
+.PP
+Destructor\&. Cleans up all the internal resources used by the font 
+.SH "Member Function Documentation"
+.PP 
+.SS "const \fBGlyph\fP & sf::Font::getGlyph (Uint32 codePoint, unsigned int characterSize, bool bold, float outlineThickness = \fR0\fP) const"
+
+.PP
+Retrieve a glyph of the font\&. If the font is a bitmap font, not all character sizes might be available\&. If the glyph is not available at the requested size, an empty glyph is returned\&.
+.PP
+You may want to use \fBhasGlyph\fP to determine if the glyph exists before requesting it\&. If the glyph does not exist, a font specific default is returned\&.
+.PP
+Be aware that using a negative value for the outline thickness will cause distorted rendering\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcodePoint\fP Unicode code point of the character to get 
+.br
+\fIcharacterSize\fP Reference character size 
+.br
+\fIbold\fP Retrieve the bold version or the regular one? 
+.br
+\fIoutlineThickness\fP Thickness of outline (when != 0 the glyph will not be filled)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The glyph corresponding to \fIcodePoint\fP and \fIcharacterSize\fP 
+.RE
+.PP
+
+.SS "const \fBInfo\fP & sf::Font::getInfo () const"
+
+.PP
+Get the font information\&. 
+.PP
+\fBReturns\fP
+.RS 4
+A structure that holds the font information 
+.RE
+.PP
+
+.SS "float sf::Font::getKerning (Uint32 first, Uint32 second, unsigned int characterSize, bool bold = \fRfalse\fP) const"
+
+.PP
+Get the kerning offset of two glyphs\&. The kerning is an extra offset (negative) to apply between two glyphs when rendering them, to make the pair look more 'natural'\&. For example, the pair 'AV' have a special kerning to make them closer than other characters\&. Most of the glyphs pairs have a kerning offset of zero, though\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfirst\fP Unicode code point of the first character 
+.br
+\fIsecond\fP Unicode code point of the second character 
+.br
+\fIcharacterSize\fP Reference character size
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Kerning value for \fIfirst\fP and \fIsecond\fP, in pixels 
+.RE
+.PP
+
+.SS "float sf::Font::getLineSpacing (unsigned int characterSize) const"
+
+.PP
+Get the line spacing\&. Line spacing is the vertical offset to apply between two consecutive lines of text\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcharacterSize\fP Reference character size
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Line spacing, in pixels 
+.RE
+.PP
+
+.SS "const \fBTexture\fP & sf::Font::getTexture (unsigned int characterSize) const"
+
+.PP
+Retrieve the texture containing the loaded glyphs of a certain size\&. The contents of the returned texture changes as more glyphs are requested, thus it is not very relevant\&. It is mainly used internally by \fBsf::Text\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcharacterSize\fP Reference character size
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBTexture\fP containing the glyphs of the requested size 
+.RE
+.PP
+
+.SS "float sf::Font::getUnderlinePosition (unsigned int characterSize) const"
+
+.PP
+Get the position of the underline\&. Underline position is the vertical offset to apply between the baseline and the underline\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcharacterSize\fP Reference character size
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Underline position, in pixels
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetUnderlineThickness\fP 
+.RE
+.PP
+
+.SS "float sf::Font::getUnderlineThickness (unsigned int characterSize) const"
+
+.PP
+Get the thickness of the underline\&. Underline thickness is the vertical size of the underline\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcharacterSize\fP Reference character size
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Underline thickness, in pixels
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetUnderlinePosition\fP 
+.RE
+.PP
+
+.SS "bool sf::Font::hasGlyph (Uint32 codePoint) const"
+
+.PP
+Determine if this font has a glyph representing the requested code point\&. Most fonts only include a very limited selection of glyphs from specific Unicode subsets, like Latin, Cyrillic, or Asian characters\&.
+.PP
+While code points without representation will return a font specific default character, it might be useful to verify whether specific code points are included to determine whether a font is suited to display text in a specific language\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcodePoint\fP Unicode code point to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the codepoint has a glyph representation, false otherwise 
+.RE
+.PP
+
+.SS "bool sf::Font::isSmooth () const"
+
+.PP
+Tell whether the smooth filter is enabled or not\&. 
+.PP
+\fBReturns\fP
+.RS 4
+True if smoothing is enabled, false if it is disabled
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetSmooth\fP 
+.RE
+.PP
+
+.SS "bool sf::Font::loadFromFile (const std::string & filename)"
+
+.PP
+Load the font from a file\&. The supported font formats are: TrueType, Type 1, CFF, OpenType, SFNT, X11 PCF, Windows FNT, BDF, PFR and Type 42\&. Note that this function knows nothing about the standard fonts installed on the user's system, thus you can't load them directly\&.
+.PP
+\fBWarning\fP
+.RS 4
+SFML cannot preload all the font data in this function, so the file has to remain accessible until the \fBsf::Font\fP object loads a new font or is destroyed\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIfilename\fP Path of the font file to load
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if loading succeeded, false if it failed
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBloadFromMemory\fP, \fBloadFromStream\fP 
+.RE
+.PP
+
+.SS "bool sf::Font::loadFromMemory (const void * data, std::size_t sizeInBytes)"
+
+.PP
+Load the font from a file in memory\&. The supported font formats are: TrueType, Type 1, CFF, OpenType, SFNT, X11 PCF, Windows FNT, BDF, PFR and Type 42\&.
+.PP
+\fBWarning\fP
+.RS 4
+SFML cannot preload all the font data in this function, so the buffer pointed by \fIdata\fP has to remain valid until the \fBsf::Font\fP object loads a new font or is destroyed\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Pointer to the file data in memory 
+.br
+\fIsizeInBytes\fP Size of the data to load, in bytes
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if loading succeeded, false if it failed
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBloadFromFile\fP, \fBloadFromStream\fP 
+.RE
+.PP
+
+.SS "bool sf::Font::loadFromStream (\fBInputStream\fP & stream)"
+
+.PP
+Load the font from a custom stream\&. The supported font formats are: TrueType, Type 1, CFF, OpenType, SFNT, X11 PCF, Windows FNT, BDF, PFR and Type 42\&. Warning: SFML cannot preload all the font data in this function, so the contents of \fIstream\fP have to remain valid as long as the font is used\&.
+.PP
+\fBWarning\fP
+.RS 4
+SFML cannot preload all the font data in this function, so the stream has to remain accessible until the \fBsf::Font\fP object loads a new font or is destroyed\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIstream\fP Source stream to read from
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if loading succeeded, false if it failed
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBloadFromFile\fP, \fBloadFromMemory\fP 
+.RE
+.PP
+
+.SS "\fBFont\fP & sf::Font::operator= (const \fBFont\fP & right)"
+
+.PP
+Overload of assignment operator\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIright\fP Instance to assign
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Reference to self 
+.RE
+.PP
+
+.SS "void sf::Font::setSmooth (bool smooth)"
+
+.PP
+Enable or disable the smooth filter\&. When the filter is activated, the font appears smoother so that pixels are less noticeable\&. However if you want the font to look exactly the same as its source file, you should disable it\&. The smooth filter is enabled by default\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsmooth\fP True to enable smoothing, false to disable it
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBisSmooth\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

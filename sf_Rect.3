@@ -1,0 +1,380 @@
+.TH "sf::Rect< T >" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Rect< T > \- Utility class for manipulating 2D axis aligned rectangles\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/Rect\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRect\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBRect\fP (T rectLeft, T rectTop, T rectWidth, T rectHeight)"
+.br
+.RI "Construct the rectangle from its coordinates\&. "
+.ti -1c
+.RI "\fBRect\fP (const \fBVector2\fP< T > &position, const \fBVector2\fP< T > &size)"
+.br
+.RI "Construct the rectangle from position and size\&. "
+.ti -1c
+.RI "template<typename U > \fBRect\fP (const \fBRect\fP< U > &rectangle)"
+.br
+.RI "Construct the rectangle from another type of rectangle\&. "
+.ti -1c
+.RI "bool \fBcontains\fP (T x, T y) const"
+.br
+.RI "Check if a point is inside the rectangle's area\&. "
+.ti -1c
+.RI "bool \fBcontains\fP (const \fBVector2\fP< T > &point) const"
+.br
+.RI "Check if a point is inside the rectangle's area\&. "
+.ti -1c
+.RI "bool \fBintersects\fP (const \fBRect\fP< T > &rectangle) const"
+.br
+.RI "Check the intersection between two rectangles\&. "
+.ti -1c
+.RI "bool \fBintersects\fP (const \fBRect\fP< T > &rectangle, \fBRect\fP< T > &intersection) const"
+.br
+.RI "Check the intersection between two rectangles\&. "
+.ti -1c
+.RI "\fBsf::Vector2\fP< T > \fBgetPosition\fP () const"
+.br
+.RI "Get the position of the rectangle's top-left corner\&. "
+.ti -1c
+.RI "\fBsf::Vector2\fP< T > \fBgetSize\fP () const"
+.br
+.RI "Get the size of the rectangle\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "T \fBleft\fP"
+.br
+.RI "Left coordinate of the rectangle\&. "
+.ti -1c
+.RI "T \fBtop\fP"
+.br
+.RI "Top coordinate of the rectangle\&. "
+.ti -1c
+.RI "T \fBwidth\fP"
+.br
+.RI "Width of the rectangle\&. "
+.ti -1c
+.RI "T \fBheight\fP"
+.br
+.RI "Height of the rectangle\&. "
+.in -1c
+.SS "Related Symbols"
+(Note that these are not member symbols\&.) 
+.in +1c
+.ti -1c
+.RI "template<typename T > bool \fBoperator==\fP (const \fBRect\fP< T > &\fBleft\fP, const \fBRect\fP< T > &right)"
+.br
+.RI "Overload of binary operator ==\&. "
+.ti -1c
+.RI "template<typename T > bool \fBoperator!=\fP (const \fBRect\fP< T > &\fBleft\fP, const \fBRect\fP< T > &right)"
+.br
+.RI "Overload of binary operator !=\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class sf::Rect< T >"Utility class for manipulating 2D axis aligned rectangles\&. 
+
+A rectangle is defined by its top-left corner and its size\&.
+.PP
+It is a very simple class defined for convenience, so its member variables (left, top, width and height) are public and can be accessed directly, just like the vector classes (\fBVector2\fP and \fBVector3\fP)\&.
+.PP
+To keep things simple, \fBsf::Rect\fP doesn't define functions to emulate the properties that are not directly members (such as right, bottom, center, etc\&.), it rather only provides intersection functions\&.
+.PP
+\fBsf::Rect\fP uses the usual rules for its boundaries: 
+.PD 0
+.IP "\(bu" 1
+The left and top edges are included in the rectangle's area 
+.IP "\(bu" 1
+The right (left + width) and bottom (top + height) edges are excluded from the rectangle's area
+.PP
+This means that sf::IntRect(0, 0, 1, 1) and sf::IntRect(1, 1, 1, 1) don't intersect\&.
+.PP
+\fBsf::Rect\fP is a template and may be used with any numeric type, but for simplicity the instantiations used by SFML are typedef'd: 
+.PD 0
+.IP "\(bu" 1
+sf::Rect<int> is sf::IntRect 
+.IP "\(bu" 1
+sf::Rect<float> is sf::FloatRect
+.PP
+So that you don't have to care about the template syntax\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Define a rectangle, located at (0, 0) with a size of 20x5
+sf::IntRect r1(0, 0, 20, 5);
+
+// Define another rectangle, located at (4, 2) with a size of 18x10
+sf::Vector2i position(4, 2);
+sf::Vector2i size(18, 10);
+sf::IntRect r2(position, size);
+
+// Test intersections with the point (3, 1)
+bool b1 = r1\&.contains(3, 1); // true
+bool b2 = r2\&.contains(3, 1); // false
+
+// Test the intersection between r1 and r2
+sf::IntRect result;
+bool b3 = r1\&.intersects(r2, result); // true
+// result == (4, 2, 16, 3)
+
+.fi
+.PP
+ 
+.PP
+Definition at line \fB42\fP of file \fBRect\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBsf::Rect\fP< T >::Rect ()"
+
+.PP
+Default constructor\&. Creates an empty rectangle (it is equivalent to calling Rect(0, 0, 0, 0))\&. 
+.SS "template<typename T > \fBsf::Rect\fP< T >::Rect (T rectLeft, T rectTop, T rectWidth, T rectHeight)"
+
+.PP
+Construct the rectangle from its coordinates\&. Be careful, the last two parameters are the width and height, not the right and bottom coordinates!
+.PP
+\fBParameters\fP
+.RS 4
+\fIrectLeft\fP Left coordinate of the rectangle 
+.br
+\fIrectTop\fP Top coordinate of the rectangle 
+.br
+\fIrectWidth\fP Width of the rectangle 
+.br
+\fIrectHeight\fP Height of the rectangle 
+.RE
+.PP
+
+.SS "template<typename T > \fBsf::Rect\fP< T >::Rect (const \fBVector2\fP< T > & position, const \fBVector2\fP< T > & size)"
+
+.PP
+Construct the rectangle from position and size\&. Be careful, the last parameter is the size, not the bottom-right corner!
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP Position of the top-left corner of the rectangle 
+.br
+\fIsize\fP Size of the rectangle 
+.RE
+.PP
+
+.SS "template<typename T > template<typename U > \fBsf::Rect\fP< T >::Rect (const \fBRect\fP< U > & rectangle)\fR [explicit]\fP"
+
+.PP
+Construct the rectangle from another type of rectangle\&. This constructor doesn't replace the copy constructor, it's called only when U != T\&. A call to this constructor will fail to compile if U is not convertible to T\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIrectangle\fP Rectangle to convert 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > bool \fBsf::Rect\fP< T >::contains (const \fBVector2\fP< T > & point) const"
+
+.PP
+Check if a point is inside the rectangle's area\&. This check is non-inclusive\&. If the point lies on the edge of the rectangle, this function will return false\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpoint\fP Point to test
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the point is inside, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBintersects\fP 
+.RE
+.PP
+
+.SS "template<typename T > bool \fBsf::Rect\fP< T >::contains (T x, T y) const"
+
+.PP
+Check if a point is inside the rectangle's area\&. This check is non-inclusive\&. If the point lies on the edge of the rectangle, this function will return false\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP X coordinate of the point to test 
+.br
+\fIy\fP Y coordinate of the point to test
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the point is inside, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBintersects\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBsf::Vector2\fP< T > \fBsf::Rect\fP< T >::getPosition () const"
+
+.PP
+Get the position of the rectangle's top-left corner\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Position of rectangle
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetSize\fP 
+.RE
+.PP
+
+.SS "template<typename T > \fBsf::Vector2\fP< T > \fBsf::Rect\fP< T >::getSize () const"
+
+.PP
+Get the size of the rectangle\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Size of rectangle
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetPosition\fP 
+.RE
+.PP
+
+.SS "template<typename T > bool \fBsf::Rect\fP< T >::intersects (const \fBRect\fP< T > & rectangle) const"
+
+.PP
+Check the intersection between two rectangles\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrectangle\fP Rectangle to test
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if rectangles overlap, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcontains\fP 
+.RE
+.PP
+
+.SS "template<typename T > bool \fBsf::Rect\fP< T >::intersects (const \fBRect\fP< T > & rectangle, \fBRect\fP< T > & intersection) const"
+
+.PP
+Check the intersection between two rectangles\&. This overload returns the overlapped rectangle in the \fIintersection\fP parameter\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIrectangle\fP Rectangle to test 
+.br
+\fIintersection\fP Rectangle to be filled with the intersection
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if rectangles overlap, false otherwise
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcontains\fP 
+.RE
+.PP
+
+.SH "Friends And Related Symbol Documentation"
+.PP 
+.SS "template<typename T > bool operator!= (const \fBRect\fP< T > & left, const \fBRect\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator !=\&. This operator compares strict difference between two rectangles\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a rectangle) 
+.br
+\fIright\fP Right operand (a rectangle)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is not equal to \fIright\fP 
+.RE
+.PP
+
+.SS "template<typename T > bool operator== (const \fBRect\fP< T > & left, const \fBRect\fP< T > & right)\fR [related]\fP"
+
+.PP
+Overload of binary operator ==\&. This operator compares strict equality between two rectangles\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIleft\fP Left operand (a rectangle) 
+.br
+\fIright\fP Right operand (a rectangle)
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if \fIleft\fP is equal to \fIright\fP 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename T > T \fBsf::Rect\fP< T >::height"
+
+.PP
+Height of the rectangle\&. 
+.PP
+Definition at line \fB180\fP of file \fBRect\&.hpp\fP\&.
+.SS "template<typename T > T \fBsf::Rect\fP< T >::left"
+
+.PP
+Left coordinate of the rectangle\&. 
+.PP
+Definition at line \fB177\fP of file \fBRect\&.hpp\fP\&.
+.SS "template<typename T > T \fBsf::Rect\fP< T >::top"
+
+.PP
+Top coordinate of the rectangle\&. 
+.PP
+Definition at line \fB178\fP of file \fBRect\&.hpp\fP\&.
+.SS "template<typename T > T \fBsf::Rect\fP< T >::width"
+
+.PP
+Width of the rectangle\&. 
+.PP
+Definition at line \fB179\fP of file \fBRect\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

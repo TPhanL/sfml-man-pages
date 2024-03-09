@@ -1,0 +1,117 @@
+.TH "window" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+window \- Window module
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBsf::Clipboard\fP"
+.br
+.RI "Give access to the system clipboard\&. "
+.ti -1c
+.RI "class \fBsf::Context\fP"
+.br
+.RI "Class holding a valid drawing context\&. "
+.ti -1c
+.RI "class \fBsf::ContextSettings\fP"
+.br
+.RI "Structure defining the settings of the OpenGL context attached to a window\&. "
+.ti -1c
+.RI "class \fBsf::Cursor\fP"
+.br
+.RI "\fBCursor\fP defines the appearance of a system cursor\&. "
+.ti -1c
+.RI "class \fBsf::Event\fP"
+.br
+.RI "Defines a system event and its parameters\&. "
+.ti -1c
+.RI "class \fBsf::GlResource\fP"
+.br
+.RI "Base class for classes that require an OpenGL context\&. "
+.ti -1c
+.RI "class \fBsf::Joystick\fP"
+.br
+.RI "Give access to the real-time state of the joysticks\&. "
+.ti -1c
+.RI "class \fBsf::Keyboard\fP"
+.br
+.RI "Give access to the real-time state of the keyboard\&. "
+.ti -1c
+.RI "class \fBsf::Mouse\fP"
+.br
+.RI "Give access to the real-time state of the mouse\&. "
+.ti -1c
+.RI "class \fBsf::Sensor\fP"
+.br
+.RI "Give access to the real-time state of the sensors\&. "
+.ti -1c
+.RI "class \fBsf::Touch\fP"
+.br
+.RI "Give access to the real-time state of the touches\&. "
+.ti -1c
+.RI "class \fBsf::VideoMode\fP"
+.br
+.RI "\fBVideoMode\fP defines a video mode (width, height, bpp) "
+.ti -1c
+.RI "class \fBsf::Vulkan\fP"
+.br
+.RI "\fBVulkan\fP helper functions\&. "
+.ti -1c
+.RI "class \fBsf::Window\fP"
+.br
+.RI "\fBWindow\fP that serves as a target for OpenGL rendering\&. "
+.ti -1c
+.RI "class \fBsf::WindowBase\fP"
+.br
+.RI "\fBWindow\fP that serves as a base for other windows\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBsf::Style::None\fP = 0, \fBsf::Style::Titlebar\fP = 1 << 0, \fBsf::Style::Resize\fP = 1 << 1, \fBsf::Style::Close\fP = 1 << 2, \fBsf::Style::Fullscreen\fP = 1 << 3, \fBsf::Style::Default\fP = Titlebar | Resize | Close }"
+.br
+.RI "Enumeration of the window styles\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+
+Provides OpenGL-based windows, and abstractions for events and input handling\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+Enumeration of the window styles\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fINone \fP\fP
+No border / title bar (this flag and all others are mutually exclusive) 
+.TP
+\fB\fITitlebar \fP\fP
+Title bar + fixed border\&. 
+.TP
+\fB\fIResize \fP\fP
+Title bar + resizable border + maximize button\&. 
+.TP
+\fB\fIClose \fP\fP
+Title bar + close button\&. 
+.TP
+\fB\fIFullscreen \fP\fP
+Fullscreen mode (this flag and all others are mutually exclusive) 
+.TP
+\fB\fIDefault \fP\fP
+Default window style\&. 
+.PP
+Definition at line \fB38\fP of file \fBWindowStyle\&.hpp\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

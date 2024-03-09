@@ -1,0 +1,611 @@
+.TH "sf::Keyboard" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Keyboard \- Give access to the real-time state of the keyboard\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Keyboard\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBScan\fP"
+.br
+.RI "Scancodes\&. "
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBKey\fP { \fBUnknown\fP = -1, \fBA\fP = 0, \fBB\fP, \fBC\fP, \fBD\fP, \fBE\fP, \fBF\fP, \fBG\fP, \fBH\fP, \fBI\fP, \fBJ\fP, \fBK\fP, \fBL\fP, \fBM\fP, \fBN\fP, \fBO\fP, \fBP\fP, \fBQ\fP, \fBR\fP, \fBS\fP, \fBT\fP, \fBU\fP, \fBV\fP, \fBW\fP, \fBX\fP, \fBY\fP, \fBZ\fP, \fBNum0\fP, \fBNum1\fP, \fBNum2\fP, \fBNum3\fP, \fBNum4\fP, \fBNum5\fP, \fBNum6\fP, \fBNum7\fP, \fBNum8\fP, \fBNum9\fP, \fBEscape\fP, \fBLControl\fP, \fBLShift\fP, \fBLAlt\fP, \fBLSystem\fP, \fBRControl\fP, \fBRShift\fP, \fBRAlt\fP, \fBRSystem\fP, \fBMenu\fP, \fBLBracket\fP, \fBRBracket\fP, \fBSemicolon\fP, \fBComma\fP, \fBPeriod\fP, \fBApostrophe\fP, \fBSlash\fP, \fBBackslash\fP, \fBGrave\fP, \fBEqual\fP, \fBHyphen\fP, \fBSpace\fP, \fBEnter\fP, \fBBackspace\fP, \fBTab\fP, \fBPageUp\fP, \fBPageDown\fP, \fBEnd\fP, \fBHome\fP, \fBInsert\fP, \fBDelete\fP, \fBAdd\fP, \fBSubtract\fP, \fBMultiply\fP, \fBDivide\fP, \fBLeft\fP, \fBRight\fP, \fBUp\fP, \fBDown\fP, \fBNumpad0\fP, \fBNumpad1\fP, \fBNumpad2\fP, \fBNumpad3\fP, \fBNumpad4\fP, \fBNumpad5\fP, \fBNumpad6\fP, \fBNumpad7\fP, \fBNumpad8\fP, \fBNumpad9\fP, \fBF1\fP, \fBF2\fP, \fBF3\fP, \fBF4\fP, \fBF5\fP, \fBF6\fP, \fBF7\fP, \fBF8\fP, \fBF9\fP, \fBF10\fP, \fBF11\fP, \fBF12\fP, \fBF13\fP, \fBF14\fP, \fBF15\fP, \fBPause\fP, \fBKeyCount\fP, \fBTilde\fP = Grave, \fBDash\fP = Hyphen, \fBBackSpace\fP = Backspace, \fBBackSlash\fP = Backslash, \fBSemiColon\fP = Semicolon, \fBReturn\fP = Enter, \fBQuote\fP = Apostrophe }"
+.br
+.RI "Key codes\&. "
+.ti -1c
+.RI "typedef \fBScan::Scancode\fP \fBScancode\fP"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBisKeyPressed\fP (\fBKey\fP key)"
+.br
+.RI "Check if a key is pressed\&. "
+.ti -1c
+.RI "static bool \fBisKeyPressed\fP (\fBScancode\fP code)"
+.br
+.RI "Check if a key is pressed\&. "
+.ti -1c
+.RI "static \fBKey\fP \fBlocalize\fP (\fBScancode\fP code)"
+.br
+.RI "Localize a physical key to a logical one\&. "
+.ti -1c
+.RI "static \fBScancode\fP \fBdelocalize\fP (\fBKey\fP key)"
+.br
+.RI "Identify the physical key corresponding to a logical one\&. "
+.ti -1c
+.RI "static \fBString\fP \fBgetDescription\fP (\fBScancode\fP code)"
+.br
+.RI "Provide a string representation for a given scancode\&. "
+.ti -1c
+.RI "static void \fBsetVirtualKeyboardVisible\fP (bool visible)"
+.br
+.RI "Show or hide the virtual keyboard\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Give access to the real-time state of the keyboard\&. 
+
+\fBsf::Keyboard\fP provides an interface to the state of the keyboard\&.
+.PP
+It only contains static functions (a single keyboard is assumed), so it's not meant to be instantiated\&.
+.PP
+This class allows users to query the keyboard state at any time and directly, without having to deal with a window and its events\&. Compared to the KeyPressed and KeyReleased events, \fBsf::Keyboard\fP can retrieve the state of a key at any time (you don't need to store and update a boolean on your side in order to know if a key is pressed or released), and you always get the real state of the keyboard, even if keys are pressed or released when your window is out of focus and no event is triggered\&.
+.PP
+Usage example: 
+.PP
+.nf
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+{
+    // move left\&.\&.\&.
+}
+else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+{
+    // move right\&.\&.\&.
+}
+else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+{
+    // quit\&.\&.\&.
+}
+else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Grave))
+{
+    // open in\-game command line (if it's not already open)
+}
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Joystick\fP, \fBsf::Mouse\fP, \fBsf::Touch\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB42\fP of file \fBKeyboard\&.hpp\fP\&.
+.SH "Member Typedef Documentation"
+.PP 
+.SS "typedef \fBScan::Scancode\fP \fBsf::Keyboard::Scancode\fP"
+
+.PP
+Definition at line \fB356\fP of file \fBKeyboard\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBsf::Keyboard::Key\fP"
+
+.PP
+Key codes\&. The enumerators refer to the 'localized' key; i\&.e\&. depending on the layout set by the operating system, a key can be mapped to \fRY\fP or \fRZ\fP\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUnknown \fP\fP
+Unhandled key\&. 
+.TP
+\fB\fIA \fP\fP
+The A key\&. 
+.TP
+\fB\fIB \fP\fP
+The B key\&. 
+.TP
+\fB\fIC \fP\fP
+The C key\&. 
+.TP
+\fB\fID \fP\fP
+The D key\&. 
+.TP
+\fB\fIE \fP\fP
+The E key\&. 
+.TP
+\fB\fIF \fP\fP
+The F key\&. 
+.TP
+\fB\fIG \fP\fP
+The G key\&. 
+.TP
+\fB\fIH \fP\fP
+The H key\&. 
+.TP
+\fB\fII \fP\fP
+The I key\&. 
+.TP
+\fB\fIJ \fP\fP
+The J key\&. 
+.TP
+\fB\fIK \fP\fP
+The K key\&. 
+.TP
+\fB\fIL \fP\fP
+The L key\&. 
+.TP
+\fB\fIM \fP\fP
+The M key\&. 
+.TP
+\fB\fIN \fP\fP
+The N key\&. 
+.TP
+\fB\fIO \fP\fP
+The O key\&. 
+.TP
+\fB\fIP \fP\fP
+The P key\&. 
+.TP
+\fB\fIQ \fP\fP
+The Q key\&. 
+.TP
+\fB\fIR \fP\fP
+The R key\&. 
+.TP
+\fB\fIS \fP\fP
+The S key\&. 
+.TP
+\fB\fIT \fP\fP
+The T key\&. 
+.TP
+\fB\fIU \fP\fP
+The U key\&. 
+.TP
+\fB\fIV \fP\fP
+The V key\&. 
+.TP
+\fB\fIW \fP\fP
+The W key\&. 
+.TP
+\fB\fIX \fP\fP
+The X key\&. 
+.TP
+\fB\fIY \fP\fP
+The Y key\&. 
+.TP
+\fB\fIZ \fP\fP
+The Z key\&. 
+.TP
+\fB\fINum0 \fP\fP
+The 0 key\&. 
+.TP
+\fB\fINum1 \fP\fP
+The 1 key\&. 
+.TP
+\fB\fINum2 \fP\fP
+The 2 key\&. 
+.TP
+\fB\fINum3 \fP\fP
+The 3 key\&. 
+.TP
+\fB\fINum4 \fP\fP
+The 4 key\&. 
+.TP
+\fB\fINum5 \fP\fP
+The 5 key\&. 
+.TP
+\fB\fINum6 \fP\fP
+The 6 key\&. 
+.TP
+\fB\fINum7 \fP\fP
+The 7 key\&. 
+.TP
+\fB\fINum8 \fP\fP
+The 8 key\&. 
+.TP
+\fB\fINum9 \fP\fP
+The 9 key\&. 
+.TP
+\fB\fIEscape \fP\fP
+The Escape key\&. 
+.TP
+\fB\fILControl \fP\fP
+The left Control key\&. 
+.TP
+\fB\fILShift \fP\fP
+The left Shift key\&. 
+.TP
+\fB\fILAlt \fP\fP
+The left Alt key\&. 
+.TP
+\fB\fILSystem \fP\fP
+The left OS specific key: window (Windows and Linux), apple (macOS), \&.\&.\&. 
+.TP
+\fB\fIRControl \fP\fP
+The right Control key\&. 
+.TP
+\fB\fIRShift \fP\fP
+The right Shift key\&. 
+.TP
+\fB\fIRAlt \fP\fP
+The right Alt key\&. 
+.TP
+\fB\fIRSystem \fP\fP
+The right OS specific key: window (Windows and Linux), apple (macOS), \&.\&.\&. 
+.TP
+\fB\fIMenu \fP\fP
+The Menu key\&. 
+.TP
+\fB\fILBracket \fP\fP
+The [ key\&. 
+.TP
+\fB\fIRBracket \fP\fP
+The ] key\&. 
+.TP
+\fB\fISemicolon \fP\fP
+The ; key\&. 
+.TP
+\fB\fIComma \fP\fP
+The , key\&. 
+.TP
+\fB\fIPeriod \fP\fP
+The \&. key\&. 
+.TP
+\fB\fIApostrophe \fP\fP
+The ' key\&. 
+.TP
+\fB\fISlash \fP\fP
+The / key\&. 
+.TP
+\fB\fIBackslash \fP\fP
+The \\ key\&. 
+.TP
+\fB\fIGrave \fP\fP
+The ` key\&. 
+.TP
+\fB\fIEqual \fP\fP
+The = key\&. 
+.TP
+\fB\fIHyphen \fP\fP
+The - key (hyphen) 
+.TP
+\fB\fISpace \fP\fP
+The Space key\&. 
+.TP
+\fB\fIEnter \fP\fP
+The Enter/Return keys\&. 
+.TP
+\fB\fIBackspace \fP\fP
+The Backspace key\&. 
+.TP
+\fB\fITab \fP\fP
+The Tabulation key\&. 
+.TP
+\fB\fIPageUp \fP\fP
+The Page up key\&. 
+.TP
+\fB\fIPageDown \fP\fP
+The Page down key\&. 
+.TP
+\fB\fIEnd \fP\fP
+The End key\&. 
+.TP
+\fB\fIHome \fP\fP
+The Home key\&. 
+.TP
+\fB\fIInsert \fP\fP
+The Insert key\&. 
+.TP
+\fB\fIDelete \fP\fP
+The Delete key\&. 
+.TP
+\fB\fIAdd \fP\fP
+The + key\&. 
+.TP
+\fB\fISubtract \fP\fP
+The - key (minus, usually from numpad) 
+.TP
+\fB\fIMultiply \fP\fP
+The * key\&. 
+.TP
+\fB\fIDivide \fP\fP
+The / key\&. 
+.TP
+\fB\fILeft \fP\fP
+Left arrow\&. 
+.TP
+\fB\fIRight \fP\fP
+Right arrow\&. 
+.TP
+\fB\fIUp \fP\fP
+Up arrow\&. 
+.TP
+\fB\fIDown \fP\fP
+Down arrow\&. 
+.TP
+\fB\fINumpad0 \fP\fP
+The numpad 0 key\&. 
+.TP
+\fB\fINumpad1 \fP\fP
+The numpad 1 key\&. 
+.TP
+\fB\fINumpad2 \fP\fP
+The numpad 2 key\&. 
+.TP
+\fB\fINumpad3 \fP\fP
+The numpad 3 key\&. 
+.TP
+\fB\fINumpad4 \fP\fP
+The numpad 4 key\&. 
+.TP
+\fB\fINumpad5 \fP\fP
+The numpad 5 key\&. 
+.TP
+\fB\fINumpad6 \fP\fP
+The numpad 6 key\&. 
+.TP
+\fB\fINumpad7 \fP\fP
+The numpad 7 key\&. 
+.TP
+\fB\fINumpad8 \fP\fP
+The numpad 8 key\&. 
+.TP
+\fB\fINumpad9 \fP\fP
+The numpad 9 key\&. 
+.TP
+\fB\fIF1 \fP\fP
+The F1 key\&. 
+.TP
+\fB\fIF2 \fP\fP
+The F2 key\&. 
+.TP
+\fB\fIF3 \fP\fP
+The F3 key\&. 
+.TP
+\fB\fIF4 \fP\fP
+The F4 key\&. 
+.TP
+\fB\fIF5 \fP\fP
+The F5 key\&. 
+.TP
+\fB\fIF6 \fP\fP
+The F6 key\&. 
+.TP
+\fB\fIF7 \fP\fP
+The F7 key\&. 
+.TP
+\fB\fIF8 \fP\fP
+The F8 key\&. 
+.TP
+\fB\fIF9 \fP\fP
+The F9 key\&. 
+.TP
+\fB\fIF10 \fP\fP
+The F10 key\&. 
+.TP
+\fB\fIF11 \fP\fP
+The F11 key\&. 
+.TP
+\fB\fIF12 \fP\fP
+The F12 key\&. 
+.TP
+\fB\fIF13 \fP\fP
+The F13 key\&. 
+.TP
+\fB\fIF14 \fP\fP
+The F14 key\&. 
+.TP
+\fB\fIF15 \fP\fP
+The F15 key\&. 
+.TP
+\fB\fIPause \fP\fP
+The Pause key\&. 
+.TP
+\fB\fIKeyCount \fP\fP
+Keep last -- the total number of keyboard keys\&. 
+.TP
+\fB\fITilde \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use Grave instead 
+.RE
+.PP
+
+.TP
+\fB\fIDash \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use Hyphen instead 
+.RE
+.PP
+
+.TP
+\fB\fIBackSpace \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use Backspace instead 
+.RE
+.PP
+
+.TP
+\fB\fIBackSlash \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use Backslash instead 
+.RE
+.PP
+
+.TP
+\fB\fISemiColon \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use Semicolon instead 
+.RE
+.PP
+
+.TP
+\fB\fIReturn \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use Enter instead 
+.RE
+.PP
+
+.TP
+\fB\fIQuote \fP\fP
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Use Apostrophe instead 
+.RE
+.PP
+
+.PP
+Definition at line \fB54\fP of file \fBKeyboard\&.hpp\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static \fBScancode\fP sf::Keyboard::delocalize (\fBKey\fP key)\fR [static]\fP"
+
+.PP
+Identify the physical key corresponding to a logical one\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP Key to 'delocalize'
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The scancode corresponding to the key under the current keyboard layout used by the operating system, or \fBsf::Keyboard::Scan::Unknown\fP when the key cannot be mapped to a sf::Keyboard::Scancode\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBlocalize\fP 
+.RE
+.PP
+
+.SS "static \fBString\fP sf::Keyboard::getDescription (\fBScancode\fP code)\fR [static]\fP"
+
+.PP
+Provide a string representation for a given scancode\&. The returned string is a short, non-technical description of the key represented with the given scancode\&. Most effectively used in user interfaces, as the description for the key takes the users keyboard layout into consideration\&.
+.PP
+\fBWarning\fP
+.RS 4
+The result is OS-dependent: for example, \fBsf::Keyboard::Scan::LSystem\fP is 'Left Meta' on Linux, 'Left Windows' on Windows and 'Left Command' on macOS\&.
+.RE
+.PP
+The current keyboard layout set by the operating system is used to interpret the scancode: for example, \fBsf::Keyboard::Semicolon\fP is mapped to ';' for layout and to 'é' for others\&.
+.PP
+\fBReturns\fP
+.RS 4
+The localized description of the code 
+.RE
+.PP
+
+.SS "static bool sf::Keyboard::isKeyPressed (\fBKey\fP key)\fR [static]\fP"
+
+.PP
+Check if a key is pressed\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP Key to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the key is pressed, false otherwise 
+.RE
+.PP
+
+.SS "static bool sf::Keyboard::isKeyPressed (\fBScancode\fP code)\fR [static]\fP"
+
+.PP
+Check if a key is pressed\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcode\fP Scancode to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the physical key is pressed, false otherwise 
+.RE
+.PP
+
+.SS "static \fBKey\fP sf::Keyboard::localize (\fBScancode\fP code)\fR [static]\fP"
+
+.PP
+Localize a physical key to a logical one\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcode\fP Scancode to localize
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The key corresponding to the scancode under the current keyboard layout used by the operating system, or \fBsf::Keyboard::Unknown\fP when the scancode cannot be mapped to a Key\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBdelocalize\fP 
+.RE
+.PP
+
+.SS "static void sf::Keyboard::setVirtualKeyboardVisible (bool visible)\fR [static]\fP"
+
+.PP
+Show or hide the virtual keyboard\&. 
+.PP
+\fBWarning\fP
+.RS 4
+The virtual keyboard is not supported on all systems\&. It will typically be implemented on mobile OSes (Android, iOS) but not on desktop OSes (Windows, Linux, \&.\&.\&.)\&.
+.RE
+.PP
+If the virtual keyboard is not available, this function does nothing\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvisible\fP True to show, false to hide 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

@@ -1,0 +1,236 @@
+.TH "sf::Http::Response" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Http::Response \- Define a HTTP response\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Network/Http\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBStatus\fP { \fBOk\fP = 200, \fBCreated\fP = 201, \fBAccepted\fP = 202, \fBNoContent\fP = 204, \fBResetContent\fP = 205, \fBPartialContent\fP = 206, \fBMultipleChoices\fP = 300, \fBMovedPermanently\fP = 301, \fBMovedTemporarily\fP = 302, \fBNotModified\fP = 304, \fBBadRequest\fP = 400, \fBUnauthorized\fP = 401, \fBForbidden\fP = 403, \fBNotFound\fP = 404, \fBRangeNotSatisfiable\fP = 407, \fBInternalServerError\fP = 500, \fBNotImplemented\fP = 501, \fBBadGateway\fP = 502, \fBServiceNotAvailable\fP = 503, \fBGatewayTimeout\fP = 504, \fBVersionNotSupported\fP = 505, \fBInvalidResponse\fP = 1000, \fBConnectionFailed\fP = 1001 }"
+.br
+.RI "Enumerate all the valid status codes for a response\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBResponse\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "const std::string & \fBgetField\fP (const std::string &field) const"
+.br
+.RI "Get the value of a field\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBgetStatus\fP () const"
+.br
+.RI "Get the response status code\&. "
+.ti -1c
+.RI "unsigned int \fBgetMajorHttpVersion\fP () const"
+.br
+.RI "Get the major HTTP version number of the response\&. "
+.ti -1c
+.RI "unsigned int \fBgetMinorHttpVersion\fP () const"
+.br
+.RI "Get the minor HTTP version number of the response\&. "
+.ti -1c
+.RI "const std::string & \fBgetBody\fP () const"
+.br
+.RI "Get the body of the response\&. "
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBHttp\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Define a HTTP response\&. 
+.PP
+Definition at line \fB193\fP of file \fBHttp\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBsf::Http::Response::Status\fP"
+
+.PP
+Enumerate all the valid status codes for a response\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIOk \fP\fP
+Most common code returned when operation was successful\&. 
+.TP
+\fB\fICreated \fP\fP
+The resource has successfully been created\&. 
+.TP
+\fB\fIAccepted \fP\fP
+The request has been accepted, but will be processed later by the server\&. 
+.TP
+\fB\fINoContent \fP\fP
+The server didn't send any data in return\&. 
+.TP
+\fB\fIResetContent \fP\fP
+The server informs the client that it should clear the view (form) that caused the request to be sent\&. 
+.TP
+\fB\fIPartialContent \fP\fP
+The server has sent a part of the resource, as a response to a partial GET request\&. 
+.TP
+\fB\fIMultipleChoices \fP\fP
+The requested page can be accessed from several locations\&. 
+.TP
+\fB\fIMovedPermanently \fP\fP
+The requested page has permanently moved to a new location\&. 
+.TP
+\fB\fIMovedTemporarily \fP\fP
+The requested page has temporarily moved to a new location\&. 
+.TP
+\fB\fINotModified \fP\fP
+For conditional requests, means the requested page hasn't changed and doesn't need to be refreshed\&. 
+.TP
+\fB\fIBadRequest \fP\fP
+The server couldn't understand the request (syntax error) 
+.TP
+\fB\fIUnauthorized \fP\fP
+The requested page needs an authentication to be accessed\&. 
+.TP
+\fB\fIForbidden \fP\fP
+The requested page cannot be accessed at all, even with authentication\&. 
+.TP
+\fB\fINotFound \fP\fP
+The requested page doesn't exist\&. 
+.TP
+\fB\fIRangeNotSatisfiable \fP\fP
+The server can't satisfy the partial GET request (with a 'Range' header field) 
+.TP
+\fB\fIInternalServerError \fP\fP
+The server encountered an unexpected error\&. 
+.TP
+\fB\fINotImplemented \fP\fP
+The server doesn't implement a requested feature\&. 
+.TP
+\fB\fIBadGateway \fP\fP
+The gateway server has received an error from the source server\&. 
+.TP
+\fB\fIServiceNotAvailable \fP\fP
+The server is temporarily unavailable (overloaded, in maintenance, \&.\&.\&.) 
+.TP
+\fB\fIGatewayTimeout \fP\fP
+The gateway server couldn't receive a response from the source server\&. 
+.TP
+\fB\fIVersionNotSupported \fP\fP
+The server doesn't support the requested HTTP version\&. 
+.TP
+\fB\fIInvalidResponse \fP\fP
+\fBResponse\fP is not a valid HTTP one\&. 
+.TP
+\fB\fIConnectionFailed \fP\fP
+Connection with server failed\&. 
+.PP
+Definition at line \fB201\fP of file \fBHttp\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Http::Response::Response ()"
+
+.PP
+Default constructor\&. Constructs an empty response\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "const std::string & sf::Http::Response::getBody () const"
+
+.PP
+Get the body of the response\&. The body of a response may contain: 
+.PD 0
+.IP "\(bu" 1
+the requested page (for GET requests) 
+.IP "\(bu" 1
+a response from the server (for POST requests) 
+.IP "\(bu" 1
+nothing (for HEAD requests) 
+.IP "\(bu" 1
+an error message (in case of an error)
+.PP
+\fBReturns\fP
+.RS 4
+The response body 
+.RE
+.PP
+
+.SS "const std::string & sf::Http::Response::getField (const std::string & field) const"
+
+.PP
+Get the value of a field\&. If the field \fIfield\fP is not found in the response header, the empty string is returned\&. This function uses case-insensitive comparisons\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfield\fP Name of the field to get
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Value of the field, or empty string if not found 
+.RE
+.PP
+
+.SS "unsigned int sf::Http::Response::getMajorHttpVersion () const"
+
+.PP
+Get the major HTTP version number of the response\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Major HTTP version number
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetMinorHttpVersion\fP 
+.RE
+.PP
+
+.SS "unsigned int sf::Http::Response::getMinorHttpVersion () const"
+
+.PP
+Get the minor HTTP version number of the response\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Minor HTTP version number
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetMajorHttpVersion\fP 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::Http::Response::getStatus () const"
+
+.PP
+Get the response status code\&. The status code should be the first thing to be checked after receiving a response, it defines whether it is a success, a failure or anything else (see the Status enumeration)\&.
+.PP
+\fBReturns\fP
+.RS 4
+Status code of the response 
+.RE
+.PP
+
+.SH "Friends And Related Symbol Documentation"
+.PP 
+.SS "friend class \fBHttp\fP\fR [friend]\fP"
+
+.PP
+Definition at line \fB308\fP of file \fBHttp\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

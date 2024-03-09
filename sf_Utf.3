@@ -1,0 +1,38 @@
+.TH "sf::Utf< N >" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Utf< N > \- Utility class providing generic functions for UTF conversions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/System/Utf\&.hpp>\fP
+.SH "Detailed Description"
+.PP 
+
+.SS "template<unsigned int N>
+.br
+class sf::Utf< N >"Utility class providing generic functions for UTF conversions\&. 
+
+\fBsf::Utf\fP is a low-level, generic interface for counting, iterating, encoding and decoding Unicode characters and strings\&. It is able to handle ANSI, wide, latin-1, UTF-8, UTF-16 and UTF-32 encodings\&.
+.PP
+sf::Utf<X> functions are all static, these classes are not meant to be instantiated\&. All the functions are template, so that you can use any character / string type for a given encoding\&.
+.PP
+It has 3 specializations: 
+.PD 0
+.IP "\(bu" 1
+\fBsf::Utf<8>\fP (typedef'd to sf::Utf8) 
+.IP "\(bu" 1
+\fBsf::Utf<16>\fP (typedef'd to sf::Utf16) 
+.IP "\(bu" 1
+\fBsf::Utf<32>\fP (typedef'd to sf::Utf32) 
+.PP
+
+.PP
+Definition at line \fB41\fP of file \fBUtf\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

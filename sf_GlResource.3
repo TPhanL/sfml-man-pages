@@ -1,0 +1,77 @@
+.TH "sf::GlResource" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::GlResource \- Base class for classes that require an OpenGL context\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/GlResource\&.hpp>\fP
+.PP
+Inherited by \fBsf::Context\fP\fR [private]\fP, \fBsf::Shader\fP\fR [private]\fP, \fBsf::Texture\fP\fR [private]\fP, \fBsf::VertexBuffer\fP\fR [private]\fP, and \fBsf::Window\fP\fR [private]\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBTransientContextLock\fP"
+.br
+.RI "RAII helper class to temporarily lock an available context for use\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBGlResource\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~GlResource\fP ()"
+.br
+.RI "Destructor\&. "
+.in -1c
+.SS "Static Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBregisterContextDestroyCallback\fP (ContextDestroyCallback callback, void *arg)"
+.br
+.RI "Register a function to be called when a context is destroyed\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for classes that require an OpenGL context\&. 
+
+This class is for internal use only, it must be the base of every class that requires a valid OpenGL context in order to work\&. 
+.PP
+Definition at line \fB46\fP of file \fBGlResource\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::GlResource::GlResource ()\fR [protected]\fP"
+
+.PP
+Default constructor\&. 
+.SS "sf::GlResource::~GlResource ()\fR [protected]\fP"
+
+.PP
+Destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static void sf::GlResource::registerContextDestroyCallback (ContextDestroyCallback callback, void * arg)\fR [static]\fP, \fR [protected]\fP"
+
+.PP
+Register a function to be called when a context is destroyed\&. This is used for internal purposes in order to properly clean up OpenGL resources that cannot be shared between contexts\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcallback\fP Function to be called when a context is destroyed 
+.br
+\fIarg\fP Argument to pass when calling the function 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

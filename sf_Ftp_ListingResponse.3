@@ -1,0 +1,255 @@
+.TH "sf::Ftp::ListingResponse" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Ftp::ListingResponse \- Specialization of FTP response returning a filename listing\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Network/Ftp\&.hpp>\fP
+.PP
+Inherits \fBsf::Ftp::Response\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBStatus\fP { \fBRestartMarkerReply\fP = 110, \fBServiceReadySoon\fP = 120, \fBDataConnectionAlreadyOpened\fP = 125, \fBOpeningDataConnection\fP = 150, \fBOk\fP = 200, \fBPointlessCommand\fP = 202, \fBSystemStatus\fP = 211, \fBDirectoryStatus\fP = 212, \fBFileStatus\fP = 213, \fBHelpMessage\fP = 214, \fBSystemType\fP = 215, \fBServiceReady\fP = 220, \fBClosingConnection\fP = 221, \fBDataConnectionOpened\fP = 225, \fBClosingDataConnection\fP = 226, \fBEnteringPassiveMode\fP = 227, \fBLoggedIn\fP = 230, \fBFileActionOk\fP = 250, \fBDirectoryOk\fP = 257, \fBNeedPassword\fP = 331, \fBNeedAccountToLogIn\fP = 332, \fBNeedInformation\fP = 350, \fBServiceUnavailable\fP = 421, \fBDataConnectionUnavailable\fP = 425, \fBTransferAborted\fP = 426, \fBFileActionAborted\fP = 450, \fBLocalError\fP = 451, \fBInsufficientStorageSpace\fP = 452, \fBCommandUnknown\fP = 500, \fBParametersUnknown\fP = 501, \fBCommandNotImplemented\fP = 502, \fBBadCommandSequence\fP = 503, \fBParameterNotImplemented\fP = 504, \fBNotLoggedIn\fP = 530, \fBNeedAccountToStore\fP = 532, \fBFileUnavailable\fP = 550, \fBPageTypeUnknown\fP = 551, \fBNotEnoughMemory\fP = 552, \fBFilenameNotAllowed\fP = 553, \fBInvalidResponse\fP = 1000, \fBConnectionFailed\fP = 1001, \fBConnectionClosed\fP = 1002, \fBInvalidFile\fP = 1003 }"
+.br
+.RI "Status codes possibly returned by a FTP response\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBListingResponse\fP (const \fBResponse\fP &response, const std::string &data)"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "const std::vector< std::string > & \fBgetListing\fP () const"
+.br
+.RI "Return the array of directory/file names\&. "
+.ti -1c
+.RI "bool \fBisOk\fP () const"
+.br
+.RI "Check if the status code means a success\&. "
+.ti -1c
+.RI "\fBStatus\fP \fBgetStatus\fP () const"
+.br
+.RI "Get the status code of the response\&. "
+.ti -1c
+.RI "const std::string & \fBgetMessage\fP () const"
+.br
+.RI "Get the full message contained in the response\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Specialization of FTP response returning a filename listing\&. 
+.PP
+Definition at line \fB221\fP of file \fBFtp\&.hpp\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBsf::Ftp::Response::Status\fP\fR [inherited]\fP"
+
+.PP
+Status codes possibly returned by a FTP response\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIRestartMarkerReply \fP\fP
+Restart marker reply\&. 
+.TP
+\fB\fIServiceReadySoon \fP\fP
+Service ready in N minutes\&. 
+.TP
+\fB\fIDataConnectionAlreadyOpened \fP\fP
+Data connection already opened, transfer starting\&. 
+.TP
+\fB\fIOpeningDataConnection \fP\fP
+File status ok, about to open data connection\&. 
+.TP
+\fB\fIOk \fP\fP
+Command ok\&. 
+.TP
+\fB\fIPointlessCommand \fP\fP
+Command not implemented\&. 
+.TP
+\fB\fISystemStatus \fP\fP
+System status, or system help reply\&. 
+.TP
+\fB\fIDirectoryStatus \fP\fP
+Directory status\&. 
+.TP
+\fB\fIFileStatus \fP\fP
+File status\&. 
+.TP
+\fB\fIHelpMessage \fP\fP
+Help message\&. 
+.TP
+\fB\fISystemType \fP\fP
+NAME system type, where NAME is an official system name from the list in the Assigned Numbers document\&. 
+.TP
+\fB\fIServiceReady \fP\fP
+Service ready for new user\&. 
+.TP
+\fB\fIClosingConnection \fP\fP
+Service closing control connection\&. 
+.TP
+\fB\fIDataConnectionOpened \fP\fP
+Data connection open, no transfer in progress\&. 
+.TP
+\fB\fIClosingDataConnection \fP\fP
+Closing data connection, requested file action successful\&. 
+.TP
+\fB\fIEnteringPassiveMode \fP\fP
+Entering passive mode\&. 
+.TP
+\fB\fILoggedIn \fP\fP
+User logged in, proceed\&. Logged out if appropriate\&. 
+.TP
+\fB\fIFileActionOk \fP\fP
+Requested file action ok\&. 
+.TP
+\fB\fIDirectoryOk \fP\fP
+PATHNAME created\&. 
+.TP
+\fB\fINeedPassword \fP\fP
+User name ok, need password\&. 
+.TP
+\fB\fINeedAccountToLogIn \fP\fP
+Need account for login\&. 
+.TP
+\fB\fINeedInformation \fP\fP
+Requested file action pending further information\&. 
+.TP
+\fB\fIServiceUnavailable \fP\fP
+Service not available, closing control connection\&. 
+.TP
+\fB\fIDataConnectionUnavailable \fP\fP
+Can't open data connection\&. 
+.TP
+\fB\fITransferAborted \fP\fP
+Connection closed, transfer aborted\&. 
+.TP
+\fB\fIFileActionAborted \fP\fP
+Requested file action not taken\&. 
+.TP
+\fB\fILocalError \fP\fP
+Requested action aborted, local error in processing\&. 
+.TP
+\fB\fIInsufficientStorageSpace \fP\fP
+Requested action not taken; insufficient storage space in system, file unavailable\&. 
+.TP
+\fB\fICommandUnknown \fP\fP
+Syntax error, command unrecognized\&. 
+.TP
+\fB\fIParametersUnknown \fP\fP
+Syntax error in parameters or arguments\&. 
+.TP
+\fB\fICommandNotImplemented \fP\fP
+Command not implemented\&. 
+.TP
+\fB\fIBadCommandSequence \fP\fP
+Bad sequence of commands\&. 
+.TP
+\fB\fIParameterNotImplemented \fP\fP
+Command not implemented for that parameter\&. 
+.TP
+\fB\fINotLoggedIn \fP\fP
+Not logged in\&. 
+.TP
+\fB\fINeedAccountToStore \fP\fP
+Need account for storing files\&. 
+.TP
+\fB\fIFileUnavailable \fP\fP
+Requested action not taken, file unavailable\&. 
+.TP
+\fB\fIPageTypeUnknown \fP\fP
+Requested action aborted, page type unknown\&. 
+.TP
+\fB\fINotEnoughMemory \fP\fP
+Requested file action aborted, exceeded storage allocation\&. 
+.TP
+\fB\fIFilenameNotAllowed \fP\fP
+Requested action not taken, file name not allowed\&. 
+.TP
+\fB\fIInvalidResponse \fP\fP
+Not part of the FTP standard, generated by SFML when a received response cannot be parsed\&. 
+.TP
+\fB\fIConnectionFailed \fP\fP
+Not part of the FTP standard, generated by SFML when the low-level socket connection with the server fails\&. 
+.TP
+\fB\fIConnectionClosed \fP\fP
+Not part of the FTP standard, generated by SFML when the low-level socket connection is unexpectedly closed\&. 
+.TP
+\fB\fIInvalidFile \fP\fP
+Not part of the FTP standard, generated by SFML when a local file cannot be read or written\&. 
+.PP
+Definition at line \fB74\fP of file \fBFtp\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Ftp::ListingResponse::ListingResponse (const \fBResponse\fP & response, const std::string & data)"
+
+.PP
+Default constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIresponse\fP Source response 
+.br
+\fIdata\fP Data containing the raw listing 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const std::vector< std::string > & sf::Ftp::ListingResponse::getListing () const"
+
+.PP
+Return the array of directory/file names\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Array containing the requested listing 
+.RE
+.PP
+
+.SS "const std::string & sf::Ftp::Response::getMessage () const\fR [inherited]\fP"
+
+.PP
+Get the full message contained in the response\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The response message 
+.RE
+.PP
+
+.SS "\fBStatus\fP sf::Ftp::Response::getStatus () const\fR [inherited]\fP"
+
+.PP
+Get the status code of the response\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Status code 
+.RE
+.PP
+
+.SS "bool sf::Ftp::Response::isOk () const\fR [inherited]\fP"
+
+.PP
+Check if the status code means a success\&. This function is defined for convenience, it is equivalent to testing if the status code is < 400\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if the status is a success, false if it is a failure 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

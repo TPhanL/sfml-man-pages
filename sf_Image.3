@@ -1,0 +1,394 @@
+.TH "sf::Image" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Image \- Class for loading, manipulating and saving images\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/Image\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBImage\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fB~Image\fP ()"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "void \fBcreate\fP (unsigned int width, unsigned int height, const \fBColor\fP &color=\fBColor\fP(0, 0, 0))"
+.br
+.RI "Create the image and fill it with a unique color\&. "
+.ti -1c
+.RI "void \fBcreate\fP (unsigned int width, unsigned int height, const Uint8 *pixels)"
+.br
+.RI "Create the image from an array of pixels\&. "
+.ti -1c
+.RI "bool \fBloadFromFile\fP (const std::string &filename)"
+.br
+.RI "Load the image from a file on disk\&. "
+.ti -1c
+.RI "bool \fBloadFromMemory\fP (const void *data, std::size_t size)"
+.br
+.RI "Load the image from a file in memory\&. "
+.ti -1c
+.RI "bool \fBloadFromStream\fP (\fBInputStream\fP &stream)"
+.br
+.RI "Load the image from a custom stream\&. "
+.ti -1c
+.RI "bool \fBsaveToFile\fP (const std::string &filename) const"
+.br
+.RI "Save the image to a file on disk\&. "
+.ti -1c
+.RI "bool \fBsaveToMemory\fP (std::vector< sf::Uint8 > &output, const std::string &format) const"
+.br
+.RI "Save the image to a buffer in memory\&. "
+.ti -1c
+.RI "\fBVector2u\fP \fBgetSize\fP () const"
+.br
+.RI "Return the size (width and height) of the image\&. "
+.ti -1c
+.RI "void \fBcreateMaskFromColor\fP (const \fBColor\fP &color, Uint8 alpha=0)"
+.br
+.RI "Create a transparency mask from a specified color-key\&. "
+.ti -1c
+.RI "void \fBcopy\fP (const \fBImage\fP &source, unsigned int destX, unsigned int destY, const \fBIntRect\fP &sourceRect=\fBIntRect\fP(0, 0, 0, 0), bool applyAlpha=false)"
+.br
+.RI "Copy pixels from another image onto this one\&. "
+.ti -1c
+.RI "void \fBsetPixel\fP (unsigned int x, unsigned int y, const \fBColor\fP &color)"
+.br
+.RI "Change the color of a pixel\&. "
+.ti -1c
+.RI "\fBColor\fP \fBgetPixel\fP (unsigned int x, unsigned int y) const"
+.br
+.RI "Get the color of a pixel\&. "
+.ti -1c
+.RI "const Uint8 * \fBgetPixelsPtr\fP () const"
+.br
+.RI "Get a read-only pointer to the array of pixels\&. "
+.ti -1c
+.RI "void \fBflipHorizontally\fP ()"
+.br
+.RI "Flip the image horizontally (left <-> right) "
+.ti -1c
+.RI "void \fBflipVertically\fP ()"
+.br
+.RI "Flip the image vertically (top <-> bottom) "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class for loading, manipulating and saving images\&. 
+
+\fBsf::Image\fP is an abstraction to manipulate images as bidimensional arrays of pixels\&.
+.PP
+The class provides functions to load, read, write and save pixels, as well as many other useful functions\&.
+.PP
+\fBsf::Image\fP can handle a unique internal representation of pixels, which is RGBA 32 bits\&. This means that a pixel must be composed of 8 bits red, green, blue and alpha channels -- just like a \fBsf::Color\fP\&. All the functions that return an array of pixels follow this rule, and all parameters that you pass to \fBsf::Image\fP functions (such as loadFromMemory) must use this representation as well\&.
+.PP
+A \fBsf::Image\fP can be copied, but it is a heavy resource and if possible you should always use [const] references to pass or return them to avoid useless copies\&.
+.PP
+Usage example: 
+.PP
+.nf
+// Load an image file from a file
+sf::Image background;
+if (!background\&.loadFromFile("background\&.jpg"))
+    return \-1;
+
+// Create a 20x20 image filled with black color
+sf::Image image;
+image\&.create(20, 20, sf::Color::Black);
+
+// Copy image1 on image2 at position (10, 10)
+image\&.copy(background, 10, 10);
+
+// Make the top\-left pixel transparent
+sf::Color color = image\&.getPixel(0, 0);
+color\&.a = 0;
+image\&.setPixel(0, 0, color);
+
+// Save the image to a file
+if (!image\&.saveToFile("result\&.png"))
+    return \-1;
+
+.fi
+.PP
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Texture\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB46\fP of file \fBImage\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Image::Image ()"
+
+.PP
+Default constructor\&. Creates an empty image\&. 
+.SS "sf::Image::~Image ()"
+
+.PP
+Destructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void sf::Image::copy (const \fBImage\fP & source, unsigned int destX, unsigned int destY, const \fBIntRect\fP & sourceRect = \fR\fBIntRect\fP(0, 0, 0, 0)\fP, bool applyAlpha = \fRfalse\fP)"
+
+.PP
+Copy pixels from another image onto this one\&. This function does a slow pixel copy and should not be used intensively\&. It can be used to prepare a complex static image from several others, but if you need this kind of feature in real-time you'd better use \fBsf::RenderTexture\fP\&.
+.PP
+If \fIsourceRect\fP is empty, the whole image is copied\&. If \fIapplyAlpha\fP is set to true, alpha blending is applied from the source pixels to the destination pixels using the \fBover\fP operator\&. If it is false, the source pixels are copied unchanged with their alpha value\&.
+.PP
+See https://en.wikipedia.org/wiki/Alpha_compositing for details on the \fBover\fP operator\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsource\fP Source image to copy 
+.br
+\fIdestX\fP X coordinate of the destination position 
+.br
+\fIdestY\fP Y coordinate of the destination position 
+.br
+\fIsourceRect\fP Sub-rectangle of the source image to copy 
+.br
+\fIapplyAlpha\fP Should the copy take into account the source transparency? 
+.RE
+.PP
+
+.SS "void sf::Image::create (unsigned int width, unsigned int height, const \fBColor\fP & color = \fR\fBColor\fP(0, 0, 0)\fP)"
+
+.PP
+Create the image and fill it with a unique color\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidth\fP Width of the image 
+.br
+\fIheight\fP Height of the image 
+.br
+\fIcolor\fP Fill color 
+.RE
+.PP
+
+.SS "void sf::Image::create (unsigned int width, unsigned int height, const Uint8 * pixels)"
+
+.PP
+Create the image from an array of pixels\&. The \fIpixel\fP array is assumed to contain 32-bits RGBA pixels, and have the given \fIwidth\fP and \fIheight\fP\&. If not, this is an undefined behavior\&. If \fIpixels\fP is null, an empty image is created\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidth\fP Width of the image 
+.br
+\fIheight\fP Height of the image 
+.br
+\fIpixels\fP Array of pixels to copy to the image 
+.RE
+.PP
+
+.SS "void sf::Image::createMaskFromColor (const \fBColor\fP & color, Uint8 alpha = \fR0\fP)"
+
+.PP
+Create a transparency mask from a specified color-key\&. This function sets the alpha value of every pixel matching the given color to \fIalpha\fP (0 by default), so that they become transparent\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcolor\fP \fBColor\fP to make transparent 
+.br
+\fIalpha\fP Alpha value to assign to transparent pixels 
+.RE
+.PP
+
+.SS "void sf::Image::flipHorizontally ()"
+
+.PP
+Flip the image horizontally (left <-> right) 
+.SS "void sf::Image::flipVertically ()"
+
+.PP
+Flip the image vertically (top <-> bottom) 
+.SS "\fBColor\fP sf::Image::getPixel (unsigned int x, unsigned int y) const"
+
+.PP
+Get the color of a pixel\&. This function doesn't check the validity of the pixel coordinates, using out-of-range values will result in an undefined behavior\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP X coordinate of pixel to get 
+.br
+\fIy\fP Y coordinate of pixel to get
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBColor\fP of the pixel at coordinates (x, y)
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBsetPixel\fP 
+.RE
+.PP
+
+.SS "const Uint8 * sf::Image::getPixelsPtr () const"
+
+.PP
+Get a read-only pointer to the array of pixels\&. The returned value points to an array of RGBA pixels made of 8 bits integers components\&. The size of the array is width * height * 4 (\fBgetSize()\fP\&.x * \fBgetSize()\fP\&.y * 4)\&. Warning: the returned pointer may become invalid if you modify the image, so you should never store it for too long\&. If the image is empty, a null pointer is returned\&.
+.PP
+\fBReturns\fP
+.RS 4
+Read-only pointer to the array of pixels 
+.RE
+.PP
+
+.SS "\fBVector2u\fP sf::Image::getSize () const"
+
+.PP
+Return the size (width and height) of the image\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Size of the image, in pixels 
+.RE
+.PP
+
+.SS "bool sf::Image::loadFromFile (const std::string & filename)"
+
+.PP
+Load the image from a file on disk\&. The supported image formats are bmp, png, tga, jpg, gif, psd, hdr, pic and pnm\&. Some format options are not supported, like jpeg with arithmetic coding or ASCII pnm\&. If this function fails, the image is left unchanged\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfilename\fP Path of the image file to load
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if loading was successful
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBloadFromMemory\fP, \fBloadFromStream\fP, \fBsaveToFile\fP 
+.RE
+.PP
+
+.SS "bool sf::Image::loadFromMemory (const void * data, std::size_t size)"
+
+.PP
+Load the image from a file in memory\&. The supported image formats are bmp, png, tga, jpg, gif, psd, hdr, pic and pnm\&. Some format options are not supported, like jpeg with arithmetic coding or ASCII pnm\&. If this function fails, the image is left unchanged\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Pointer to the file data in memory 
+.br
+\fIsize\fP Size of the data to load, in bytes
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if loading was successful
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBloadFromFile\fP, \fBloadFromStream\fP 
+.RE
+.PP
+
+.SS "bool sf::Image::loadFromStream (\fBInputStream\fP & stream)"
+
+.PP
+Load the image from a custom stream\&. The supported image formats are bmp, png, tga, jpg, gif, psd, hdr, pic and pnm\&. Some format options are not supported, like jpeg with arithmetic coding or ASCII pnm\&. If this function fails, the image is left unchanged\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstream\fP Source stream to read from
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if loading was successful
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBloadFromFile\fP, \fBloadFromMemory\fP 
+.RE
+.PP
+
+.SS "bool sf::Image::saveToFile (const std::string & filename) const"
+
+.PP
+Save the image to a file on disk\&. The format of the image is automatically deduced from the extension\&. The supported image formats are bmp, png, tga and jpg\&. The destination file is overwritten if it already exists\&. This function fails if the image is empty\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfilename\fP Path of the file to save
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if saving was successful
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcreate\fP, \fBloadFromFile\fP, \fBloadFromMemory\fP 
+.RE
+.PP
+
+.SS "bool sf::Image::saveToMemory (std::vector< sf::Uint8 > & output, const std::string & format) const"
+
+.PP
+Save the image to a buffer in memory\&. The format of the image must be specified\&. The supported image formats are bmp, png, tga and jpg\&. This function fails if the image is empty, or if the format was invalid\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIoutput\fP Buffer to fill with encoded data 
+.br
+\fIformat\fP Encoding format to use
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if saving was successful
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcreate\fP, \fBloadFromFile\fP, \fBloadFromMemory\fP, \fBsaveToFile\fP 
+.RE
+.PP
+
+.SS "void sf::Image::setPixel (unsigned int x, unsigned int y, const \fBColor\fP & color)"
+
+.PP
+Change the color of a pixel\&. This function doesn't check the validity of the pixel coordinates, using out-of-range values will result in an undefined behavior\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP X coordinate of pixel to change 
+.br
+\fIy\fP Y coordinate of pixel to change 
+.br
+\fIcolor\fP New color of the pixel
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgetPixel\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

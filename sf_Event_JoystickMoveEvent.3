@@ -1,0 +1,56 @@
+.TH "sf::Event::JoystickMoveEvent" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Event::JoystickMoveEvent \- \fBJoystick\fP axis move event parameters (JoystickMoved)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Window/Event\&.hpp>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBjoystickId\fP"
+.br
+.RI "Index of the joystick (in range [0 \&.\&. \fBJoystick::Count\fP - 1]) "
+.ti -1c
+.RI "\fBJoystick::Axis\fP \fBaxis\fP"
+.br
+.RI "Axis on which the joystick moved\&. "
+.ti -1c
+.RI "float \fBposition\fP"
+.br
+.RI "New position on the axis (in range [-100 \&.\&. 100]) "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBJoystick\fP axis move event parameters (JoystickMoved) 
+.PP
+Definition at line \fB143\fP of file \fBEvent\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBJoystick::Axis\fP sf::Event::JoystickMoveEvent::axis"
+
+.PP
+Axis on which the joystick moved\&. 
+.PP
+Definition at line \fB146\fP of file \fBEvent\&.hpp\fP\&.
+.SS "unsigned int sf::Event::JoystickMoveEvent::joystickId"
+
+.PP
+Index of the joystick (in range [0 \&.\&. \fBJoystick::Count\fP - 1]) 
+.PP
+Definition at line \fB145\fP of file \fBEvent\&.hpp\fP\&.
+.SS "float sf::Event::JoystickMoveEvent::position"
+
+.PP
+New position on the axis (in range [-100 \&.\&. 100]) 
+.PP
+Definition at line \fB147\fP of file \fBEvent\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.

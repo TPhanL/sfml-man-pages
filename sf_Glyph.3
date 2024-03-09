@@ -1,0 +1,110 @@
+.TH "sf::Glyph" 3 "Version .." "SFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sf::Glyph \- Structure describing a glyph\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <SFML/Graphics/Glyph\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBGlyph\fP ()"
+.br
+.RI "Default constructor\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "float \fBadvance\fP"
+.br
+.RI "Offset to move horizontally to the next character\&. "
+.ti -1c
+.RI "int \fBlsbDelta\fP"
+.br
+.RI "Left offset after forced autohint\&. Internally used by getKerning() "
+.ti -1c
+.RI "int \fBrsbDelta\fP"
+.br
+.RI "Right offset after forced autohint\&. Internally used by getKerning() "
+.ti -1c
+.RI "\fBFloatRect\fP \fBbounds\fP"
+.br
+.RI "Bounding rectangle of the glyph, in coordinates relative to the baseline\&. "
+.ti -1c
+.RI "\fBIntRect\fP \fBtextureRect\fP"
+.br
+.RI "\fBTexture\fP coordinates of the glyph inside the font's texture\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Structure describing a glyph\&. 
+
+A glyph is the visual representation of a character\&.
+.PP
+The \fBsf::Glyph\fP structure provides the information needed to handle the glyph: 
+.PD 0
+.IP "\(bu" 1
+its coordinates in the font's texture 
+.IP "\(bu" 1
+its bounding rectangle 
+.IP "\(bu" 1
+the offset to apply to get the starting position of the next glyph
+.PP
+\fBSee also\fP
+.RS 4
+\fBsf::Font\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB41\fP of file \fBGlyph\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "sf::Glyph::Glyph ()\fR [inline]\fP"
+
+.PP
+Default constructor\&. 
+.PP
+Definition at line \fB49\fP of file \fBGlyph\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "float sf::Glyph::advance"
+
+.PP
+Offset to move horizontally to the next character\&. 
+.PP
+Definition at line \fB54\fP of file \fBGlyph\&.hpp\fP\&.
+.SS "\fBFloatRect\fP sf::Glyph::bounds"
+
+.PP
+Bounding rectangle of the glyph, in coordinates relative to the baseline\&. 
+.PP
+Definition at line \fB57\fP of file \fBGlyph\&.hpp\fP\&.
+.SS "int sf::Glyph::lsbDelta"
+
+.PP
+Left offset after forced autohint\&. Internally used by getKerning() 
+.PP
+Definition at line \fB55\fP of file \fBGlyph\&.hpp\fP\&.
+.SS "int sf::Glyph::rsbDelta"
+
+.PP
+Right offset after forced autohint\&. Internally used by getKerning() 
+.PP
+Definition at line \fB56\fP of file \fBGlyph\&.hpp\fP\&.
+.SS "\fBIntRect\fP sf::Glyph::textureRect"
+
+.PP
+\fBTexture\fP coordinates of the glyph inside the font's texture\&. 
+.PP
+Definition at line \fB58\fP of file \fBGlyph\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SFML from the source code\&.
